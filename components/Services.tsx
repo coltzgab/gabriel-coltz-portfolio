@@ -41,6 +41,8 @@ const services: ServiceItem[] = [
   }
 ];
 
+import { GlowingEffect } from './ui/glowing-effect';
+
 export const Services: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -83,16 +85,26 @@ export const Services: React.FC = () => {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="group p-8 border border-organic-white/5 rounded-3xl hover:border-organic-cyan transition-all duration-300 hover:bg-organic-white/5 animate-on-scroll"
+              className="group relative p-1 rounded-[2rem] border border-white/5 overflow-hidden transition-all duration-300 animate-on-scroll h-full"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="mb-6 text-organic-cyan group-hover:text-organic-white transition-colors duration-300 transform group-hover:-translate-y-1">
-                {service.icon}
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative h-full p-8 rounded-[1.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors">
+                <div className="mb-6 text-organic-cyan group-hover:text-organic-white transition-colors duration-300 transform group-hover:-translate-y-1">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-organic-white uppercase tracking-wide">{service.title}</h3>
+                <p className="text-organic-white/60 leading-relaxed text-sm font-sans italic">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-xl font-display font-bold mb-3 text-organic-white">{service.title}</h3>
-              <p className="text-organic-white/60 leading-relaxed text-sm">
-                {service.description}
-              </p>
             </div>
           ))}
         </div>

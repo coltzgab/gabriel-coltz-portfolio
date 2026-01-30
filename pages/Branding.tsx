@@ -1,48 +1,84 @@
 import React, { useEffect } from 'react';
 import { Palette, Diamond, Layout, PenTool, CheckCircle2, ArrowRight, Eye, Star } from 'lucide-react';
 import { NeonCarousel } from '../components/ui/NeonCarousel';
+import { GlowingEffect } from '../components/ui/glowing-effect';
 
 export const Branding: React.FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    const portfolio = [
+        {
+            title: "MP4 Contábil",
+            category: "Branding & Identity",
+            description: "Identidade sólida para o setor contábil digital.",
+            image: "/branding-mp4.png",
+            color: "rgba(71, 228, 190, 0.4)" // Organic Cyan
+        },
+        {
+            title: "Olivers",
+            category: "Brand System",
+            description: "Ecossistema visual moderno para marca criativa.",
+            image: "/branding-olivers.png",
+            color: "rgba(90, 61, 127, 0.4)" // Organic Purple
+        },
+        {
+            title: "Finup AI",
+            category: "Financial Branding",
+            description: "Posicionamento premium para inovação financeira.",
+            image: "/branding-finup.png",
+            color: "rgba(255, 107, 0, 0.4)" // Finup Orange
+        },
+        {
+            title: "Gislaine Coltz",
+            category: "Luxury Personal Branding",
+            description: "Marca pessoal sofisticada e atemporal.",
+            image: "/branding-gislaine.png",
+            color: "rgba(191, 155, 155, 0.4)" // Soft Rose
+        }
+    ];
+
     const brandingFeatures = [
         {
-            icon: <Star className="text-organic-cyan" />,
+            icon: <Star size={24} className="text-organic-cyan" />,
             title: "Símbolos Vivos",
             description: "Não criamos apenas logos. Criamos identidades que contam histórias e emocionam."
         },
         {
-            icon: <Layout className="text-organic-cyan" />,
+            icon: <Layout size={24} className="text-organic-cyan" />,
             title: "Sistemas Visuais",
             description: "Identidades flexíveis que funcionam do mobile ao outdoor com consistência total."
         },
         {
-            icon: <PenTool className="text-organic-cyan" />,
+            icon: <PenTool size={24} className="text-organic-cyan" />,
             title: "Posicionamento",
             description: "Design que comunica profissionalismo, autoridade e a alma do seu negócio."
         }
     ];
 
     return (
-        <div className="pt-24">
+        <div className="pt-24 font-sans selection:bg-organic-cyan selection:text-organic-black">
             {/* Hero Section */}
             <section className="py-20 px-6 lg:px-24">
                 <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <div className="max-w-2xl">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/5">
+                            <Star size={14} className="text-organic-cyan" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan"> Branding & Posicionamento</span>
+                        </div>
                         <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
-                            Identidade visual com <span className="text-organic-cyan">alma</span>
+                            Identidade visual com <span className="text-organic-cyan">alma</span> e estratégia
                         </h1>
                         <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans">
-                            Transformamos identidade em estratégia e estética em conversão. Criamos marcas que conversam, não que apenas aparecem.
+                            Não criamos apenas logotipos. Desenvolvemos sistemas visuais que comunicam autoridade, despertam desejo e constroem valor de marca real.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <button className="px-8 py-4 bg-organic-cyan text-organic-black font-semibold rounded-full hover:scale-105 transition-transform flex items-center justify-center space-x-2">
                                 <span className="font-display text-lg uppercase">Criar minha marca</span>
                             </button>
                             <button className="px-8 py-4 border border-white/20 rounded-full hover:bg-white/5 transition-colors flex items-center justify-center space-x-2">
-                                <span className="font-display text-lg uppercase tracking-wider">Ver Portfólio</span>
+                                <span className="font-display text-lg uppercase tracking-wider">Ver Projetos</span>
                             </button>
                         </div>
                     </div>
@@ -60,17 +96,78 @@ export const Branding: React.FC = () => {
                 ]}
             />
 
-            {/* Branding Excellence */}
-            <section className="py-24 bg-organic-gray/20">
+            {/* Portfolio Showcase Section */}
+            <section className="py-32 px-6 lg:px-24 bg-organic-black overflow-hidden" id="portfolio">
+                <div className="container mx-auto">
+                    <div className="text-center mb-24">
+                        <h2 className="text-5xl md:text-7xl font-display font-bold uppercase mb-4">
+                            Marcas que <span className="text-organic-cyan">dominam</span> o mercado
+                        </h2>
+                        <p className="text-organic-white/50 text-lg max-w-2xl mx-auto font-sans">
+                            Confira como transformamos conceitos abstratos em universos visuais inesquecíveis.
+                        </p>
+                    </div>
+
+
+                    <div className="grid md:grid-cols-2 gap-12">
+                        {portfolio.map((site, idx) => (
+                            <div
+                                key={idx}
+                                className="group relative rounded-[40px] p-2 overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 hover:border-white/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
+                            >
+                                <GlowingEffect
+                                    spread={40}
+                                    glow={true}
+                                    disabled={false}
+                                    proximity={64}
+                                    inactiveZone={0.01}
+                                    borderWidth={3}
+                                />
+                                <div className="relative rounded-[32px] overflow-hidden bg-organic-black h-full">
+                                    {/* Glow Effect Background */}
+                                    <div
+                                        className="absolute -inset-20 blur-[100px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
+                                        style={{ background: site.color }}
+                                    />
+
+                                    <div className="aspect-[16/10] overflow-hidden">
+                                        <img
+                                            src={site.image}
+                                            alt={site.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                    </div>
+
+                                    <div className="p-10 relative z-10">
+                                        <div className="flex justify-between items-end">
+                                            <div>
+                                                <span className="text-organic-cyan text-xs font-bold uppercase tracking-[0.3em] mb-3 block">{site.category}</span>
+                                                <h3 className="text-4xl font-display font-bold uppercase mb-2 group-hover:text-organic-cyan transition-colors">{site.title}</h3>
+                                                <p className="text-organic-white/60 font-sans max-w-md">{site.description}</p>
+                                            </div>
+                                            <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-organic-black transition-all">
+                                                <ArrowRight size={24} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Expertise Grid */}
+            <section className="py-24 bg-white/5 border-y border-white/5">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-3 gap-12">
                         {brandingFeatures.map((feature, idx) => (
-                            <div key={idx} className="text-center group">
-                                <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-organic-cyan/10 transition-colors">
+                            <div key={idx} className="p-10 rounded-3xl bg-organic-black/40 border border-white/10 hover:border-organic-cyan/50 transition-all group">
+                                <div className="w-12 h-12 bg-organic-cyan/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                                <p className="text-organic-white/60 leading-relaxed">
+                                <h3 className="text-2xl font-bold font-display uppercase mb-4 tracking-wide">{feature.title}</h3>
+                                <p className="text-organic-white/50 leading-relaxed font-sans text-sm">
                                     {feature.description}
                                 </p>
                             </div>
@@ -79,34 +176,37 @@ export const Branding: React.FC = () => {
                 </div>
             </section>
 
-            {/* Double Column Section */}
-            <section className="py-24 border-t border-white/5">
+            {/* Strategy Section */}
+            <section className="py-32">
                 <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-20 items-center">
+                    <div className="grid lg:grid-cols-2 gap-24 items-center">
                         <div className="relative">
-                            <div className="absolute -inset-4 bg-organic-cyan/20 blur-3xl rounded-full opacity-30"></div>
-                            <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center">
-                                <Palette size={120} className="text-organic-white/20" />
+                            <div className="absolute -inset-10 bg-organic-purple/20 blur-[100px] rounded-full opacity-30 pointer-events-none"></div>
+                            <div className="relative aspect-square rounded-[60px] overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group">
+                                <Palette size={160} className="text-organic-cyan opacity-20 group-hover:scale-110 transition-transform duration-700" />
+                                <div className="absolute inset-x-0 bottom-0 p-12 bg-gradient-to-t from-organic-black to-transparent">
+                                    <p className="font-display text-5xl font-bold uppercase">DNA <br />Estratégico</p>
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <h2 className="text-4xl font-display font-bold mb-8">Design que gera valor de verdade</h2>
-                            <p className="text-organic-white/70 mb-8 text-lg">
-                                Design bonito é só metade do caminho. A outra metade é o que ele comunica e como ele posiciona sua empresa no mercado.
+                            <h2 className="text-5xl md:text-7xl font-display font-bold mb-8 uppercase leading-none">Design que gera <span className="text-organic-cyan">valor real</span></h2>
+                            <p className="text-organic-white/60 mb-12 text-lg font-sans">
+                                Através do Branding, transformamos a percepção do seu negócio. Saia da guerra de preços e entre no campo do valor percebido.
                             </p>
-                            <div className="space-y-6">
+                            <div className="space-y-8">
                                 {[
                                     { t: "Naming e Logomarca", d: "Criação de nomes e símbolos que ficam na memória." },
                                     { t: "Manual da Marca", d: "Regras claras para manter sua identidade sempre impecável." },
                                     { t: "Papelaria e Social Kit", d: "Tudo o que você precisa para começar a rodar amanhã." }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex space-x-4">
-                                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-organic-cyan/20 flex items-center justify-center mt-1">
-                                            <div className="w-2 h-2 rounded-full bg-organic-cyan"></div>
+                                    <div key={i} className="flex space-x-6 p-6 rounded-2xl border border-white/5 hover:bg-white/5 transition-colors">
+                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-organic-cyan text-organic-black flex items-center justify-center font-bold font-display">
+                                            {i + 1}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-lg">{item.t}</h4>
-                                            <p className="text-organic-white/50 text-sm">{item.d}</p>
+                                            <h4 className="font-bold text-xl uppercase tracking-wide mb-1">{item.t}</h4>
+                                            <p className="text-organic-white/40 text-sm font-sans">{item.d}</p>
                                         </div>
                                     </div>
                                 ))}
