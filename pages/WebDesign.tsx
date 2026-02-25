@@ -76,11 +76,11 @@ export const WebDesign: React.FC = () => {
             image: "/finup-hero.png"
         },
         {
-            title: "Brand Identity",
-            category: "Branding",
-            description: "Design de identidade visual completo para marca corporativa.",
-            url: "https://brandmode.1onestrong.com/?storefront=envato-elements",
-            image: "https://organic-mkt.com.br/wp-content/uploads/2025/04/brand-identity.jpg"
+            title: "ClipStorm",
+            category: "SaaS & IA",
+            description: "Plataforma avançada de automação de vídeos curtos com inteligência artificial e narrativas inteligentes.",
+            url: "https://clipstorm-indol.vercel.app/",
+            image: `https://v1.screenshot.11ty.dev/${encodeURIComponent("https://clipstorm-indol.vercel.app/")}/large/`
         },
         {
             title: "About Us Page",

@@ -4,7 +4,7 @@ const cases = [
   { id: 1, client: "MP4 Contabil", cat: "Web Design", img: `https://v1.screenshot.11ty.dev/${encodeURIComponent("https://mp4contabil.com.br/")}/large/`, url: "https://mp4contabil.com.br/" },
   { id: 2, client: "Olivers", cat: "Branding & Web", img: `https://v1.screenshot.11ty.dev/${encodeURIComponent("https://olivers-zeta.vercel.app/")}/large/`, url: "https://olivers-zeta.vercel.app/" },
   { id: 3, client: "FinUp AI", cat: "Web Design", img: "/finup-hero.png", url: "https://finup-ai.vercel.app/" },
-  { id: 4, client: "Gislaine Coltz", cat: "Personal Branding", img: `https://v1.screenshot.11ty.dev/${encodeURIComponent("https://gislaine-coltz.vercel.app/")}/large/`, url: "https://gislaine-coltz.vercel.app/" },
+  { id: 4, client: "ClipStorm", cat: "IA & Video", img: `https://v1.screenshot.11ty.dev/${encodeURIComponent("https://clipstorm-indol.vercel.app/")}/large/`, url: "https://clipstorm-indol.vercel.app/" },
 ];
 
 import { GlowingEffect } from './ui/glowing-effect';
