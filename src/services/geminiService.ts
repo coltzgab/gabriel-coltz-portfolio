@@ -1,25 +1,26 @@
-import { GoogleGenAI, Type } from "@google/genai";
 import { BrandAnalysisResult } from '../types';
 
 let aiInstance: any = null;
 
-const getAI = () => {
+const getAI = async () => {
   if (!aiInstance) {
     const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
     if (!apiKey) {
       console.warn("AI API Key missing. Diagnostic features will be disabled.");
       return null;
     }
+    const { GoogleGenAI } = await import("@google/genai");
     aiInstance = new GoogleGenAI({ apiKey });
   }
   return aiInstance;
 };
 
 export const analyzeBrand = async (description: string): Promise<BrandAnalysisResult> => {
-  const modelId = 'gemini-3-flash-preview';
-
-  const ai = getAI();
+  const ai = await getAI();
   if (!ai) throw new Error("Serviço de IA não configurado. Por favor, adicione a chave GEMINI_API_KEY.");
+
+  const { Type } = await import("@google/genai");
+  const modelId = 'gemini-3-flash-preview';
 
   const response = await ai.models.generateContent({
     model: modelId,
