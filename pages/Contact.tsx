@@ -93,10 +93,10 @@ export const Contact: React.FC = () => {
                                         initial={{ opacity: 0, x: -20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className="p-8 border border-white/5 rounded-3xl bg-white/5 hover:border-organic-cyan/30 transition-all group"
+                                        className="p-8 border border-white/5 rounded-[60px] bg-white/5 hover:border-organic-cyan/30 transition-all group text-center"
                                     >
-                                        <div className="mb-4 p-3 bg-white/5 w-fit rounded-2xl group-hover:scale-110 transition-transform">
-                                            {React.cloneElement(info.icon as React.ReactElement, { size: 24 })}
+                                        <div className="mb-4 mx-auto p-3 bg-white/5 w-fit rounded-full group-hover:scale-110 transition-transform">
+                                            {React.cloneElement(info.icon as React.ReactElement<any>, { size: 24 } as any)}
                                         </div>
                                         <h3 className="text-xs uppercase tracking-widest text-white/40 mb-2 font-bold">{info.title}</h3>
                                         <p className="font-display text-2xl group-hover:text-organic-cyan transition-colors">{info.value}</p>
@@ -104,7 +104,7 @@ export const Contact: React.FC = () => {
                                 ))}
                             </div>
 
-                            <div className="p-10 rounded-[40px] bg-gradient-to-br from-organic-purple/30 to-transparent border border-white/5">
+                            <div className="p-10 rounded-[60px] bg-gradient-to-br from-organic-purple/30 to-transparent border border-white/5 text-center">
                                 <h3 className="text-3xl font-display font-bold mb-4 uppercase">Horário de Atendimento</h3>
                                 <p className="text-organic-white/60 mb-6 font-sans">
                                     Estamos disponíveis para transformar sua marca durante toda a semana útil.
@@ -126,7 +126,7 @@ export const Contact: React.FC = () => {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            className="bg-organic-black border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative"
+                            className="bg-organic-black border border-white/10 p-8 md:p-12 rounded-[60px] shadow-2xl relative"
                         >
                             <div className="absolute -top-6 -right-6 w-24 h-24 bg-organic-cyan/10 blur-3xl rounded-full" />
 
@@ -142,7 +142,7 @@ export const Contact: React.FC = () => {
                                             name="name"
                                             value={formData.name}
                                             onChange={handleInputChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-organic-cyan transition-colors font-sans"
+                                            className="w-full bg-white/5 border border-white/10 rounded-full px-8 py-4 outline-none focus:border-organic-cyan transition-colors font-sans"
                                             placeholder="Ex: Gabriel"
                                         />
                                     </div>
@@ -154,7 +154,7 @@ export const Contact: React.FC = () => {
                                             name="email"
                                             value={formData.email}
                                             onChange={handleInputChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-organic-cyan transition-colors font-sans"
+                                            className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-4 outline-none focus:border-organic-cyan transition-colors font-sans"
                                             placeholder="seu@contato.com"
                                         />
                                     </div>
@@ -167,7 +167,7 @@ export const Contact: React.FC = () => {
                                         name="service"
                                         value={formData.service}
                                         onChange={handleInputChange}
-                                        className="w-full bg-white/5 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-organic-cyan transition-colors font-sans appearance-none"
+                                        className="w-full bg-white/5 border border-white/10 rounded-full px-8 py-4 outline-none focus:border-organic-cyan transition-colors font-sans appearance-none"
                                     >
                                         <option value="" disabled className="bg-organic-black">Selecione o serviço...</option>
                                         <option value="Web Design" className="bg-organic-black">Web Design / Sites</option>
@@ -185,14 +185,14 @@ export const Contact: React.FC = () => {
                                         value={formData.message}
                                         onChange={handleInputChange}
                                         rows={4}
-                                        className="w-full bg-white/5 border border-white/10 rounded-3xl px-5 py-4 outline-none focus:border-organic-cyan transition-colors font-sans resize-none"
+                                        className="w-full bg-white/5 border border-white/10 rounded-full px-8 py-6 outline-none focus:border-organic-cyan transition-colors font-sans resize-none"
                                         placeholder="Conte brevemente sobre seu projeto..."
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="w-full py-5 bg-organic-cyan text-organic-black font-bold rounded-3xl flex items-center justify-center space-x-3 hover:bg-white transition-all transform hover:-translate-y-1 group"
+                                    className="w-full py-5 bg-organic-cyan text-organic-black font-bold rounded-full flex items-center justify-center space-x-3 hover:bg-white transition-all transform hover:-translate-y-1 group"
                                 >
                                     <MessageCircle size={22} />
                                     <span className="font-display text-2xl uppercase tracking-tighter">Mandar para o WhatsApp</span>

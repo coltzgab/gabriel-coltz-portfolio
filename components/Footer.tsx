@@ -9,13 +9,13 @@ export const Footer: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-16 mb-20">
           <div>
             <h2 className="font-display text-5xl font-bold mb-6 text-organic-white">
-              Sua marca não pode <br/>
+              Sua marca não pode <br />
               <span className="text-organic-cyan">parar no tempo.</span>
             </h2>
             <p className="text-organic-white/60 text-lg mb-8 max-w-md">
               Acompanhamos empresas que desejam liderar seus nichos através de uma estética impecável e estratégia sólida.
             </p>
-            
+
             <div className="flex gap-4">
               <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-3 border border-organic-white/20 rounded-full hover:border-organic-purple hover:text-organic-purple transition-colors">
                 <Instagram size={20} />
@@ -29,23 +29,23 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-organic-white/5 p-8 border border-organic-white/10">
-            <h3 className="font-display text-2xl font-bold mb-6">Iniciar Projeto</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+          <div className="bg-organic-white/5 p-10 border border-organic-white/10 rounded-[60px]">
+            <h3 className="font-display text-4xl font-bold mb-8 uppercase tracking-tighter">Iniciar Projeto</h3>
+            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-organic-white/50 mb-2">Nome</label>
-                <input type="text" className="w-full bg-transparent border-b border-organic-white/20 py-2 text-organic-white focus:outline-none focus:border-organic-cyan transition-colors" />
+                <label className="block text-[10px] uppercase tracking-widest text-organic-white/50 mb-2 ml-4 font-bold font-sans">Nome</label>
+                <input type="text" placeholder="Seu nome" className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-3 text-organic-white focus:outline-none focus:border-organic-cyan transition-colors" />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-organic-white/50 mb-2">Email</label>
-                <input type="email" className="w-full bg-transparent border-b border-organic-white/20 py-2 text-organic-white focus:outline-none focus:border-organic-cyan transition-colors" />
+                <label className="block text-[10px] uppercase tracking-widest text-organic-white/50 mb-2 ml-4 font-bold font-sans">Email</label>
+                <input type="email" placeholder="seu@email.com" className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-3 text-organic-white focus:outline-none focus:border-organic-cyan transition-colors" />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-organic-white/50 mb-2">Mensagem</label>
-                <textarea rows={3} className="w-full bg-transparent border-b border-organic-white/20 py-2 text-organic-white focus:outline-none focus:border-organic-cyan transition-colors resize-none"></textarea>
+                <label className="block text-[10px] uppercase tracking-widest text-organic-white/50 mb-2 ml-4 font-bold font-sans">Mensagem</label>
+                <textarea rows={3} placeholder="Como podemos ajudar?" className="w-full bg-white/5 border border-white/10 rounded-[30px] px-6 py-4 text-organic-white focus:outline-none focus:border-organic-cyan transition-colors resize-none"></textarea>
               </div>
-              <Button type="submit" fullWidth className="mt-4">
-                Enviar Solicitação <MessageCircle size={18} className="inline ml-2"/>
+              <Button type="submit" fullWidth className="py-4 text-xl">
+                Enviar Solicitação <MessageCircle size={20} className="inline ml-2" />
               </Button>
             </form>
           </div>

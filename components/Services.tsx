@@ -85,7 +85,7 @@ export const Services: React.FC = () => {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="group relative p-1 rounded-[2rem] border border-white/5 overflow-hidden transition-all duration-300 animate-on-scroll h-full"
+              className="group relative p-1 rounded-[4rem] border border-white/5 overflow-hidden transition-all duration-300 animate-on-scroll h-full"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <GlowingEffect
@@ -96,7 +96,7 @@ export const Services: React.FC = () => {
                 inactiveZone={0.01}
                 borderWidth={3}
               />
-              <div className="relative h-full p-8 rounded-[1.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors">
+              <div className="relative h-full p-8 rounded-[3.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors">
                 <div className="mb-6 text-organic-cyan group-hover:text-organic-white transition-colors duration-300 transform group-hover:-translate-y-1">
                   {service.icon}
                 </div>

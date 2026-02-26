@@ -39,18 +39,18 @@ export const Hero: React.FC = () => {
 
         <div className="relative hidden md:block h-[600px]">
           {/* Decorative Image Composition mimicking the collage style */}
-          <div className="absolute top-10 right-10 w-64 h-80 border-2 border-organic-cyan z-20 translate-x-4 translate-y-4 rounded-3xl"></div>
-          <div className="absolute top-10 right-10 w-64 h-80 bg-organic-gray z-10 overflow-hidden rounded-3xl">
+          <div className="absolute top-10 right-10 w-64 h-80 border-2 border-organic-cyan z-20 translate-x-4 translate-y-4 rounded-full"></div>
+          <div className="absolute top-10 right-10 w-64 h-80 bg-organic-gray z-10 overflow-hidden rounded-full">
             <img src="/astronaut-left.png" alt="Brand Art" className="w-full h-full object-cover" />
           </div>
 
-          <div className="absolute bottom-10 left-10 w-56 h-72 border-2 border-organic-purple z-20 -translate-x-4 -translate-y-4 rounded-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-56 h-72 bg-organic-black z-10 overflow-hidden rounded-3xl">
+          <div className="absolute bottom-10 left-10 w-56 h-72 border-2 border-organic-purple z-20 -translate-x-4 -translate-y-4 rounded-full"></div>
+          <div className="absolute bottom-10 left-10 w-56 h-72 bg-organic-black z-10 overflow-hidden rounded-full">
             <img src="/astronaut-right.png" alt="Strategy Art" className="w-full h-full object-cover" />
           </div>
 
           {/* Floating Badge */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-organic-black border border-organic-white/10 p-6 backdrop-blur-sm z-30 rounded-3xl shadow-2xl">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-organic-black border border-organic-white/10 p-6 backdrop-blur-sm z-30 rounded-full shadow-2xl">
             <p className="font-display text-organic-cyan text-4xl font-bold text-center">360°</p>
             <p className="text-[10px] uppercase tracking-widest text-center text-organic-white font-bold">Visão Estratégica</p>
           </div>

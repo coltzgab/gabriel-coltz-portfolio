@@ -90,11 +90,11 @@ export const WebDesign: React.FC = () => {
             image: "https://organic-mkt.com.br/wp-content/uploads/2025/04/about-us.jpg"
         },
         {
-            title: "E-Commerce",
-            category: "Vendas Online",
-            description: "Plataforma personalizada para e-commerce.",
-            url: "https://kits.yumnatype.com/niskala/?storefront=envato-elements",
-            image: "https://organic-mkt.com.br/wp-content/uploads/2025/05/home-1-scaled.jpg"
+            title: "Gislaine Coltz",
+            category: "Landing Page & Mentoria",
+            description: "Landing page de alta conversão para profissional de destaque no setor de estética avançada.",
+            url: "https://gislaine-coltz.vercel.app/",
+            image: `https://v1.screenshot.11ty.dev/${encodeURIComponent("https://gislaine-coltz.vercel.app/")}/large/`
         }
     ];
 
@@ -117,18 +117,9 @@ export const WebDesign: React.FC = () => {
                 "Ideal para autoridade",
                 "SEO Otimizado",
                 "Copywriting Otimizado",
+                "Blog Automático com IA (Postagens Semanais)",
                 "Múltiplas páginas",
                 "Suporte Total"
-            ]
-        },
-        {
-            name: "E-commerce",
-            price: "Sob Consulta",
-            features: [
-                "Estrutura robusta de vendas",
-                "Gestão de Produtos",
-                "Checkout Otimizado",
-                "SEO Avançado"
             ]
         }
     ];
@@ -200,7 +191,7 @@ export const WebDesign: React.FC = () => {
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {features.map((feature, idx) => (
-                            <div key={idx} className="p-8 border border-white/5 rounded-3xl hover:border-organic-cyan/30 transition-colors bg-organic-black/40">
+                            <div key={idx} className="p-8 border border-white/5 rounded-[60px] hover:border-organic-cyan/30 transition-all bg-organic-black/40 text-center">
                                 <div className="mb-4">{feature.icon}</div>
                                 <h3 className="text-2xl font-display font-bold mb-3">{feature.title}</h3>
                                 <p className="text-organic-white/60 text-sm leading-relaxed font-sans">
@@ -252,7 +243,7 @@ export const WebDesign: React.FC = () => {
                                 href={site.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="min-w-[280px] md:min-w-[600px] snap-center group bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-organic-cyan transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                                className="min-w-[280px] md:min-w-[600px] snap-center group bg-white/5 border border-white/10 rounded-[60px] overflow-hidden hover:border-organic-cyan transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
                             >
                                 <div className="aspect-[16/9] overflow-hidden relative">
                                     <img
@@ -304,9 +295,9 @@ export const WebDesign: React.FC = () => {
                         <h2 className="text-5xl font-display font-bold mb-4">Nossos Planos</h2>
                         <p className="text-organic-white/60 font-sans">Soluções sob medida para o seu momento de negócio.</p>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         {plans.map((plan, idx) => (
-                            <div key={idx} className={`p-8 rounded-3xl border ${plan.highlight ? 'border-organic-cyan bg-organic-cyan/5 scale-105 relative z-10' : 'border-white/10 bg-organic-black'}`}>
+                            <div key={idx} className={`p-8 rounded-[60px] border ${plan.highlight ? 'border-organic-cyan bg-organic-cyan/5 scale-105 relative z-10' : 'border-white/10 bg-organic-black'}`}>
                                 {plan.highlight && <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-organic-cyan text-organic-black text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full font-display">Mais Procurado</span>}
                                 <div className="mb-8">
                                     <h3 className="text-3xl font-display font-bold mb-2">{plan.name}</h3>
@@ -334,7 +325,7 @@ export const WebDesign: React.FC = () => {
 
             {/* CTA */}
             <section className="py-24 px-6 text-center">
-                <div className="container mx-auto max-w-4xl bg-gradient-to-br from-organic-purple/20 to-organic-cyan/10 p-16 rounded-[40px] border border-white/5">
+                <div className="container mx-auto max-w-4xl bg-gradient-to-br from-organic-purple/20 to-organic-cyan/10 p-16 rounded-[60px] border border-white/5">
                     <h2 className="text-5xl md:text-7xl font-display font-bold mb-8">Pronto para transformar sua presença digital?</h2>
                     <p className="text-organic-white/70 mb-10 text-lg font-sans">
                         Estamos prontos para criar um site que não apenas pareça bom, mas que venda.

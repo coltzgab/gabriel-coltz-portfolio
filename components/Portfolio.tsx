@@ -24,7 +24,7 @@ export const Portfolio: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               key={item.id}
-              className={`relative group cursor-pointer rounded-3xl p-1 transition-all ${index % 2 === 0 ? 'md:mt-12' : ''}`}
+              className={`relative group cursor-pointer rounded-[60px] p-1 transition-all ${index % 2 === 0 ? 'md:mt-12' : ''}`}
             >
               <GlowingEffect
                 spread={40}
@@ -34,7 +34,7 @@ export const Portfolio: React.FC = () => {
                 inactiveZone={0.01}
                 borderWidth={2}
               />
-              <div className="aspect-[4/5] bg-organic-gray relative overflow-hidden rounded-[calc(1.5rem-4px)]">
+              <div className="aspect-[4/5] bg-organic-gray relative overflow-hidden rounded-[calc(3.75rem-4px)]">
                 <img
                   src={item.img}
                   alt={item.client}
@@ -42,7 +42,7 @@ export const Portfolio: React.FC = () => {
                 />
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-organic-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-6 border-2 border-organic-cyan/50 m-4 rounded-2xl">
+                <div className="absolute inset-0 bg-organic-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-6 border-2 border-organic-cyan/50 m-4 rounded-full">
                   <span className="text-organic-cyan text-xs font-bold uppercase tracking-widest mb-2">{item.cat}</span>
                   <h3 className="text-2xl font-display font-bold text-organic-white">{item.client}</h3>
                 </div>

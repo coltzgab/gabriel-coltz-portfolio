@@ -100,10 +100,10 @@ export const SocialMedia: React.FC = () => {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="p-8 border border-white/5 rounded-3xl bg-organic-black/40 hover:border-organic-cyan/30 transition-all group"
+                                className="p-8 border border-white/5 rounded-[60px] bg-organic-black/40 hover:border-organic-cyan/30 transition-all group text-center"
                             >
-                                <div className="mb-6 p-3 bg-white/5 w-fit rounded-2xl group-hover:scale-110 transition-transform">
-                                    {React.cloneElement(step.icon as React.ReactElement, { size: 32 })}
+                                <div className="mb-6 mx-auto p-3 bg-white/5 w-fit rounded-full group-hover:scale-110 transition-transform">
+                                    {React.cloneElement(step.icon as React.ReactElement<any>, { size: 32 } as any)}
                                 </div>
                                 <h3 className="text-2xl font-display font-bold mb-3 uppercase tracking-tight">{step.title}</h3>
                                 <p className="text-organic-white/60 text-sm leading-relaxed font-sans">
@@ -118,7 +118,7 @@ export const SocialMedia: React.FC = () => {
             {/* Philosophy Section */}
             <section className="py-24">
                 <div className="container mx-auto px-6">
-                    <div className="bg-gradient-to-br from-organic-purple/20 to-organic-cyan/10 p-12 md:p-20 rounded-[40px] border border-white/5 relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-organic-purple/20 to-organic-cyan/10 p-12 md:p-20 rounded-[60px] border border-white/5 relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
                             <Sparkles size={200} className="text-organic-cyan" />
                         </div>
@@ -148,7 +148,7 @@ export const SocialMedia: React.FC = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="bg-organic-black/60 backdrop-blur-md p-8 rounded-3xl border border-white/10" id="budget-form">
+                            <div className="bg-organic-black/60 backdrop-blur-md p-8 rounded-[60px] border border-white/10" id="budget-form">
                                 <h3 className="text-3xl font-display font-bold mb-6 text-center uppercase tracking-tight">Conte seu objetivo</h3>
                                 <form onSubmit={handleWhatsAppRedirect} className="space-y-4">
                                     <div>
@@ -159,7 +159,7 @@ export const SocialMedia: React.FC = () => {
                                             name="name"
                                             value={formData.name}
                                             onChange={handleInputChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-3xl px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans"
+                                            className="w-full bg-white/5 border border-white/10 rounded-full px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans"
                                             placeholder="Ex: Gabriel Freitas"
                                         />
                                     </div>
@@ -171,7 +171,7 @@ export const SocialMedia: React.FC = () => {
                                             name="company"
                                             value={formData.company}
                                             onChange={handleInputChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-3xl px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans"
+                                            className="w-full bg-white/5 border border-white/10 rounded-full px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans"
                                             placeholder="Ex: Minha Loja Ltda"
                                         />
                                     </div>
@@ -182,7 +182,7 @@ export const SocialMedia: React.FC = () => {
                                             name="instagram"
                                             value={formData.instagram}
                                             onChange={handleInputChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-3xl px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans"
+                                            className="w-full bg-white/5 border border-white/10 rounded-full px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans"
                                             placeholder="Ex: @minhamarca"
                                         />
                                     </div>
@@ -193,7 +193,7 @@ export const SocialMedia: React.FC = () => {
                                             name="objective"
                                             value={formData.objective}
                                             onChange={handleInputChange}
-                                            className="w-full bg-white/10 border border-white/10 rounded-3xl px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans appearance-none"
+                                            className="w-full bg-white/10 border border-white/10 rounded-full px-4 py-3 outline-none focus:border-organic-cyan transition-colors font-sans appearance-none"
                                         >
                                             <option value="" disabled className="bg-organic-black">Selecione...</option>
                                             <option value="Aumentar Vendas" className="bg-organic-black">Aumentar Vendas</option>
@@ -204,7 +204,7 @@ export const SocialMedia: React.FC = () => {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="w-full py-4 bg-organic-cyan text-organic-black font-bold rounded-3xl flex items-center justify-center space-x-2 hover:bg-white transition-all transform hover:-translate-y-1"
+                                        className="w-full py-4 bg-organic-cyan text-organic-black font-bold rounded-full flex items-center justify-center space-x-2 hover:bg-white transition-all transform hover:-translate-y-1"
                                     >
                                         <MessageCircle size={20} />
                                         <span className="font-display text-xl uppercase">Enviar via WhatsApp</span>

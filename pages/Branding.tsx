@@ -113,7 +113,7 @@ export const Branding: React.FC = () => {
                         {portfolio.map((site, idx) => (
                             <div
                                 key={idx}
-                                className="group relative rounded-[40px] p-2 overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 hover:border-white/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
+                                className="group relative rounded-[60px] p-2 overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 hover:border-white/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]"
                             >
                                 <GlowingEffect
                                     spread={40}
@@ -123,7 +123,7 @@ export const Branding: React.FC = () => {
                                     inactiveZone={0.01}
                                     borderWidth={3}
                                 />
-                                <div className="relative rounded-[32px] overflow-hidden bg-organic-black h-full">
+                                <div className="relative rounded-[50px] overflow-hidden bg-organic-black h-full">
                                     {/* Glow Effect Background */}
                                     <div
                                         className="absolute -inset-20 blur-[100px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
@@ -162,8 +162,8 @@ export const Branding: React.FC = () => {
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-3 gap-12">
                         {brandingFeatures.map((feature, idx) => (
-                            <div key={idx} className="p-10 rounded-3xl bg-organic-black/40 border border-white/10 hover:border-organic-cyan/50 transition-all group">
-                                <div className="w-12 h-12 bg-organic-cyan/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <div key={idx} className="p-10 rounded-[60px] bg-organic-black/40 border border-white/10 hover:border-organic-cyan/50 transition-all group text-center">
+                                <div className="w-12 h-12 bg-organic-cyan/10 mx-auto rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-2xl font-bold font-display uppercase mb-4 tracking-wide">{feature.title}</h3>
@@ -182,7 +182,7 @@ export const Branding: React.FC = () => {
                     <div className="grid lg:grid-cols-2 gap-24 items-center">
                         <div className="relative">
                             <div className="absolute -inset-10 bg-organic-purple/20 blur-[100px] rounded-full opacity-30 pointer-events-none"></div>
-                            <div className="relative aspect-square rounded-[60px] overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group">
+                            <div className="relative aspect-square rounded-full overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group">
                                 <Palette size={160} className="text-organic-cyan opacity-20 group-hover:scale-110 transition-transform duration-700" />
                                 <div className="absolute inset-x-0 bottom-0 p-12 bg-gradient-to-t from-organic-black to-transparent">
                                     <p className="font-display text-5xl font-bold uppercase">DNA <br />Estratégico</p>
@@ -200,7 +200,7 @@ export const Branding: React.FC = () => {
                                     { t: "Manual da Marca", d: "Regras claras para manter sua identidade sempre impecável." },
                                     { t: "Papelaria e Social Kit", d: "Tudo o que você precisa para começar a rodar amanhã." }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex space-x-6 p-6 rounded-2xl border border-white/5 hover:bg-white/5 transition-colors">
+                                    <div key={i} className="flex space-x-6 p-6 rounded-full border border-white/5 hover:bg-white/5 transition-colors">
                                         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-organic-cyan text-organic-black flex items-center justify-center font-bold font-display">
                                             {i + 1}
                                         </div>
