@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+console.log('main.tsx: starting render');
 import App from './App';
 
 const rootElement = document.getElementById('root');

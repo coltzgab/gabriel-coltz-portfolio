@@ -12,6 +12,7 @@ import { Coproduction } from './pages/Coproduction';
 import { ShootingStars } from './components/ui/shooting-stars';
 
 const App: React.FC = () => {
+  console.log('App: rendering components');
   return (
     <Router>
       <div className="font-sans antialiased text-organic-white selection:bg-organic-cyan selection:text-organic-black min-h-screen flex flex-col bg-organic-black relative">
