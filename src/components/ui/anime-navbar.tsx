@@ -10,6 +10,7 @@ interface NavItem {
     name: string
     url: string
     icon: LucideIcon
+    children?: NavItem[]
 }
 
 interface NavBarProps {
@@ -52,203 +53,164 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                 >
                     {items.map((item) => {
                         const Icon = item.icon
-                        const isActive = activeTab === item.name
+                        const isActive = activeTab === item.name || (item.children?.some(c => c.url === location.pathname))
                         const isHovered = hoveredTab === item.name
+                        const hasChildren = item.children && item.children.length > 0
 
                         return (
-                            <Link
+                            <div
                                 key={item.name}
-                                to={item.url}
-                                onClick={() => setActiveTab(item.name)}
+                                className="relative"
                                 onMouseEnter={() => setHoveredTab(item.name)}
                                 onMouseLeave={() => setHoveredTab(null)}
-                                className={cn(
-                                    "relative cursor-pointer text-[10px] sm:text-xs font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-full transition-all duration-300 uppercase tracking-widest",
-                                    "text-white/60 hover:text-white",
-                                    isActive && "text-white"
-                                )}
                             >
-                                {isActive && (
-                                    <motion.div
-                                        className="absolute inset-0 rounded-full -z-10 overflow-hidden"
-                                        initial={{ opacity: 0 }}
-                                        animate={{
-                                            opacity: [0.3, 0.5, 0.3],
-                                            scale: [1, 1.03, 1]
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
+                                {hasChildren ? (
+                                    <span
+                                        className={cn(
+                                            "relative cursor-pointer text-[10px] sm:text-xs font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-full transition-all duration-300 uppercase tracking-widest inline-block",
+                                            "text-white/60 hover:text-white",
+                                            isActive && "text-white"
+                                        )}
                                     >
-                                        <div className="absolute inset-0 bg-organic-cyan/25 rounded-full blur-md" />
-                                        <div className="absolute inset-[-4px] bg-organic-cyan/20 rounded-full blur-xl" />
-                                        <div className="absolute inset-[-8px] bg-organic-cyan/15 rounded-full blur-2xl" />
-                                        <div className="absolute inset-[-12px] bg-organic-cyan/5 rounded-full blur-3xl" />
+                                        {isActive && (
+                                            <motion.div
+                                                className="absolute inset-0 rounded-full -z-10 overflow-hidden"
+                                                initial={{ opacity: 0 }}
+                                                animate={{
+                                                    opacity: [0.3, 0.5, 0.3],
+                                                    scale: [1, 1.03, 1]
+                                                }}
+                                                transition={{
+                                                    duration: 2,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut"
+                                                }}
+                                            >
+                                                <div className="absolute inset-0 bg-organic-cyan/25 rounded-full blur-md" />
+                                                <div className="absolute inset-[-4px] bg-organic-cyan/20 rounded-full blur-xl" />
+                                            </motion.div>
+                                        )}
+                                        <motion.span
+                                            className="hidden md:inline relative z-10"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {item.name}
+                                        </motion.span>
+                                        <motion.span
+                                            className="md:hidden relative z-10 flex items-center justify-center w-5 h-5"
+                                        >
+                                            <Icon size={16} strokeWidth={2.5} />
+                                        </motion.span>
 
-                                        <div
-                                            className="absolute inset-0 bg-gradient-to-r from-organic-cyan/0 via-organic-cyan/20 to-organic-cyan/0 animate-pulse-slow"
-                                        />
-                                    </motion.div>
+                                        <AnimatePresence>
+                                            {isHovered && !isActive && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    exit={{ opacity: 0, scale: 0.8 }}
+                                                    className="absolute inset-0 bg-white/5 rounded-full -z-10"
+                                                />
+                                            )}
+                                        </AnimatePresence>
+                                    </span>
+                                ) : (
+                                    <Link
+                                        to={item.url}
+                                        onClick={() => setActiveTab(item.name)}
+                                        className={cn(
+                                            "relative cursor-pointer text-[10px] sm:text-xs font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-full transition-all duration-300 uppercase tracking-widest",
+                                            "text-white/60 hover:text-white",
+                                            isActive && "text-white"
+                                        )}
+                                    >
+                                        {isActive && (
+                                            <motion.div
+                                                className="absolute inset-0 rounded-full -z-10 overflow-hidden"
+                                                initial={{ opacity: 0 }}
+                                                animate={{
+                                                    opacity: [0.3, 0.5, 0.3],
+                                                    scale: [1, 1.03, 1]
+                                                }}
+                                                transition={{
+                                                    duration: 2,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut"
+                                                }}
+                                            >
+                                                <div className="absolute inset-0 bg-organic-cyan/25 rounded-full blur-md" />
+                                                <div className="absolute inset-[-4px] bg-organic-cyan/20 rounded-full blur-xl" />
+                                                <div className="absolute inset-[-8px] bg-organic-cyan/15 rounded-full blur-2xl" />
+                                                <div className="absolute inset-[-12px] bg-organic-cyan/5 rounded-full blur-3xl" />
+
+                                                <div
+                                                    className="absolute inset-0 bg-gradient-to-r from-organic-cyan/0 via-organic-cyan/20 to-organic-cyan/0 animate-pulse-slow"
+                                                />
+                                            </motion.div>
+                                        )}
+
+                                        <motion.span
+                                            className="hidden md:inline relative z-10"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {item.name}
+                                        </motion.span>
+                                        <motion.span
+                                            className="md:hidden relative z-10 flex items-center justify-center w-5 h-5"
+                                        >
+                                            <Icon size={16} strokeWidth={2.5} />
+                                        </motion.span>
+
+                                        <AnimatePresence>
+                                            {isHovered && !isActive && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    exit={{ opacity: 0, scale: 0.8 }}
+                                                    className="absolute inset-0 bg-white/5 rounded-full -z-10"
+                                                />
+                                            )}
+                                        </AnimatePresence>
+                                    </Link>
                                 )}
 
-                                <motion.span
-                                    className="hidden md:inline relative z-10"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    {item.name}
-                                </motion.span>
-                                <motion.span
-                                    className="md:hidden relative z-10 flex items-center justify-center w-5 h-5"
-                                >
-                                    <Icon size={16} strokeWidth={2.5} />
-                                </motion.span>
-
+                                {/* Dropdown for children */}
                                 <AnimatePresence>
-                                    {isHovered && !isActive && (
+                                    {hasChildren && isHovered && (
                                         <motion.div
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.8 }}
-                                            className="absolute inset-0 bg-white/5 rounded-full -z-10"
-                                        />
+                                            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                                            transition={{ duration: 0.2 }}
+                                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 py-2 px-1 bg-black/80 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl min-w-[180px] z-50"
+                                        >
+                                            {item.children!.map((child) => {
+                                                const ChildIcon = child.icon
+                                                const isChildActive = location.pathname === child.url
+                                                return (
+                                                    <Link
+                                                        key={child.name}
+                                                        to={child.url}
+                                                        onClick={() => { setActiveTab(item.name); setHoveredTab(null) }}
+                                                        className={cn(
+                                                            "flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all",
+                                                            isChildActive
+                                                                ? "text-organic-cyan bg-organic-cyan/10"
+                                                                : "text-white/60 hover:text-white hover:bg-white/5"
+                                                        )}
+                                                    >
+                                                        <ChildIcon size={14} />
+                                                        {child.name}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </motion.div>
                                     )}
                                 </AnimatePresence>
-
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="anime-mascot"
-                                        className="absolute -top-12 left-1/2 -translate-x-1/2 pointer-events-none hidden sm:block"
-                                        initial={false}
-                                        transition={{
-                                            type: "spring",
-                                            stiffness: 300,
-                                            damping: 30,
-                                        }}
-                                    >
-                                        <div className="relative w-12 h-12">
-                                            <motion.div
-                                                className="absolute w-10 h-10 bg-white rounded-full left-1/2 -translate-x-1/2 shadow-lg shadow-black/50"
-                                                animate={
-                                                    hoveredTab ? {
-                                                        scale: [1, 1.1, 1],
-                                                        rotate: [0, -5, 5, 0],
-                                                        transition: {
-                                                            duration: 0.5,
-                                                            ease: "easeInOut"
-                                                        }
-                                                    } : {
-                                                        y: [0, -3, 0],
-                                                        transition: {
-                                                            duration: 2,
-                                                            repeat: Infinity,
-                                                            ease: "easeInOut"
-                                                        }
-                                                    }
-                                                }
-                                            >
-                                                <motion.div
-                                                    className="absolute w-1.5 h-1.5 bg-black rounded-full"
-                                                    animate={
-                                                        hoveredTab ? {
-                                                            scaleY: [1, 0.2, 1],
-                                                            transition: {
-                                                                duration: 0.2,
-                                                                times: [0, 0.5, 1]
-                                                            }
-                                                        } : {}
-                                                    }
-                                                    style={{ left: '25%', top: '40%' }}
-                                                />
-                                                <motion.div
-                                                    className="absolute w-1.5 h-1.5 bg-black rounded-full"
-                                                    animate={
-                                                        hoveredTab ? {
-                                                            scaleY: [1, 0.2, 1],
-                                                            transition: {
-                                                                duration: 0.2,
-                                                                times: [0, 0.5, 1]
-                                                            }
-                                                        } : {}
-                                                    }
-                                                    style={{ right: '25%', top: '40%' }}
-                                                />
-                                                <motion.div
-                                                    className="absolute w-2 h-1 bg-pink-300 rounded-full blur-[1px]"
-                                                    style={{ left: '15%', top: '55%' }}
-                                                />
-                                                <motion.div
-                                                    className="absolute w-2 h-1 bg-pink-300 rounded-full blur-[1px]"
-                                                    style={{ right: '15%', top: '55%' }}
-                                                />
-
-                                                <motion.div
-                                                    className="absolute w-4 h-2 border-b-2 border-black rounded-full"
-                                                    animate={
-                                                        hoveredTab ? {
-                                                            scaleY: 1.5,
-                                                            y: -1
-                                                        } : {
-                                                            scaleY: 1,
-                                                            y: 0
-                                                        }
-                                                    }
-                                                    style={{ left: '30%', top: '55%' }}
-                                                />
-                                                <AnimatePresence>
-                                                    {hoveredTab && (
-                                                        <>
-                                                            <motion.div
-                                                                initial={{ opacity: 0, scale: 0 }}
-                                                                animate={{ opacity: 1, scale: 1 }}
-                                                                exit={{ opacity: 0, scale: 0 }}
-                                                                className="absolute -top-1 -right-1 text-[8px]"
-                                                            >
-                                                                ✨
-                                                            </motion.div>
-                                                            <motion.div
-                                                                initial={{ opacity: 0, scale: 0 }}
-                                                                animate={{ opacity: 1, scale: 1 }}
-                                                                exit={{ opacity: 0, scale: 0 }}
-                                                                transition={{ delay: 0.1 }}
-                                                                className="absolute -top-2 left-0 text-[8px]"
-                                                            >
-                                                                ✨
-                                                            </motion.div>
-                                                        </>
-                                                    )}
-                                                </AnimatePresence>
-                                            </motion.div>
-                                            <motion.div
-                                                className="absolute -bottom-1 left-1/2 w-3 h-3 -translate-x-1/2"
-                                                animate={
-                                                    hoveredTab ? {
-                                                        y: [0, -4, 0],
-                                                        transition: {
-                                                            duration: 0.3,
-                                                            repeat: Infinity,
-                                                            repeatType: "reverse"
-                                                        }
-                                                    } : {
-                                                        y: [0, 2, 0],
-                                                        transition: {
-                                                            duration: 1,
-                                                            repeat: Infinity,
-                                                            ease: "easeInOut",
-                                                            delay: 0.5
-                                                        }
-                                                    }
-                                                }
-                                            >
-                                                <div className="w-full h-full bg-white rotate-45 transform origin-center shadow-md shadow-black/50" />
-                                            </motion.div>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </Link>
+                            </div>
                         )
                     })}
                 </motion.div>

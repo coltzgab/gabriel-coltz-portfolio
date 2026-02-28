@@ -31,6 +31,7 @@ import { AdminProposals } from './pages/admin/AdminProposals';
 import { AdminProposalForm } from './pages/admin/AdminProposalForm';
 import { AdminProposalTemplates } from './pages/admin/AdminProposalTemplates';
 import { AdminBlogTopics } from './pages/admin/AdminBlogTopics';
+import { AdminTeam } from './pages/admin/AdminTeam';
 import { ProposalPage } from './pages/ProposalPage';
 
 // Public layout wrapper
@@ -98,7 +99,8 @@ const App: React.FC = () => {
             <Route path="propostas/nova" element={<AdminProposalForm />} />
             <Route path="propostas/editar/:id" element={<AdminProposalForm />} />
             <Route path="templates" element={<AdminProposalTemplates />} />
-            {/* Phase 5: Team routes will go here */}
+            {/* Team Management */}
+            <Route path="equipe" element={<AdminTeam />} />
           </Route>
 
           {/* ========== PUBLIC ROUTES ========== */}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getTemplates, createTemplate, updateTemplate, deleteTemplate, type ProposalTemplate } from '../../services/templateService';
-import { Plus, Edit2, Trash2, Code, Eye, X, Loader2, Save } from 'lucide-react';
+import { Plus, Edit2, Trash2, Code, Eye, X, Loader2, Save, Maximize2 } from 'lucide-react';
 
 export const AdminProposalTemplates: React.FC = () => {
     const [templates, setTemplates] = useState<ProposalTemplate[]>([]);
@@ -9,6 +9,8 @@ export const AdminProposalTemplates: React.FC = () => {
 
     // Modal state
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalView, setModalView] = useState<'code' | 'preview'>('code');
+    const [fullPreviewId, setFullPreviewId] = useState<string | null>(null);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -117,11 +119,21 @@ export const AdminProposalTemplates: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {templates.map(tpl => (
                         <div key={tpl.id} className="bg-organic-gray/20 border border-white/5 rounded-[32px] overflow-hidden group hover:border-organic-cyan/30 transition-colors">
-                            <div className="h-32 bg-[#0d1117] relative p-4 border-b border-white/5 overflow-hidden">
-                                <Code className="absolute -right-4 -bottom-4 text-white/5" size={100} />
-                                <div className="text-[10px] uppercase font-mono text-organic-cyan/60">
-                                    {tpl.html_content.substring(0, 100)}...
-                                </div>
+                            <div className="h-48 bg-[#0d1117] relative border-b border-white/5 overflow-hidden">
+                                <iframe
+                                    srcDoc={tpl.html_content}
+                                    className="w-[200%] h-[200%] border-none pointer-events-none origin-top-left"
+                                    style={{ transform: 'scale(0.5)' }}
+                                    sandbox=""
+                                    title={tpl.name}
+                                />
+                                <button
+                                    onClick={() => setFullPreviewId(tpl.id)}
+                                    className="absolute top-3 right-3 p-1.5 bg-black/60 border border-white/10 rounded-xl text-organic-white/60 hover:text-white hover:border-white transition-colors z-10 opacity-0 group-hover:opacity-100"
+                                    title="Expandir Preview"
+                                >
+                                    <Maximize2 size={14} />
+                                </button>
                             </div>
                             <div className="p-6">
                                 <h3 className="font-display font-bold text-xl uppercase tracking-wider mb-2">{tpl.name}</h3>
@@ -188,15 +200,36 @@ export const AdminProposalTemplates: React.FC = () => {
                             </div>
 
                             <div className="space-y-2 flex-1 flex flex-col">
-                                <label className="text-xs uppercase tracking-widest font-bold text-organic-white/60">Código HTML Base</label>
-                                <textarea
-                                    required
-                                    value={htmlContent}
-                                    onChange={e => setHtmlContent(e.target.value)}
-                                    className="w-full h-[400px] bg-[#0d1117] border border-white/10 rounded-2xl px-4 py-4 text-emerald-400 font-mono text-sm focus:border-organic-cyan focus:outline-none resize-none"
-                                    placeholder="<html...>"
-                                    spellCheck={false}
-                                />
+                                <div className="flex items-center justify-between">
+                                    <label className="text-xs uppercase tracking-widest font-bold text-organic-white/60">Código HTML Base</label>
+                                    <div className="flex bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+                                        <button type="button" onClick={() => setModalView('code')} className={`px-3 py-1 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors ${modalView === 'code' ? 'bg-organic-cyan/20 text-organic-cyan' : 'text-organic-white/40 hover:text-white'}`}>
+                                            <Code size={12} /> Código
+                                        </button>
+                                        <button type="button" onClick={() => setModalView('preview')} className={`px-3 py-1 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors ${modalView === 'preview' ? 'bg-organic-cyan/20 text-organic-cyan' : 'text-organic-white/40 hover:text-white'}`}>
+                                            <Eye size={12} /> Preview
+                                        </button>
+                                    </div>
+                                </div>
+                                {modalView === 'code' ? (
+                                    <textarea
+                                        required
+                                        value={htmlContent}
+                                        onChange={e => setHtmlContent(e.target.value)}
+                                        className="w-full h-[400px] bg-[#0d1117] border border-white/10 rounded-2xl px-4 py-4 text-emerald-400 font-mono text-sm focus:border-organic-cyan focus:outline-none resize-none"
+                                        placeholder="<html...>"
+                                        spellCheck={false}
+                                    />
+                                ) : (
+                                    <div className="w-full h-[400px] bg-white rounded-2xl overflow-hidden border border-white/10">
+                                        <iframe
+                                            srcDoc={htmlContent}
+                                            className="w-full h-full border-none"
+                                            sandbox="allow-scripts"
+                                            title="Template Preview"
+                                        />
+                                    </div>
+                                )}
                                 <p className="text-[10px] text-white/40 mt-2">Dica: Cole o HTML completo da Landing Page, a IA irá ler este HTML e manter o layout exato, mas substituindo os textos/imagens/cores de acordo com o briefing.</p>
                             </div>
                         </div>
@@ -221,6 +254,31 @@ export const AdminProposalTemplates: React.FC = () => {
                     </form>
                 </div>
             )}
+            {/* Fullscreen Preview Modal */}
+            {fullPreviewId && (() => {
+                const tpl = templates.find(t => t.id === fullPreviewId);
+                return tpl ? (
+                    <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex flex-col">
+                        <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-organic-black/80">
+                            <h3 className="font-display text-lg font-bold uppercase tracking-wider text-organic-white">
+                                <Eye size={16} className="inline mr-2 text-organic-cyan" />
+                                {tpl.name}
+                            </h3>
+                            <button onClick={() => setFullPreviewId(null)} className="p-2 rounded-xl hover:bg-white/10 text-organic-white/60 hover:text-white transition-colors">
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <div className="flex-1 overflow-hidden">
+                            <iframe
+                                srcDoc={tpl.html_content}
+                                className="w-full h-full border-none bg-white"
+                                sandbox="allow-scripts"
+                                title={tpl.name}
+                            />
+                        </div>
+                    </div>
+                ) : null;
+            })()}
         </div>
     );
 };

@@ -8,21 +8,25 @@ interface Stats {
     publishedPosts: number;
     totalProposals: number;
     activeProposals: number;
+    teamMembers: number;
+    activeTopics: number;
 }
 
 export const AdminDashboard: React.FC = () => {
     const { adminProfile } = useAuth();
     const [stats, setStats] = useState<Stats>({
-        totalPosts: 0, publishedPosts: 0, totalProposals: 0, activeProposals: 0,
+        totalPosts: 0, publishedPosts: 0, totalProposals: 0, activeProposals: 0, teamMembers: 0, activeTopics: 0,
     });
 
     useEffect(() => {
         const fetchStats = async () => {
-            const [postsRes, publishedRes, proposalsRes, activeRes] = await Promise.all([
+            const [postsRes, publishedRes, proposalsRes, activeRes, teamRes, topicsRes] = await Promise.all([
                 supabase.from('blog_posts').select('id', { count: 'exact', head: true }),
                 supabase.from('blog_posts').select('id', { count: 'exact', head: true }).eq('is_published', true),
                 supabase.from('proposals').select('id', { count: 'exact', head: true }),
                 supabase.from('proposals').select('id', { count: 'exact', head: true }).eq('is_active', true),
+                supabase.from('admin_users').select('id', { count: 'exact', head: true }).eq('is_active', true),
+                supabase.from('blog_topics').select('id', { count: 'exact', head: true }).eq('is_active', true),
             ]);
 
             setStats({
@@ -30,6 +34,8 @@ export const AdminDashboard: React.FC = () => {
                 publishedPosts: publishedRes.count || 0,
                 totalProposals: proposalsRes.count || 0,
                 activeProposals: activeRes.count || 0,
+                teamMembers: teamRes.count || 0,
+                activeTopics: topicsRes.count || 0,
             });
         };
 
@@ -39,8 +45,8 @@ export const AdminDashboard: React.FC = () => {
     const statCards = [
         { label: 'Posts do Blog', value: stats.totalPosts, sub: `${stats.publishedPosts} publicados`, icon: FileText, color: 'text-organic-cyan' },
         { label: 'Propostas', value: stats.totalProposals, sub: `${stats.activeProposals} ativas`, icon: FileCode, color: 'text-emerald-400' },
-        { label: 'Crescimento', value: '—', sub: 'Em breve', icon: TrendingUp, color: 'text-amber-400' },
-        { label: 'Equipe', value: '—', sub: 'Em breve', icon: Users, color: 'text-violet-400' },
+        { label: 'Auto Blog', value: stats.activeTopics, sub: 'tópicos ativos', icon: TrendingUp, color: 'text-amber-400' },
+        { label: 'Equipe', value: stats.teamMembers, sub: 'membros ativos', icon: Users, color: 'text-organic-cyan' },
     ];
 
     return (
