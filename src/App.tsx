@@ -36,9 +36,9 @@ import { ProposalPage } from './pages/ProposalPage';
 
 // Public layout wrapper
 const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="font-sans antialiased text-organic-white selection:bg-organic-cyan selection:text-organic-black min-h-screen flex flex-col bg-organic-black relative">
+  <div className="font-sans antialiased text-organic-white selection:bg-organic-cyan selection:text-organic-black min-h-screen flex flex-col bg-organic-black relative overflow-x-hidden">
     {/* Global Background Effect */}
-    <div className="fixed inset-0 pointer-events-none z-0">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(71,228,190,0.05)_0%,rgba(0,0,0,0)_80%)]" />
       <div className="stars absolute inset-0" />
 

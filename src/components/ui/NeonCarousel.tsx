@@ -17,11 +17,11 @@ export const NeonCarousel: React.FC<NeonCarouselProps> = ({ items, speed = 25 })
     const duplicatedItems = [...items, ...items, ...items, ...items];
 
     return (
-        <div className="neon-carousel relative w-full h-16 overflow-hidden flex items-center bg-black/40 backdrop-blur-sm border-y border-organic-cyan/10 z-20">
+        <div className="neon-carousel relative w-full h-16 flex items-center bg-black/40 backdrop-blur-sm border-y border-organic-cyan/10 z-20" style={{ overflow: 'clip', contain: 'paint' }}>
             {/* Soft LED effect instead of strong glow */}
             <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(71,228,190,0.05)] pointer-events-none z-10" />
 
-            <div className="flex w-full overflow-hidden">
+            <div className="flex w-full" style={{ overflow: 'clip' }}>
                 <motion.div
                     className="flex items-center gap-16 whitespace-nowrap px-8"
                     animate={{

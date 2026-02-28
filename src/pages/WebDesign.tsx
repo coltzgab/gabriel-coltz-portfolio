@@ -143,11 +143,11 @@ export const WebDesign: React.FC = () => {
             {/* Hero Section */}
             <section className="pt-20 pb-0 px-6 lg:px-24 relative overflow-hidden h-[600px] flex items-center justify-center">
                 <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 h-full">
-                    <div className="max-w-xl py-20 z-20">
+                    <div className="max-w-xl py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
                         <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
                             Web Design que vai além <br /> <span className="text-organic-cyan">da aparência</span>
                         </h1>
-                        <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans">
+                        <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans mx-auto lg:mx-0">
                             Na Organic, não criamos apenas sites bonitos – desenvolvemos experiências de usuários que impulsionam resultados reais para sua marca.
                         </p>
                         <button
@@ -270,8 +270,8 @@ export const WebDesign: React.FC = () => {
             {/* Methodology */}
             <section className="py-24">
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-                        <div className="max-w-2xl">
+                    <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left">
+                        <div className="max-w-2xl mx-auto md:mx-0">
                             <h2 className="text-5xl font-display font-bold mb-4">Processo Transparente</h2>
                             <p className="text-organic-white/60 font-sans">Agilidade e transparência em cada etapa do seu projeto.</p>
                         </div>

@@ -4,15 +4,22 @@ import { Button } from './Button';
 
 export const Footer: React.FC = () => {
   return (
-    <footer id="contact" className="bg-organic-black border-t border-organic-white/10 pt-20 pb-10">
+    <footer id="contact" className="bg-organic-black border-t border-organic-white/10 pt-20 pb-10 font-sans">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 mb-20">
-          <div>
-            <h2 className="font-display text-5xl font-bold mb-6 text-organic-white">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="flex justify-center md:justify-start mb-6">
+              <img
+                src="/logo.png"
+                alt="Organic Logo"
+                className="h-12 w-auto"
+              />
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-organic-white uppercase tracking-tighter">
               Sua marca não pode <br />
               <span className="text-organic-cyan">parar no tempo.</span>
             </h2>
-            <p className="text-organic-white/60 text-lg mb-8 max-w-md">
+            <p className="text-organic-white/60 text-base md:text-lg mb-8 max-w-md mx-auto md:mx-0 leading-relaxed font-sans italic">
               Acompanhamos empresas que desejam liderar seus nichos através de uma estética impecável e estratégia sólida.
             </p>
 
@@ -29,7 +36,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-organic-white/5 p-10 border border-organic-white/10 rounded-[60px]">
+          <div className="bg-organic-white/5 p-10 border border-organic-white/10 rounded-[60px] flex flex-col items-center md:items-start text-center md:text-left">
             <h3 className="font-display text-4xl font-bold mb-8 uppercase tracking-tighter">Iniciar Projeto</h3>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>

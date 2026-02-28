@@ -83,13 +83,8 @@ MISSÃO: Crie um artigo completo e VISUALMENTE RICO para blog.
 
 REGRAS ESTRITAS DE FORMATAÇÃO HTML:
 1. Retorne SOMENTE HTML puro (sem <html>, <head>, <body>). Apenas o conteúdo do artigo.
-2. Use estas tags: <h2>, <h3>, <p>, <ul>, <li>, <ol>, <strong>, <em>, <blockquote>, <figure>, <figcaption>, <img>.
-3. Para IMAGENS INCRÍVEIS GERADAS POR IA: Use a API grátis do Pollinations. Formato EXATO: 
-   <img src="https://image.pollinations.ai/prompt/CRIE_UM_PROMPT_AQUI_EM_INGLES_DESCREVENDO_A_CENA_DETALHADAMENTE_COMO_MIDJOURNEY?width=800&height=400&nologo=true&seed=NUMERO_ALEATORIO" alt="Sua descrição" style="width:100%;border-radius:16px;margin:24px 0" />
-   - Substitua o CRIE_UM_PROMPT_AQUI_EM_INGLES por uma descrição visual hiper-realista em inglês.
-   - Escreva o prompt na URL separando as palavras com underline (_) ou traços (-).
-   - Use um seed aleatório no final para texturas diferentes.
-   - Use 3 a 5 imagens impactantes ao longo do artigo que expliquem visualmente o tema.
+2. Use estas tags: <h2>, <h3>, <p>, <ul>, <li>, <ol>, <strong>, <em>, <blockquote>.
+3. Não insira NENHUMA tag <img> no conteúdo. Nós adicionaremos as imagens manualmente ou as capas geridas por outro sistema. Mantenha o foco 100% no valor do texto.
 4. SUBTÍTULOS <h2> devem ter style="color:#47e4be" (cor cyan da marca).
 5. SUBTÍTULOS <h3> devem ter style="color:#a78bfa" (cor lavanda).
 6. Use <blockquote style="border-left:4px solid #47e4be;padding:16px 24px;margin:24px 0;background:rgba(71,228,190,0.05);border-radius:12px"> para citações e destaques.
@@ -157,7 +152,7 @@ SEO_KEYWORDS: (5-8 keywords separadas por vírgula)
                     .trim() + '-' + Date.now();
 
                 // 5. Extract first image as cover
-                const coverMatch = htmlContent.match(/<img[^>]+src="([^"]+)"/);
+                const coverMatch = htmlContent.match(/<img[^>]+src=["']([^"']+)["']/i);
                 const coverImage = coverMatch ? coverMatch[1] : '';
 
                 // 6. Save to DB

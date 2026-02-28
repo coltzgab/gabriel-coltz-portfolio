@@ -71,12 +71,12 @@ export const Services: React.FC = () => {
   return (
     <section id="services" className="py-24 bg-organic-black">
       <div className="container mx-auto px-6" ref={containerRef}>
-        <div className="mb-16 md:flex justify-between items-end">
-          <div>
-            <h2 className="font-display text-4xl font-bold mb-2 text-organic-white">O que fazemos</h2>
-            <div className="h-1 w-20 bg-organic-purple"></div>
+        <div className="mb-16 flex flex-col items-center md:items-end md:flex-row md:justify-between text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start">
+            <h2 className="font-display text-4xl font-bold mb-2 text-organic-white uppercase tracking-tighter">O que fazemos</h2>
+            <div className="h-1 w-20 bg-organic-purple rounded-full"></div>
           </div>
-          <p className="text-organic-white/50 mt-4 md:mt-0 max-w-md text-right">
+          <p className="text-organic-white/50 mt-4 md:mt-0 max-w-md md:text-right font-sans text-sm md:text-base leading-relaxed">
             Um ecossistema completo para escalar sua autoridade digital.
           </p>
         </div>
@@ -96,7 +96,7 @@ export const Services: React.FC = () => {
                 inactiveZone={0.01}
                 borderWidth={3}
               />
-              <div className="relative h-full p-8 rounded-[3.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors">
+              <div className="relative h-full p-8 rounded-[3.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
                 <div className="mb-6 text-organic-cyan group-hover:text-organic-white transition-colors duration-300 transform group-hover:-translate-y-1">
                   {service.icon}
                 </div>

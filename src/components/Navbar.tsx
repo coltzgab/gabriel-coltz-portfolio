@@ -2,7 +2,7 @@ import React from 'react';
 import { Home, Laptop, Users, Palette, MessageSquare, Rocket, FileText, Briefcase } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { AnimeNavBar } from './ui/anime-navbar';
-
+import { MobileNavBar } from './MobileNavBar';
 export const Navbar: React.FC = () => {
   const location = useLocation();
 
@@ -24,6 +24,11 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <AnimeNavBar items={navItems} defaultActive="Início" />
+    <>
+      <div className="hidden md:block">
+        <AnimeNavBar items={navItems} defaultActive="Início" />
+      </div>
+      <MobileNavBar items={navItems} />
+    </>
   );
 };

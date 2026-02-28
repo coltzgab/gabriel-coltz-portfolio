@@ -62,7 +62,7 @@ export const BlogPostPage: React.FC = () => {
     if (!post) return null;
 
     return (
-        <div className="pt-32 pb-20 px-6 bg-organic-black relative">
+        <div className="pt-48 pb-20 px-6 bg-organic-black relative">
             {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[800px] pointer-events-none opacity-20">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(71,228,190,0.15)_0%,rgba(0,0,0,0)_70%)]" />

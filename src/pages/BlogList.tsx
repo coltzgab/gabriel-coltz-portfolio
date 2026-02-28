@@ -40,9 +40,9 @@ export const BlogList: React.FC = () => {
     const totalPages = Math.ceil(totalPosts / postsPerPage);
 
     return (
-        <div className="pt-32 pb-20 px-6 relative">
+        <div className="pt-48 pb-20 px-6 relative">
             {/* Header Section */}
-            <section className="max-w-7xl mx-auto mb-20 text-center relative z-10">
+            <section className="max-w-7xl mx-auto mb-20 text-center relative z-10 mt-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

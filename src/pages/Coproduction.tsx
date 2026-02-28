@@ -60,17 +60,18 @@ export const Coproduction: React.FC = () => {
             {/* Hero Section */}
             <section className="pt-20 pb-0 px-6 lg:px-24 relative overflow-hidden h-[750px] flex items-center justify-center">
                 <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 h-full">
-                    <div className="max-w-xl py-20 z-20">
+                    <div className="max-w-xl py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6 }}
+                            className="flex flex-col items-center lg:items-start"
                         >
                             <span className="text-organic-cyan font-display text-xl tracking-widest uppercase mb-4 block underline decoration-organic-purple decoration-4 underline-offset-8">Coprodução</span>
                             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
                                 Você entra com o <span className="text-organic-cyan italic">Expertise</span>, nós com a <span className="text-organic-cyan italic">Estratégia</span>
                             </h1>
-                            <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans font-medium">
+                            <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans font-medium mx-auto lg:mx-0">
                                 Transformamos o seu conhecimento em um negócio digital lucrativo e escalável.
                                 Na Organic, cuidamos de toda a estratégia e bastidores para você focar no que faz de melhor: ensinar.
                             </p>
@@ -78,7 +79,7 @@ export const Coproduction: React.FC = () => {
                                 href="https://wa.me/5551993909150?text=Olá! Tenho interesse na coprodução da Organic para o meu projeto."
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex px-8 py-4 bg-organic-cyan text-organic-black font-semibold rounded-full items-center space-x-2 hover:scale-105 transition-transform"
+                                className="inline-flex px-8 py-4 bg-organic-cyan text-organic-black font-semibold rounded-full items-center space-x-2 hover:scale-105 transition-transform w-full sm:w-auto justify-center"
                             >
                                 <span className="font-display text-lg uppercase">Quero ser um Expert</span>
                                 <ArrowRight size={20} />
@@ -112,27 +113,42 @@ export const Coproduction: React.FC = () => {
             />
 
             {/* Stats/Highlight Section */}
-            <section className="py-12 bg-organic-cyan/5 border-y border-white/5 overflow-hidden">
+            <section className="py-24 relative">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-wrap justify-between items-center gap-8">
-                        <div className="flex items-center space-x-4">
-                            <span className="text-5xl font-display font-bold text-organic-cyan">+5</span>
-                            <span className="text-sm uppercase tracking-widest font-bold text-white/60">Anos de<br />Experiência</span>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <span className="text-5xl font-display font-bold text-organic-cyan">+100</span>
-                            <span className="text-sm uppercase tracking-widest font-bold text-white/60">Estratégias<br />Validadas</span>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <span className="text-5xl font-display font-bold text-organic-cyan">Focus</span>
-                            <span className="text-sm uppercase tracking-widest font-bold text-white/60">Tráfego<br />Orgânico</span>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <span className="text-5xl font-display font-bold text-organic-cyan">Scale</span>
-                            <span className="text-sm uppercase tracking-widest font-bold text-white/60">Lançamentos<br />Digitais</span>
-                        </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            { val: "+5", label: "Anos de Experiência", sub: "Desde 2019" },
+                            { val: "+100", label: "Estratégias Validadas", sub: "Cases de Sucesso" },
+                            { val: "Focus", label: "Tráfego Orgânico", sub: "Crescimento Vivo" },
+                            { val: "Scale", label: "Lançamentos Digitais", sub: "Escalabilidade Real" }
+                        ].map((stat, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                whileHover={{ y: -8, scale: 1.02 }}
+                                className="group p-8 rounded-[40px] bg-white/5 border border-white/10 backdrop-blur-xl relative overflow-hidden text-center lg:text-left h-full flex flex-col justify-center"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-organic-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                                <div className="relative z-10">
+                                    <h3 className="text-6xl font-display font-bold text-organic-cyan mb-2 group-hover:drop-shadow-[0_0_15px_rgba(71,228,190,0.4)] transition-all">
+                                        {stat.val}
+                                    </h3>
+                                    <p className="text-sm uppercase tracking-widest font-bold text-white/80 leading-tight mb-2">
+                                        {stat.label}
+                                    </p>
+                                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold">
+                                        {stat.sub}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
+                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </section>
 
             {/* Features */}
@@ -165,10 +181,10 @@ export const Coproduction: React.FC = () => {
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-20">
                         <h2 className="text-5xl md:text-7xl font-display font-bold mb-4 uppercase leading-none">
-                            Nosso Caminho para o <span className="text-organic-cyan italic">RREU</span>
+                            Nosso Caminho para o <span className="text-organic-cyan italic">Sucesso</span>
                         </h2>
                         <p className="text-organic-white/60 max-w-2xl mx-auto uppercase tracking-widest text-xs font-bold font-sans">
-                            Resultados Reais de Especialistas Únicos
+                            Estratégia Validada para Resultados Exponenciais
                         </p>
                     </div>
 

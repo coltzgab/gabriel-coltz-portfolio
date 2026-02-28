@@ -5,12 +5,13 @@ import { Button } from './Button';
 export const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Abstract Background Elements */}
-      <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 bg-gradient-to-l from-organic-purple to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 opacity-10 bg-gradient-to-t from-organic-cyan to-transparent pointer-events-none rounded-full blur-3xl" />
-
+      {/* Abstract Background Elements - clipped to prevent mobile overflow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 bg-gradient-to-l from-organic-purple to-transparent" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/2 opacity-10 bg-gradient-to-t from-organic-cyan to-transparent rounded-full blur-3xl" />
+      </div>
       <div className="container mx-auto px-6 lg:px-24 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-        <div>
+        <div className="flex flex-col items-center md:items-start text-center md:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/5">
             <Sparkles size={14} className="text-organic-cyan" />
             <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan">Assessoria de Branding & MKT</span>
@@ -23,15 +24,15 @@ export const Hero: React.FC = () => {
             </span>
           </h1>
 
-          <p className="text-organic-white/60 text-base md:text-lg max-w-lg mb-10 leading-relaxed font-sans">
+          <p className="text-organic-white/60 text-base md:text-lg max-w-lg mb-10 leading-relaxed font-sans mx-auto md:mx-0">
             Identidade visual estratégica, posicionamento digital e resultados que não dependem da sorte. O óbvio precisa ser dito, mas de forma inesquecível.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button onClick={() => document.getElementById('ai-audit')?.scrollIntoView({ behavior: 'smooth' })}>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Button className="w-full sm:w-auto" onClick={() => document.getElementById('ai-audit')?.scrollIntoView({ behavior: 'smooth' })}>
               Diagnóstico com IA
             </Button>
-            <Button variant="outline" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button variant="outline" className="w-full sm:w-auto" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
               Ver Cases <ArrowRight className="inline ml-2" size={18} />
             </Button>
           </div>

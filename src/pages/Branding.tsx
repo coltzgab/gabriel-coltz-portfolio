@@ -62,7 +62,7 @@ export const Branding: React.FC = () => {
             {/* Hero Section */}
             <section className="py-20 px-6 lg:px-24">
                 <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="max-w-2xl">
+                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left">
                         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/5">
                             <Star size={14} className="text-organic-cyan" />
                             <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan"> Branding & Posicionamento</span>
@@ -70,14 +70,14 @@ export const Branding: React.FC = () => {
                         <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
                             Identidade visual com <span className="text-organic-cyan">alma</span> e estratégia
                         </h1>
-                        <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans">
+                        <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans mx-auto lg:mx-0">
                             Não criamos apenas logotipos. Desenvolvemos sistemas visuais que comunicam autoridade, despertam desejo e constroem valor de marca real.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="px-8 py-4 bg-organic-cyan text-organic-black font-semibold rounded-full hover:scale-105 transition-transform flex items-center justify-center space-x-2">
+                        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                            <button className="px-8 py-4 bg-organic-cyan text-organic-black font-semibold rounded-full hover:scale-105 transition-transform flex items-center justify-center space-x-2 w-full sm:w-auto">
                                 <span className="font-display text-lg uppercase">Criar minha marca</span>
                             </button>
-                            <button className="px-8 py-4 border border-white/20 rounded-full hover:bg-white/5 transition-colors flex items-center justify-center space-x-2">
+                            <button className="px-8 py-4 border border-white/20 rounded-full hover:bg-white/5 transition-colors flex items-center justify-center space-x-2 w-full sm:w-auto">
                                 <span className="font-display text-lg uppercase tracking-wider">Ver Projetos</span>
                             </button>
                         </div>
@@ -182,18 +182,19 @@ export const Branding: React.FC = () => {
                     <div className="grid lg:grid-cols-2 gap-24 items-center">
                         <div className="relative">
                             <div className="absolute -inset-10 bg-organic-purple/20 blur-[100px] rounded-full opacity-30 pointer-events-none"></div>
-                            <div className="relative aspect-square rounded-full overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group">
-                                <Palette size={160} className="text-organic-cyan opacity-20 group-hover:scale-110 transition-transform duration-700" />
+                            <div className="relative aspect-square rounded-full overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group overflow-hidden">
                                 <div className="absolute inset-x-0 bottom-0 p-12 bg-gradient-to-t from-organic-black to-transparent">
                                     <p className="font-display text-5xl font-bold uppercase">DNA <br />Estratégico</p>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <h2 className="text-5xl md:text-7xl font-display font-bold mb-8 uppercase leading-none">Design que gera <span className="text-organic-cyan">valor real</span></h2>
-                            <p className="text-organic-white/60 mb-12 text-lg font-sans">
-                                Através do Branding, transformamos a percepção do seu negócio. Saia da guerra de preços e entre no campo do valor percebido.
-                            </p>
+                            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                                <h2 className="text-5xl md:text-7xl font-display font-bold mb-8 uppercase leading-none">Design que gera <span className="text-organic-cyan">valor real</span></h2>
+                                <p className="text-organic-white/60 mb-12 text-lg font-sans max-w-xl">
+                                    Através do Branding, transformamos a percepção do seu negócio. Saia da guerra de preços e entre no campo do valor percebido.
+                                </p>
+                            </div>
                             <div className="space-y-8">
                                 {[
                                     { t: "Naming e Logomarca", d: "Criação de nomes e símbolos que ficam na memória." },

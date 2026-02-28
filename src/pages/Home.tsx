@@ -1,7 +1,8 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
 import { Services } from '../components/Services';
-import { SmartBriefing } from '../components/SmartBriefing';
+import { ClientList } from '../components/ClientList';
+
 import { Portfolio } from '../components/Portfolio';
 import { NeonCarousel } from '../components/ui/NeonCarousel';
 import { Globe, Users, Palette, Rocket, Search, Zap } from 'lucide-react';
@@ -21,7 +22,8 @@ export const Home: React.FC = () => {
                 ]}
             />
             <Services />
-            <SmartBriefing />
+
+            <ClientList />
             <Portfolio />
         </main>
     );

@@ -54,17 +54,18 @@ export const SocialMedia: React.FC = () => {
             {/* Hero Section */}
             <section className="py-20 px-6 lg:px-24">
                 <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="max-w-2xl">
+                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
+                            className="flex flex-col items-center lg:items-start"
                         >
                             <span className="text-organic-cyan font-display text-xl tracking-widest uppercase mb-4 block">Especialistas em Tráfego Orgânico</span>
                             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
                                 Sua marca <span className="text-organic-cyan italic">viva</span> nas redes sociais
                             </h1>
-                            <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans">
+                            <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans mx-auto lg:mx-0">
                                 Criamos estratégias de conteúdo há mais de 5 anos. Na Organic, a gestão só começa depois que a estratégia está desenhada para vencer.
                             </p>
                             <button
@@ -119,12 +120,8 @@ export const SocialMedia: React.FC = () => {
             <section className="py-24">
                 <div className="container mx-auto px-6">
                     <div className="bg-gradient-to-br from-organic-purple/20 to-organic-cyan/10 p-12 md:p-20 rounded-[60px] border border-white/5 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
-                            <Sparkles size={200} className="text-organic-cyan" />
-                        </div>
-
                         <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
-                            <div>
+                            <div className="flex flex-col items-center md:items-start text-center md:text-left">
                                 <h2 className="text-5xl font-display font-bold mb-8 uppercase leading-none">
                                     Por que não temos <span className="text-organic-cyan italic">planos definidos?</span>
                                 </h2>
