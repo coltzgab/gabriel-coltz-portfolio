@@ -3,14 +3,16 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import {
     LayoutDashboard, FileText, FolderOpen, FileCode, Users,
-    LogOut, Menu, X, ChevronRight
+    LogOut, Menu, X, ChevronRight, TrendingUp
 } from 'lucide-react';
 
 const navItems = [
     { to: '/adminorg', icon: LayoutDashboard, label: 'Dashboard', end: true },
     { to: '/adminorg/blog', icon: FileText, label: 'Blog' },
     { to: '/adminorg/categorias', icon: FolderOpen, label: 'Categorias' },
+    { to: '/adminorg/topicos', icon: TrendingUp, label: 'Auto Blog' },
     { to: '/adminorg/propostas', icon: FileCode, label: 'Propostas' },
+    { to: '/adminorg/templates', icon: LayoutDashboard, label: 'Templates' },
 ];
 
 const ownerItems = [

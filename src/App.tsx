@@ -14,6 +14,8 @@ import { SocialMedia } from './pages/SocialMedia';
 import { Branding } from './pages/Branding';
 import { Contact } from './pages/Contact';
 import { Coproduction } from './pages/Coproduction';
+import { BlogList } from './pages/BlogList';
+import { BlogPostPage } from './pages/BlogPostPage';
 
 // Admin components
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
@@ -22,6 +24,14 @@ import { AdminLayout } from './components/admin/AdminLayout';
 // Admin pages
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminBlogPosts } from './pages/admin/AdminBlogPosts';
+import { AdminBlogForm } from './pages/admin/AdminBlogForm';
+import { AdminBlogCategories } from './pages/admin/AdminBlogCategories';
+import { AdminProposals } from './pages/admin/AdminProposals';
+import { AdminProposalForm } from './pages/admin/AdminProposalForm';
+import { AdminProposalTemplates } from './pages/admin/AdminProposalTemplates';
+import { AdminBlogTopics } from './pages/admin/AdminBlogTopics';
+import { ProposalPage } from './pages/ProposalPage';
 
 // Public layout wrapper
 const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -75,8 +85,19 @@ const App: React.FC = () => {
             }
           >
             <Route index element={<AdminDashboard />} />
-            {/* Phase 2: Blog routes will go here */}
-            {/* Phase 4: Proposal routes will go here */}
+
+            {/* Blog Management */}
+            <Route path="blog" element={<AdminBlogPosts />} />
+            <Route path="blog/novo" element={<AdminBlogForm />} />
+            <Route path="blog/editar/:id" element={<AdminBlogForm />} />
+            <Route path="categorias" element={<AdminBlogCategories />} />
+            <Route path="topicos" element={<AdminBlogTopics />} />
+
+            {/* Proposal Management (Phase 4) */}
+            <Route path="propostas" element={<AdminProposals />} />
+            <Route path="propostas/nova" element={<AdminProposalForm />} />
+            <Route path="propostas/editar/:id" element={<AdminProposalForm />} />
+            <Route path="templates" element={<AdminProposalTemplates />} />
             {/* Phase 5: Team routes will go here */}
           </Route>
 
@@ -88,8 +109,13 @@ const App: React.FC = () => {
           <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
           <Route path="/coproduction" element={<PublicLayout><Coproduction /></PublicLayout>} />
 
-          {/* Phase 2: /blog and /blog/:slug will go here */}
-          {/* Phase 4: /proposta/:slug will go here */}
+          {/* Blog Pages */}
+          <Route path="/blog" element={<PublicLayout><BlogList /></PublicLayout>} />
+          <Route path="/blog/:slug" element={<PublicLayout><BlogPostPage /></PublicLayout>} />
+          <Route path="/blog/categoria/:categorySlug" element={<PublicLayout><BlogList /></PublicLayout>} />
+
+          {/* Proposal Public Page */}
+          <Route path="/proposta/:slug" element={<ProposalPage />} />
         </Routes>
       </Router>
     </AuthProvider>

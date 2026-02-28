@@ -1,54 +1,37 @@
 import { BrandAnalysisResult } from '../types';
-
-let aiInstance: any = null;
-
-const getAI = async () => {
-  if (!aiInstance) {
-    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      console.warn("AI API Key missing. Diagnostic features will be disabled.");
-      return null;
-    }
-    const { GoogleGenAI } = await import("@google/genai");
-    aiInstance = new GoogleGenAI({ apiKey });
-  }
-  return aiInstance;
-};
+import { supabase } from '../lib/supabase';
 
 export const analyzeBrand = async (description: string): Promise<BrandAnalysisResult> => {
-  const ai = await getAI();
-  if (!ai) throw new Error("Serviço de IA não configurado. Por favor, adicione a chave GEMINI_API_KEY.");
+  const prompt = `
+Analyze this business description for a branding agency client: "${description}". 
+Create a conceptual brand direction.
+You MUST reply with a RAW JSON object exactly in this format in your message, do not add markdown backticks:
+{
+  "tagline": "A short, punchy, modern tagline max 6 words",
+  "pillars": ["Pillar 1", "Pillar 2", "Pillar 3"],
+  "vibe": "A visual vibe description like Minimalist Neo-Noir"
+}
+`;
 
-  const { Type } = await import("@google/genai");
-  const modelId = 'gemini-3-flash-preview';
-
-  const response = await ai.models.generateContent({
-    model: modelId,
-    contents: `Analyze this business description for a branding agency client: "${description}". 
-    Create a conceptual brand direction.
-    Return 3 distinct items: 
-    1. A short, punchy, modern tagline (max 6 words).
-    2. 3 Strategic Content Pillars (short phrases).
-    3. A visual vibe description (e.g., "Minimalist Neo-Noir").`,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          tagline: { type: Type.STRING },
-          pillars: {
-            type: Type.ARRAY,
-            items: { type: Type.STRING }
-          },
-          vibe: { type: Type.STRING }
-        },
-        required: ["tagline", "pillars", "vibe"]
-      }
-    }
+  const { data, error } = await supabase.functions.invoke('gemini-chat', {
+    body: { prompt, model: 'gemini-2.5-flash' }
   });
 
-  const text = response.text;
+  if (error) {
+    throw new Error(`Edge Function Error: ${error.message}`);
+  }
+
+  if (data && data.error) {
+    throw new Error(`AI Service Error: ${data.error}`);
+  }
+
+  const text = data?.content;
   if (!text) throw new Error("No response from AI");
 
-  return JSON.parse(text) as BrandAnalysisResult;
+  try {
+    const cleanJson = text.replace(/^```json/, '').replace(/```$/, '').trim();
+    return JSON.parse(cleanJson) as BrandAnalysisResult;
+  } catch (e: any) {
+    throw new Error("Failed to parse AI response as JSON.");
+  }
 };

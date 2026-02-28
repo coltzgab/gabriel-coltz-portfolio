@@ -29,29 +29,52 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchAdminProfile = async (userId: string) => {
-        const { data, error } = await supabase
-            .from('admin_users')
-            .select('*')
-            .eq('id', userId)
-            .eq('is_active', true)
-            .single();
+        try {
+            console.log('Fetching admin profile for:', userId);
+            const { data, error } = await supabase
+                .from('admin_users')
+                .select('*')
+                .eq('id', userId)
+                .eq('is_active', true)
+                .single();
 
-        if (error || !data) {
+            if (error) {
+                console.error('Error fetching profile:', error);
+                setAdminProfile(null);
+                return null;
+            }
+
+            if (!data) {
+                console.warn('No active admin profile found for user');
+                setAdminProfile(null);
+                return null;
+            }
+
+            console.log('Profile fetched successfully:', data.email, data.role);
+            setAdminProfile(data as AdminProfile);
+            return data;
+        } catch (err) {
+            console.error('Fatal error fetching profile:', err);
             setAdminProfile(null);
             return null;
         }
-
-        setAdminProfile(data as AdminProfile);
-        return data;
     };
 
     useEffect(() => {
+        let mounted = true;
+
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
+            if (!mounted) return;
+
+            console.log('Initial session check:', session?.user?.email || 'No session');
             setSession(session);
             setUser(session?.user ?? null);
+
             if (session?.user) {
-                fetchAdminProfile(session.user.id).finally(() => setIsLoading(false));
+                fetchAdminProfile(session.user.id).finally(() => {
+                    if (mounted) setIsLoading(false);
+                });
             } else {
                 setIsLoading(false);
             }
@@ -59,18 +82,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         // Listen for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            async (_event, session) => {
+            (event, session) => {
+                if (!mounted) return;
+
+                console.log('Auth event received:', event, session?.user?.email || 'No user');
+
                 setSession(session);
                 setUser(session?.user ?? null);
-                if (session?.user) {
-                    await fetchAdminProfile(session.user.id);
-                } else {
+
+                if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+                    if (session?.user) {
+                        // Use a side effect so we don't block the listener
+                        setIsLoading(true);
+                        fetchAdminProfile(session.user.id).finally(() => {
+                            if (mounted) setIsLoading(false);
+                        });
+                    } else {
+                        setIsLoading(false);
+                    }
+                } else if (event === 'SIGNED_OUT') {
                     setAdminProfile(null);
+                    setSession(null);
+                    setUser(null);
+                    setIsLoading(false);
                 }
             }
         );
 
-        return () => subscription.unsubscribe();
+        return () => {
+            mounted = false;
+            subscription.unsubscribe();
+        };
     }, []);
 
     const signIn = async (email: string, password: string) => {
