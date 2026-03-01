@@ -52,18 +52,18 @@ export const SocialMedia: React.FC = () => {
     return (
         <div className="pt-24 font-sans text-organic-white">
             {/* Hero Section */}
-            <section className="py-20 px-6 lg:px-24">
-                <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left">
+            <section className="pt-20 px-6 lg:px-24 overflow-hidden">
+                <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-end">
+                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left pb-20">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="flex flex-col items-center lg:items-start"
+                            className="flex flex-col items-center lg:items-start relative z-20"
                         >
                             <span className="text-organic-cyan font-display text-xl tracking-widest uppercase mb-4 block">Especialistas em Tráfego Orgânico</span>
                             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
-                                Sua marca <span className="text-organic-cyan italic">viva</span> nas redes sociais
+                                Sua marca <span className="text-organic-cyan italic">viva</span> nas <br className="hidden md:block" /> redes sociais
                             </h1>
                             <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans mx-auto lg:mx-0">
                                 Criamos estratégias de conteúdo há mais de 5 anos. Na Organic, a gestão só começa depois que a estratégia está desenhada para vencer.
@@ -77,6 +77,23 @@ export const SocialMedia: React.FC = () => {
                             </button>
                         </motion.div>
                     </div>
+
+                    {/* Hero Image */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="hidden lg:flex justify-end relative h-full items-end"
+                    >
+                        <div className="relative w-full max-w-lg mt-auto -mb-2">
+                            <div className="absolute inset-0 bg-organic-cyan/20 blur-[100px] rounded-full" />
+                            <img
+                                src="/social-hero.png"
+                                alt="Estratégia de Redes Sociais"
+                                className="relative z-10 w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(71,228,190,0.15)]"
+                            />
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 

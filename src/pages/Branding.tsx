@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Palette, Diamond, Layout, PenTool, CheckCircle2, ArrowRight, Eye, Star } from 'lucide-react';
+import { Palette, Diamond, Layout, PenTool, ArrowRight, Eye, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { NeonCarousel } from '../components/ui/NeonCarousel';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 
@@ -19,7 +20,7 @@ export const Branding: React.FC = () => {
         {
             title: "Olivers",
             category: "Brand System",
-            description: "Ecossistema visual moderno para marca criativa.",
+            description: "Ecessistema visual moderno para marca criativa.",
             image: "/branding-olivers.png",
             color: "rgba(90, 61, 127, 0.4)" // Organic Purple
         },
@@ -60,15 +61,15 @@ export const Branding: React.FC = () => {
     return (
         <div className="pt-24 font-sans selection:bg-organic-cyan selection:text-organic-black">
             {/* Hero Section */}
-            <section className="py-20 px-6 lg:px-24">
-                <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left">
+            <section className="pt-20 px-6 lg:px-24 overflow-hidden">
+                <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-end">
+                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left pb-20">
                         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/5">
                             <Star size={14} className="text-organic-cyan" />
                             <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan"> Branding & Posicionamento</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
-                            Identidade visual com <span className="text-organic-cyan">alma</span> e estratégia
+                            Identidade visual com <br className="hidden md:block" /> <span className="text-organic-cyan italic">alma</span> e estratégia
                         </h1>
                         <p className="text-lg text-organic-white/70 mb-10 max-w-xl font-sans mx-auto lg:mx-0">
                             Não criamos apenas logotipos. Desenvolvemos sistemas visuais que comunicam autoridade, despertam desejo e constroem valor de marca real.
@@ -82,6 +83,23 @@ export const Branding: React.FC = () => {
                             </button>
                         </div>
                     </div>
+
+                    {/* Hero Image */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="hidden lg:flex justify-end relative h-full items-end"
+                    >
+                        <div className="relative w-full max-w-lg mt-auto -mb-2">
+                            <div className="absolute inset-0 bg-organic-purple/20 blur-[100px] rounded-full" />
+                            <img
+                                src="/branding-hero.png"
+                                alt="Identidade Visual com Alma"
+                                className="relative z-10 w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(167,139,250,0.15)]"
+                            />
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -108,7 +126,6 @@ export const Branding: React.FC = () => {
                         </p>
                     </div>
 
-
                     <div className="grid md:grid-cols-2 gap-12">
                         {portfolio.map((site, idx) => (
                             <div
@@ -121,15 +138,9 @@ export const Branding: React.FC = () => {
                                     disabled={false}
                                     proximity={64}
                                     inactiveZone={0.01}
-                                    borderWidth={3}
+                                    borderWidth={2}
                                 />
-                                <div className="relative rounded-[50px] overflow-hidden bg-organic-black h-full">
-                                    {/* Glow Effect Background */}
-                                    <div
-                                        className="absolute -inset-20 blur-[100px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
-                                        style={{ background: site.color }}
-                                    />
-
+                                <div className="relative z-10 bg-organic-black rounded-[54px] overflow-hidden">
                                     <div className="aspect-[16/10] overflow-hidden">
                                         <img
                                             src={site.image}
@@ -182,7 +193,7 @@ export const Branding: React.FC = () => {
                     <div className="grid lg:grid-cols-2 gap-24 items-center">
                         <div className="relative">
                             <div className="absolute -inset-10 bg-organic-purple/20 blur-[100px] rounded-full opacity-30 pointer-events-none"></div>
-                            <div className="relative aspect-square rounded-full overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group overflow-hidden">
+                            <div className="relative aspect-square rounded-full overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center group">
                                 <div className="absolute inset-x-0 bottom-0 p-12 bg-gradient-to-t from-organic-black to-transparent">
                                     <p className="font-display text-5xl font-bold uppercase">DNA <br />Estratégico</p>
                                 </div>
