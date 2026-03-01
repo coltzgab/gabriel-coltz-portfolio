@@ -17,6 +17,7 @@ import { Contact } from './pages/Contact';
 import { Coproduction } from './pages/Coproduction';
 import { BlogList } from './pages/BlogList';
 import { BlogPostPage } from './pages/BlogPostPage';
+import { Bio } from './pages/Bio';
 
 // Admin components
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
@@ -127,6 +128,9 @@ const App: React.FC = () => {
 
           {/* Proposal Public Page */}
           <Route path="/proposta/:slug" element={<ProposalPage />} />
+
+          {/* Link Bio Page */}
+          <Route path="/bio" element={<Bio />} />
         </Routes>
       </Router>
     </AuthProvider>
