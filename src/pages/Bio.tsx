@@ -1,150 +1,230 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, Globe, Users, Palette, Rocket, FileText, ChevronRight } from 'lucide-react';
+import { MessageSquare, Globe, Users, Palette, Rocket, FileText, ChevronRight, Sparkles, Box } from 'lucide-react';
+import { ShootingStars } from '../components/ui/shooting-stars';
+import { CelestialSphere } from '../components/ui/celestial-sphere';
 
 export const Bio: React.FC = () => {
     const links = [
         {
+            tag: "ATENDIMENTO",
             title: "Falar no WhatsApp",
-            subtitle: "Atendimento direto e personalizado",
-            url: "https://wa.me/5551981240660", // Replace with actual number if different
-            icon: <MessageSquare className="w-6 h-6" />,
-            color: "from-green-400 to-emerald-600",
-            image: "/astronaut-working.png" // Placeholder, will use actual assets if found
+            description: "Clique aqui para iniciar um atendimento direto e personalizado com nossa equipe agora mesmo.",
+            url: "https://wa.me/5551981240660",
+            buttonText: "CHAMAR AGORA",
+            color: "from-green-500/20 to-emerald-500/10",
+            borderColor: "border-green-500/30",
+            icon: <MessageSquare className="w-5 h-5 text-green-400" />,
+            image: "/tv-head-man.png"
         },
         {
-            title: "Web Design",
-            subtitle: "Sites que convertem e encantam",
+            tag: "SOLUÇÕES DIGITAIS",
+            title: "Web Design Premium",
+            description: "Desenvolvemos sites de alta performance, focados em conversão e experiência do usuário (UX).",
             url: "/web-design",
-            icon: <Globe className="w-6 h-6" />,
-            color: "from-organic-cyan to-blue-500",
+            buttonText: "VER PROJETOS",
+            color: "from-organic-cyan/20 to-blue-500/10",
+            borderColor: "border-organic-cyan/30",
+            icon: <Globe className="w-5 h-5 text-organic-cyan" />,
             image: "/character-hero-no-bg.png"
         },
         {
+            tag: "ESTRATÉGIA",
             title: "Social Media",
-            subtitle: "Gestão estratégica de redes",
+            description: "Gestão completa de redes sociais com foco em crescimento orgânico e autoridade de marca.",
             url: "/social-media",
-            icon: <Users className="w-6 h-6" />,
-            color: "from-purple-500 to-indigo-600",
-            image: "/character-hero-no-bg.png" // Using available assets
+            buttonText: "SABER MAIS",
+            color: "from-organic-cyan/20 to-organic-purple/10",
+            borderColor: "border-organic-cyan/30",
+            icon: <Users className="w-5 h-5 text-organic-cyan" />,
+            image: "/social-hero.png"
         },
         {
+            tag: "DIREÇÃO DE ARTE",
             title: "Branding",
-            subtitle: "Identidade visual de impacto",
+            description: "Criação de identidades visuais potentes que comunicam a essência e os valores do seu negócio.",
             url: "/branding",
-            icon: <Palette className="w-6 h-6" />,
-            color: "from-pink-500 to-rose-600",
-            image: "/character-hero-no-bg.png"
+            buttonText: "VER BRANDING",
+            color: "from-organic-purple/20 to-organic-cyan/10",
+            borderColor: "border-organic-purple/30",
+            icon: <Palette className="w-5 h-5 text-organic-purple" />,
+            image: "/branding-hero.png"
         },
         {
+            tag: "LANÇAMENTOS",
             title: "Coprodução",
-            subtitle: "Lançamentos e infoprodutos",
+            description: "Parceria estratégica para transformar seu conhecimento em um infoproduto de sucesso no mercado.",
             url: "/coproduction",
-            icon: <Rocket className="w-6 h-6" />,
-            color: "from-orange-500 to-red-600",
-            image: "/character-hero-no-bg.png"
+            buttonText: "RESERVAR VAGA",
+            color: "from-organic-cyan/20 to-organic-purple/10",
+            borderColor: "border-organic-cyan/30",
+            icon: <Rocket className="w-5 h-5 text-organic-cyan" />,
+            image: "/coproduction-hero.png"
         },
         {
-            title: "Nosso Blog",
-            subtitle: "Dicas de marketing e tendências 2026",
+            tag: "CONTEÚDO",
+            title: "Organic Blog",
+            description: "Acesse nosso blog com as últimas tendências de marketing digital e IA para 2026.",
             url: "/blog",
-            icon: <FileText className="w-6 h-6" />,
-            color: "from-gray-700 to-gray-900",
+            buttonText: "LER ARTIGOS",
+            color: "from-gray-500/20 to-gray-700/10",
+            borderColor: "border-white/20",
+            icon: <FileText className="w-5 h-5 text-white/50" />,
             image: "/character-hero-no-bg.png"
         }
     ];
 
     return (
-        <div className="min-h-screen bg-organic-black text-organic-white font-sans selection:bg-organic-cyan selection:text-organic-black overflow-x-hidden">
-            {/* Background Decoration */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-organic-cyan/10 blur-[120px] rounded-full" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 blur-[120px] rounded-full" />
+        <div className="min-h-screen bg-organic-black text-organic-white font-sans selection:bg-organic-cyan selection:text-organic-black overflow-x-hidden relative">
+
+            {/* Background Integrado (Igual ao Hero da Home) */}
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+                <CelestialSphere hue={165.0} speed={0.15} zoom={1.2} particleSize={2.0} className="w-full h-full opacity-30 mix-blend-screen" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(71,228,190,0.05)_0%,rgba(0,0,0,0)_80%)]" />
+                <div className="stars absolute inset-0" />
+
+                <ShootingStars
+                    starColor="#47e4be"
+                    trailColor="#2EB9DF"
+                    minSpeed={15}
+                    maxSpeed={35}
+                    minDelay={1000}
+                    maxDelay={3000}
+                />
+                <ShootingStars
+                    starColor="#5a3d7f"
+                    trailColor="#47e4be"
+                    minSpeed={10}
+                    maxSpeed={25}
+                    minDelay={2000}
+                    maxDelay={4000}
+                />
             </div>
 
-            <div className="relative z-10 max-w-2xl mx-auto px-6 py-16">
-                {/* Header */}
-                <header className="text-center mb-12">
+            <div className="relative z-10 max-w-2xl mx-auto px-6 py-20 pb-24">
+                {/* Hero Futurista (Adeus bolinha clichê) */}
+                <header className="text-center mb-24 px-4 relative">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="relative inline-block mb-6"
+                        transition={{ duration: 1 }}
+                        className="relative"
                     >
-                        <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-organic-cyan to-purple-500">
-                            <div className="w-full h-full rounded-full bg-organic-black overflow-hidden flex items-center justify-center border-4 border-organic-black">
-                                <img src="/logo.png" alt="Organic" className="w-16 h-auto" />
-                            </div>
+                        {/* Abstract Geometry */}
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-organic-cyan/10 blur-[60px] rounded-full animate-pulse" />
+
+                        <div className="relative z-20 mb-8 flex flex-col items-center">
+                            {/* Floating Glass Logo Container */}
+                            <motion.div
+                                animate={{ y: [0, -10, 0] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                className="relative p-6 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-3xl shadow-2xl mb-10 group"
+                            >
+                                <div className="absolute -inset-1 bg-gradient-to-r from-organic-cyan/50 to-organic-purple/50 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition-opacity" />
+                                <img src="/logo.png" alt="Organic" className="w-20 h-auto relative z-10 brightness-110" />
+
+                                {/* Orbiting Elements decoration */}
+                                <div className="absolute -top-2 -right-2 w-4 h-4 bg-organic-cyan rounded-full blur-[2px] animate-ping opacity-30" />
+                                <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-organic-purple rounded-full blur-[1px]" />
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="space-y-4"
+                            >
+                                <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-organic-cyan/5 border border-organic-cyan/20 text-organic-cyan text-[10px] font-black tracking-[0.4em] mb-2 uppercase">
+                                    <Box size={14} className="animate-spin-slow" />
+                                    Inteligência Organic
+                                </div>
+                                <h1 className="text-4xl md:text-5xl font-display font-black uppercase tracking-tighter text-white leading-[0.9] flex flex-col">
+                                    <span>Além do</span>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-organic-cyan to-organic-purple">Comum</span>
+                                </h1>
+                                <p className="text-sm text-organic-white/60 font-medium max-w-[280px] mx-auto leading-relaxed border-t border-white/10 pt-4 mt-4">
+                                    Estratégia 360° para marcas que cansam do básico e buscam o extraordinário.
+                                </p>
+                            </motion.div>
                         </div>
                     </motion.div>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-2xl font-display font-bold uppercase tracking-widest mb-2"
-                    >
-                        Organic Assessoria
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-organic-white/60 font-medium"
-                    >
-                        Marketing Digital de Alto Impacto
-                    </motion.p>
                 </header>
 
-                {/* Links */}
-                <nav className="space-y-6">
+                {/* Blocos Grandes (Estilo Gislaine Coltz) */}
+                <div className="space-y-8">
                     {links.map((link, index) => (
                         <motion.a
                             key={link.title}
                             href={link.url}
                             target={link.url.startsWith('http') ? '_blank' : '_self'}
                             rel="noopener noreferrer"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1, duration: 0.6 }}
                             className="group block relative"
                         >
-                            <div className="relative overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300 rounded-[2rem] p-6 flex items-center justify-between backdrop-blur-md">
-                                <div className="flex items-center gap-6 relative z-10">
-                                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${link.color} flex items-center justify-center shadow-lg`}>
+                            <div className={`relative min-h-[220px] overflow-hidden bg-gradient-to-br ${link.color} border ${link.borderColor} backdrop-blur-xl rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-center shadow-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-white/5`}>
+
+                                {/* Info Section */}
+                                <div className="max-w-[65%] md:max-w-[60%] space-y-3 md:space-y-4 relative z-20 text-left pr-2 md:pr-0">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-black tracking-[0.2em] text-white/50 uppercase">
                                         {link.icon}
+                                        {link.tag}
                                     </div>
-                                    <div className="text-left">
-                                        <h3 className="text-lg font-bold uppercase tracking-tight">{link.title}</h3>
-                                        <p className="text-sm text-organic-white/50 font-medium">{link.subtitle}</p>
+
+                                    <h3 className="text-xl md:text-3xl font-display font-bold uppercase tracking-tight text-white leading-tight">
+                                        {link.title}
+                                    </h3>
+
+                                    <p className="text-xs md:text-sm text-organic-white/60 leading-relaxed font-medium line-clamp-3 md:line-clamp-none whitespace-normal break-words">
+                                        {link.description}
+                                    </p>
+
+                                    <div className="pt-2">
+                                        <div className="inline-flex items-center gap-2 px-6 py-2.5 md:py-3 bg-white/10 group-hover:bg-white text-white group-hover:text-black rounded-full font-bold text-[9px] md:text-[10px] tracking-widest uppercase transition-all duration-300">
+                                            {link.buttonText}
+                                            <ChevronRight className="w-4 h-4" />
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center relative z-10">
-                                    <ChevronRight className="w-5 h-5 text-organic-white/30 group-hover:text-organic-cyan transition-colors group-hover:translate-x-1" />
+                                {/* Large Side Image */}
+                                <div className="absolute right-[-10px] md:right-[-20px] bottom-[-10px] md:bottom-[-20px] w-[45%] md:w-[50%] h-[110%] md:h-[120%] z-10 pointer-events-none group-hover:scale-110 group-hover:-translate-y-2 md:group-hover:-translate-y-4 group-hover:-translate-x-2 md:group-hover:-translate-x-4 transition-all duration-700 ease-out flex items-end justify-end">
+                                    <img
+                                        src={link.image}
+                                        alt=""
+                                        className="w-full h-full object-contain object-bottom drop-shadow-2xl opacity-40 md:opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                                    />
                                 </div>
 
-                                {/* Floating Illustration (Side of the block) */}
-                                <div className="absolute right-[-10px] bottom-[-20px] w-32 opacity-20 filter grayscale blur-[1px] group-hover:opacity-40 group-hover:filter-none group-hover:blur-0 group-hover:scale-110 transition-all duration-500 pointer-events-none">
-                                    <img src={link.image} alt="" className="w-full h-auto object-contain" />
-                                </div>
-
-                                {/* Hover background shift */}
-                                <div className={`absolute inset-0 bg-gradient-to-r ${link.color} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300`} />
+                                {/* Aesthetic Glow Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </div>
                         </motion.a>
                     ))}
-                </nav>
+                </div>
 
-                {/* Social Icons Footer */}
-                <footer className="mt-16 text-center">
-                    <div className="flex justify-center gap-6 mb-8">
+                {/* Footer Minimalista */}
+                <footer className="mt-24 text-center">
+                    <div className="flex justify-center gap-10 mb-10">
                         {['Instagram', 'Linkedin', 'Behance'].map((social) => (
-                            <a key={social} href="#" className="text-organic-white/40 hover:text-organic-cyan transition-colors uppercase text-[10px] font-bold tracking-[0.2em]">
+                            <a
+                                key={social}
+                                href="#"
+                                className="text-organic-white/30 hover:text-organic-cyan transition-all uppercase text-[10px] font-black tracking-[0.3em] hover:tracking-[0.4em]"
+                            >
                                 {social}
                             </a>
                         ))}
                     </div>
-                    <p className="text-[10px] text-white/20 uppercase tracking-[0.3em]">
-                        &copy; 2026 Organic Assessoria
-                    </p>
+                    <div className="space-y-2 opacity-20">
+                        <p className="text-[10px] font-black uppercase tracking-[0.5em]">
+                            Organic Assessoria
+                        </p>
+                        <p className="text-[8px] font-medium uppercase tracking-[0.2em]">
+                            &copy; 2026 - All Rights Reserved
+                        </p>
+                    </div>
                 </footer>
             </div>
         </div>
