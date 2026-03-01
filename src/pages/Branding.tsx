@@ -61,9 +61,9 @@ export const Branding: React.FC = () => {
     return (
         <div className="pt-24 font-sans selection:bg-organic-cyan selection:text-organic-black">
             {/* Hero Section */}
-            <section className="pt-20 px-6 lg:px-24 overflow-hidden">
-                <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-end">
-                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left pb-20">
+            <section className="pt-20 pb-0 px-6 lg:px-24 relative overflow-hidden h-[750px] flex items-center justify-center">
+                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 h-full max-w-7xl">
+                    <div className="max-w-xl flex-1 shrink-0 py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
                         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/5">
                             <Star size={14} className="text-organic-cyan" />
                             <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan"> Branding & Posicionamento</span>
@@ -89,14 +89,14 @@ export const Branding: React.FC = () => {
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="hidden lg:flex justify-end relative h-full items-end"
+                        className="hidden lg:flex relative h-full w-full max-w-xl flex-1 items-end justify-center"
                     >
-                        <div className="relative w-full max-w-lg mt-auto -mb-2">
+                        <div className="relative w-full mt-auto -mb-8">
                             <div className="absolute inset-0 bg-organic-purple/20 blur-[100px] rounded-full" />
                             <img
                                 src="/branding-hero.png"
                                 alt="Identidade Visual com Alma"
-                                className="relative z-10 w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(167,139,250,0.15)]"
+                                className="relative z-10 w-full h-auto object-contain object-bottom drop-shadow-[0_0_40px_rgba(167,139,250,0.15)]"
                             />
                         </div>
                     </motion.div>

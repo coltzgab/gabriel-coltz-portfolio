@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
 // Public components
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ShootingStars } from './components/ui/shooting-stars';
+import { CelestialSphere } from './components/ui/celestial-sphere';
 
 // Public pages
 import { Home } from './pages/Home';
@@ -35,40 +36,48 @@ import { AdminTeam } from './pages/admin/AdminTeam';
 import { ProposalPage } from './pages/ProposalPage';
 
 // Public layout wrapper
-const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="font-sans antialiased text-organic-white selection:bg-organic-cyan selection:text-organic-black min-h-screen flex flex-col bg-organic-black relative overflow-x-hidden">
-    {/* Global Background Effect */}
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(71,228,190,0.05)_0%,rgba(0,0,0,0)_80%)]" />
-      <div className="stars absolute inset-0" />
+const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+  const isServicePage = ['/web-design', '/social-media', '/branding', '/coproduction'].includes(location.pathname);
 
-      <ShootingStars
-        starColor="#47e4be"
-        trailColor="#2EB9DF"
-        minSpeed={15}
-        maxSpeed={35}
-        minDelay={1000}
-        maxDelay={3000}
-      />
-      <ShootingStars
-        starColor="#5a3d7f"
-        trailColor="#47e4be"
-        minSpeed={10}
-        maxSpeed={25}
-        minDelay={2000}
-        maxDelay={4000}
-      />
-    </div>
+  return (
+    <div className="font-sans antialiased text-organic-white selection:bg-organic-cyan selection:text-organic-black min-h-screen flex flex-col bg-organic-black relative overflow-x-hidden">
+      {/* Global Background Effect */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {!isServicePage && (
+          <CelestialSphere hue={165.0} speed={0.15} zoom={1.2} particleSize={2.0} className="w-full h-full opacity-30 mix-blend-screen" />
+        )}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(71,228,190,0.05)_0%,rgba(0,0,0,0)_80%)]" />
+        <div className="stars absolute inset-0" />
 
-    <div className="relative z-10 flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        {children}
-      </main>
-      <Footer />
+        <ShootingStars
+          starColor="#47e4be"
+          trailColor="#2EB9DF"
+          minSpeed={15}
+          maxSpeed={35}
+          minDelay={1000}
+          maxDelay={3000}
+        />
+        <ShootingStars
+          starColor="#5a3d7f"
+          trailColor="#47e4be"
+          minSpeed={10}
+          maxSpeed={25}
+          minDelay={2000}
+          maxDelay={4000}
+        />
+      </div>
+
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const App: React.FC = () => {
   return (

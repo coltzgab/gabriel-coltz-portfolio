@@ -42,71 +42,57 @@ const services: ServiceItem[] = [
 ];
 
 import { GlowingEffect } from './ui/glowing-effect';
+import { ScrollReveal } from './ui/ScrollReveal';
 
 export const Services: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
-
-    const elements = containerRef.current?.querySelectorAll('.animate-on-scroll');
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section id="services" className="py-24 bg-organic-black">
-      <div className="container mx-auto px-6" ref={containerRef}>
-        <div className="mb-16 flex flex-col items-center md:items-end md:flex-row md:justify-between text-center md:text-left">
-          <div className="flex flex-col items-center md:items-start">
-            <h2 className="font-display text-4xl font-bold mb-2 text-organic-white uppercase tracking-tighter">O que fazemos</h2>
-            <div className="h-1 w-20 bg-organic-purple rounded-full"></div>
+    <section id="services" className="py-24 bg-organic-black overflow-hidden">
+      <div className="container mx-auto px-6">
+        <ScrollReveal animation="fade-up" duration={0.8}>
+          <div className="mb-16 flex flex-col items-center md:items-end md:flex-row md:justify-between text-center md:text-left">
+            <div className="flex flex-col items-center md:items-start">
+              <h2 className="font-display text-4xl font-bold mb-2 text-organic-white uppercase tracking-tighter">O que fazemos</h2>
+              <div className="h-1 w-20 bg-organic-purple rounded-full"></div>
+            </div>
+            <p className="text-organic-white/50 mt-4 md:mt-0 max-w-md md:text-right font-sans text-sm md:text-base leading-relaxed">
+              Um ecossistema completo para escalar sua autoridade digital.
+            </p>
           </div>
-          <p className="text-organic-white/50 mt-4 md:mt-0 max-w-md md:text-right font-sans text-sm md:text-base leading-relaxed">
-            Um ecossistema completo para escalar sua autoridade digital.
-          </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className="group relative p-1 rounded-[4rem] border border-white/5 overflow-hidden transition-all duration-300 animate-on-scroll h-full"
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <GlowingEffect
-                spread={40}
-                glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
-                borderWidth={3}
-              />
-              <div className="relative h-full p-8 rounded-[3.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
-                <div className="mb-6 text-organic-cyan group-hover:text-organic-white transition-colors duration-300 transform group-hover:-translate-y-1">
-                  {service.icon}
+          {services.map((service, index) => {
+            const anim = index % 3 === 0 ? "slide-right" : index % 3 === 1 ? "scale-up" : "slide-left";
+            return (
+              <ScrollReveal
+                key={service.id}
+                animation={anim as any}
+                delay={(index % 3) * 0.15}
+                duration={0.8}
+              >
+                <div className="group relative p-1 rounded-[4rem] border border-white/5 overflow-hidden transition-all h-full h-full min-h-[300px]">
+                  <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                    borderWidth={3}
+                  />
+                  <div className="relative h-full p-8 rounded-[3.8rem] bg-organic-black border border-white/5 group-hover:border-white/10 transition-colors flex flex-col items-center md:items-start text-center md:text-left">
+                    <div className="mb-6 text-organic-cyan group-hover:text-organic-white transition-colors duration-300 transform group-hover:-translate-y-1">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-display font-bold mb-3 text-organic-white uppercase tracking-wide">{service.title}</h3>
+                    <p className="text-organic-white/60 leading-relaxed text-sm font-sans italic">
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-display font-bold mb-3 text-organic-white uppercase tracking-wide">{service.title}</h3>
-                <p className="text-organic-white/60 leading-relaxed text-sm font-sans italic">
-                  {service.description}
-                </p>
-              </div>
-            </div>
-          ))}
+              </ScrollReveal>
+            )
+          })}
         </div>
       </div>
     </section>

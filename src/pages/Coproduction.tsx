@@ -57,10 +57,9 @@ export const Coproduction: React.FC = () => {
     return (
         <div className="pt-24 font-sans text-organic-white">
             {/* Hero Section */}
-            {/* Hero Section */}
-            <section className="pt-20 pb-0 px-6 lg:px-24 relative overflow-hidden h-[750px] flex items-center justify-center">
-                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 h-full">
-                    <div className="max-w-xl py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <section className="pt-10 lg:pt-16 pb-0 px-6 lg:px-24 relative overflow-hidden h-[600px] lg:h-[650px] flex items-center justify-center">
+                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 h-full max-w-7xl">
+                    <div className="max-w-xl flex-1 shrink-0 py-10 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -88,15 +87,17 @@ export const Coproduction: React.FC = () => {
                     </div>
 
                     {/* Image Column */}
-                    <div className="hidden lg:flex relative h-full flex-shrink-0 items-end">
-                        <motion.img
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            src="/coproduction-hero.png"
-                            alt="Coproduction Strategy"
-                            className="h-[110%] w-auto object-contain object-bottom -mb-2"
-                        />
+                    <div className="hidden lg:flex relative h-full w-full max-w-[420px] flex-1 items-end justify-center">
+                        <div className="relative w-full mt-auto -mb-8">
+                            <motion.img
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                src="/coproduction-hero.png"
+                                alt="Coproduction Strategy"
+                                className="relative z-10 w-full h-auto object-contain object-bottom"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>

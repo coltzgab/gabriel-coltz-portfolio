@@ -52,9 +52,9 @@ export const SocialMedia: React.FC = () => {
     return (
         <div className="pt-24 font-sans text-organic-white">
             {/* Hero Section */}
-            <section className="pt-20 px-6 lg:px-24 overflow-hidden">
-                <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-end">
-                    <div className="max-w-2xl flex flex-col items-center lg:items-start text-center lg:text-left pb-20">
+            <section className="pt-20 pb-0 px-6 lg:px-24 relative overflow-hidden h-[650px] flex items-center justify-center">
+                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 h-full max-w-7xl">
+                    <div className="max-w-xl flex-1 shrink-0 py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -83,14 +83,14 @@ export const SocialMedia: React.FC = () => {
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="hidden lg:flex justify-end relative h-full items-end"
+                        className="hidden lg:flex relative h-full w-full max-w-xl flex-1 items-end justify-center"
                     >
-                        <div className="relative w-full max-w-lg mt-auto -mb-2">
+                        <div className="relative w-full mt-auto -mb-8">
                             <div className="absolute inset-0 bg-organic-cyan/20 blur-[100px] rounded-full" />
                             <img
                                 src="/social-hero.png"
                                 alt="Estratégia de Redes Sociais"
-                                className="relative z-10 w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(71,228,190,0.15)]"
+                                className="relative z-10 w-full h-auto object-contain object-bottom drop-shadow-[0_0_40px_rgba(71,228,190,0.15)]"
                             />
                         </div>
                     </motion.div>

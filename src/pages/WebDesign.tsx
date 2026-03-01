@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Palette, Layers, Smartphone, Search, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight, Globe, Zap, Shield, Cpu } from 'lucide-react';
 import { NeonCarousel } from '../components/ui/NeonCarousel';
+import { ScrollReveal } from '../components/ui/ScrollReveal';
+import { motion } from 'framer-motion';
+import CyberneticGridShader from '../components/ui/cybernetic-grid-shader';
 
 export const WebDesign: React.FC = () => {
     useEffect(() => {
@@ -139,11 +142,17 @@ export const WebDesign: React.FC = () => {
     };
 
     return (
-        <div className="pt-24 font-sans text-organic-white">
+        <div className="font-sans text-organic-white relative -mt-28">
             {/* Hero Section */}
-            <section className="pt-20 pb-0 px-6 lg:px-24 relative overflow-hidden h-[600px] flex items-center justify-center">
-                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 h-full">
-                    <div className="max-w-xl py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <section className="bg-organic-black pt-32 md:pt-40 pb-0 px-6 lg:px-24 relative overflow-hidden h-[650px] md:h-[750px] flex items-center justify-center">
+                <CyberneticGridShader />
+                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 h-full relative z-10 max-w-7xl">
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-xl flex-1 shrink-0 py-20 z-20 flex flex-col items-center lg:items-start text-center lg:text-left"
+                    >
                         <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight uppercase">
                             Web Design que vai além <br /> <span className="text-organic-cyan">da aparência</span>
                         </h1>
@@ -157,15 +166,22 @@ export const WebDesign: React.FC = () => {
                             <span className="font-display text-lg uppercase">Falar com Especialista</span>
                             <ArrowRight size={20} />
                         </button>
-                    </div>
+                    </motion.div>
                     {/* Character Column */}
-                    <div className="hidden lg:block relative h-full flex-shrink-0">
-                        <img
-                            src="/character-hero-no-bg.png"
-                            alt="Character"
-                            className="h-full w-auto object-contain object-bottom"
-                        />
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, filter: "blur(15px)", y: 20 }}
+                        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="hidden lg:flex relative h-full w-full max-w-[500px] flex-1 items-end justify-center"
+                    >
+                        <div className="relative w-full mt-auto -mb-8">
+                            <img
+                                src="/character-hero-no-bg.png"
+                                alt="Character"
+                                className="relative z-10 w-full h-auto object-contain object-bottom drop-shadow-[0_0_40px_rgba(71,228,190,0.15)]"
+                            />
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -191,13 +207,15 @@ export const WebDesign: React.FC = () => {
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {features.map((feature, idx) => (
-                            <div key={idx} className="p-8 border border-white/5 rounded-[60px] hover:border-organic-cyan/30 transition-all bg-organic-black/40 text-center">
-                                <div className="mb-4">{feature.icon}</div>
-                                <h3 className="text-2xl font-display font-bold mb-3">{feature.title}</h3>
-                                <p className="text-organic-white/60 text-sm leading-relaxed font-sans">
-                                    {feature.description}
-                                </p>
-                            </div>
+                            <ScrollReveal key={idx} animation="scale-up" delay={idx * 0.15}>
+                                <div className="p-8 border border-white/5 rounded-[60px] hover:border-organic-cyan/30 transition-all bg-organic-black/40 text-center h-full">
+                                    <div className="mb-4">{feature.icon}</div>
+                                    <h3 className="text-2xl font-display font-bold mb-3">{feature.title}</h3>
+                                    <p className="text-organic-white/60 text-sm leading-relaxed font-sans">
+                                        {feature.description}
+                                    </p>
+                                </div>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -238,30 +256,32 @@ export const WebDesign: React.FC = () => {
                         className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide"
                     >
                         {portfolio.map((site, idx) => (
-                            <a
-                                key={idx}
-                                href={site.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="min-w-[280px] md:min-w-[600px] snap-center group bg-white/5 border border-white/10 rounded-[60px] overflow-hidden hover:border-organic-cyan transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
-                            >
-                                <div className="aspect-[16/9] overflow-hidden relative">
-                                    <img
-                                        src={site.image}
-                                        alt={site.title}
-                                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-organic-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                                </div>
+                            <ScrollReveal key={idx} animation="flip" duration={0.6} delay={idx * 0.1} className="min-w-[280px] md:min-w-[600px] snap-center">
+                                <a
+                                    href={site.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block group bg-white/5 border border-white/10 rounded-[60px] overflow-hidden hover:border-organic-cyan transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] h-full"
+                                >
+                                    <div className="aspect-[16/9] overflow-hidden relative">
+                                        <img
+                                            src={site.image}
+                                            alt={site.title}
+                                            loading="lazy"
+                                            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-organic-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                                    </div>
 
-                                <div className="p-8">
-                                    <span className="text-organic-cyan text-xs font-semibold uppercase tracking-widest mb-2 block font-sans">{site.category}</span>
-                                    <h3 className="text-3xl font-display font-bold mb-3 group-hover:text-organic-cyan transition-colors">{site.title}</h3>
-                                    <p className="text-organic-white/60 text-sm leading-relaxed font-sans">
-                                        {site.description}
-                                    </p>
-                                </div>
-                            </a>
+                                    <div className="p-8">
+                                        <span className="text-organic-cyan text-xs font-semibold uppercase tracking-widest mb-2 block font-sans">{site.category}</span>
+                                        <h3 className="text-3xl font-display font-bold mb-3 group-hover:text-organic-cyan transition-colors">{site.title}</h3>
+                                        <p className="text-organic-white/60 text-sm leading-relaxed font-sans">
+                                            {site.description}
+                                        </p>
+                                    </div>
+                                </a>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -278,11 +298,13 @@ export const WebDesign: React.FC = () => {
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1">
                         {methodology.map((m, idx) => (
-                            <div key={idx} className="relative p-8 border-l border-white/10 group hover:border-organic-cyan transition-colors">
-                                <span className="text-5xl font-display font-bold text-white/10 group-hover:text-organic-cyan/20 transition-colors absolute top-4 right-4">{m.step}</span>
-                                <h3 className="text-2xl font-display font-bold mb-4 relative z-10">{m.title}</h3>
-                                <p className="text-organic-white/60 text-sm relative z-10 font-sans">{m.description}</p>
-                            </div>
+                            <ScrollReveal key={idx} animation="slide-left" delay={idx * 0.1} duration={0.6}>
+                                <div className="relative p-8 border-l border-white/10 group hover:border-organic-cyan transition-colors h-full">
+                                    <span className="text-5xl font-display font-bold text-white/10 group-hover:text-organic-cyan/20 transition-colors absolute top-4 right-4">{m.step}</span>
+                                    <h3 className="text-2xl font-display font-bold mb-4 relative z-10">{m.title}</h3>
+                                    <p className="text-organic-white/60 text-sm relative z-10 font-sans">{m.description}</p>
+                                </div>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>

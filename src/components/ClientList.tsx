@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { ScrollReveal } from './ui/ScrollReveal';
 
 export const ClientList: React.FC = () => {
     const clients = [
@@ -24,18 +25,20 @@ export const ClientList: React.FC = () => {
             <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-organic-cyan/30 to-transparent" />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="text-center mb-20 flex flex-col items-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/10">
-                        <Star size={16} className="text-organic-cyan fill-organic-cyan/50" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan">Parcerias de Elite</span>
+                <ScrollReveal animation="fade-up" duration={0.8}>
+                    <div className="text-center mb-20 flex flex-col items-center">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/10">
+                            <Star size={16} className="text-organic-cyan fill-organic-cyan/50" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan">Parcerias de Elite</span>
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold uppercase leading-tight mb-4 text-white">
+                            Marcas que <span className="text-organic-cyan italic">aceleramos</span>
+                        </h2>
+                        <p className="text-lg text-organic-white/60 font-sans max-w-2xl">
+                            Estratégias que transformam negócios. Conheça as empresas que confiam na Organic para dominar seus mercados.
+                        </p>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-display font-bold uppercase leading-tight mb-4 text-white">
-                        Marcas que <span className="text-organic-cyan italic">aceleramos</span>
-                    </h2>
-                    <p className="text-lg text-organic-white/60 font-sans max-w-2xl">
-                        Estratégias que transformam negócios. Conheça as empresas que confiam na Organic para dominar seus mercados.
-                    </p>
-                </div>
+                </ScrollReveal>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                     {clients.map((client, index) => (

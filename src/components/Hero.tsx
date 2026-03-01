@@ -1,17 +1,23 @@
 import React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from './Button';
+import { motion } from 'framer-motion';
 
 export const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Abstract Background Elements - clipped to prevent mobile overflow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 bg-gradient-to-l from-organic-purple to-transparent" />
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/2 opacity-10 bg-gradient-to-t from-organic-cyan to-transparent rounded-full blur-3xl" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 bg-gradient-to-l from-organic-purple to-transparent mix-blend-screen" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/2 opacity-10 bg-gradient-to-t from-organic-cyan to-transparent rounded-full blur-3xl mix-blend-screen" />
       </div>
-      <div className="container mx-auto px-6 lg:px-24 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="container mx-auto px-6 lg:px-24 relative z-10 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 h-full">
+        <motion.div
+          className="max-w-xl flex-1 flex flex-col items-center lg:items-start text-center lg:text-left"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-organic-cyan/30 rounded-full bg-organic-cyan/5">
             <Sparkles size={14} className="text-organic-cyan" />
             <span className="text-xs font-bold uppercase tracking-widest text-organic-cyan">Assessoria de Branding & MKT</span>
@@ -36,17 +42,22 @@ export const Hero: React.FC = () => {
               Ver Cases <ArrowRight className="inline ml-2" size={18} />
             </Button>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="relative hidden md:block h-[600px]">
+        <motion.div
+          className="relative hidden lg:block h-[500px] w-full max-w-lg flex-1"
+          initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+        >
           {/* Decorative Image Composition mimicking the collage style */}
-          <div className="absolute top-10 right-10 w-64 h-80 border-2 border-organic-cyan z-20 translate-x-4 translate-y-4 rounded-full"></div>
-          <div className="absolute top-10 right-10 w-64 h-80 bg-organic-gray z-10 overflow-hidden rounded-full">
+          <div className="absolute -top-12 -right-12 w-80 h-[380px] border-2 border-organic-cyan z-20 translate-x-4 translate-y-4 rounded-[120px]"></div>
+          <div className="absolute -top-12 -right-12 w-80 h-[380px] bg-organic-gray z-10 overflow-hidden rounded-[120px]">
             <img src="/astronaut-left.png" alt="Brand Art" className="w-full h-full object-cover" />
           </div>
 
-          <div className="absolute bottom-10 left-10 w-56 h-72 border-2 border-organic-purple z-20 -translate-x-4 -translate-y-4 rounded-full"></div>
-          <div className="absolute bottom-10 left-10 w-56 h-72 bg-organic-black z-10 overflow-hidden rounded-full">
+          <div className="absolute -bottom-12 -left-12 w-72 h-[320px] border-2 border-organic-purple z-20 -translate-x-4 -translate-y-4 rounded-[100px]"></div>
+          <div className="absolute -bottom-12 -left-12 w-72 h-[320px] bg-organic-black z-10 overflow-hidden rounded-[100px]">
             <img src="/astronaut-right.png" alt="Strategy Art" className="w-full h-full object-cover" />
           </div>
 
@@ -55,7 +66,7 @@ export const Hero: React.FC = () => {
             <p className="font-display text-organic-cyan text-4xl font-bold text-center">360°</p>
             <p className="text-[10px] uppercase tracking-widest text-center text-organic-white font-bold">Visão Estratégica</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
