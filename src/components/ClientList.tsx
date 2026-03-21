@@ -5,14 +5,14 @@ import { ScrollReveal } from './ui/ScrollReveal';
 
 export const ClientList: React.FC = () => {
     const clients = [
-        "JJ Lima",
-        "Juliano Camello",
-        "MP4 Contábil",
-        "Next Imóveis",
-        "Olivers",
-        "FinUp",
-        "ClipStorm",
-        "Gislaine Coltz"
+        { name: "JJ Lima", industry: "Consultoria" },
+        { name: "Juliano Camello", industry: "Advocacia" },
+        { name: "MP4 Contábil", industry: "Contabilidade" },
+        { name: "Next Imóveis", industry: "Imobiliária" },
+        { name: "Olivers", industry: "E-commerce" },
+        { name: "FinUp", industry: "Fintech" },
+        { name: "ClipStorm", industry: "IA & Vídeo" },
+        { name: "Gislaine Coltz", industry: "Saúde & Bem-estar" },
     ];
 
     return (
@@ -48,12 +48,15 @@ export const ClientList: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            whileHover={{ y: -5, scale: 1.05 }}
-                            className="group relative flex items-center justify-center p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 hover:border-organic-cyan/40 transition-all duration-300 shadow-2xl overflow-hidden"
+                            whileHover={{ y: -5, scale: 1.02 }}
+                            className="group relative flex flex-col items-center justify-center gap-2 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 hover:border-organic-cyan/40 transition-all duration-300 shadow-2xl overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-gradient-to-tr from-organic-cyan/0 via-organic-cyan/0 to-organic-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             <span className="font-display text-xl md:text-2xl font-bold uppercase tracking-wider text-center text-white/80 group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(71,228,190,0.8)] transition-all duration-300 select-none z-10">
-                                {client}
+                                {client.name}
+                            </span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-organic-cyan/50 group-hover:text-organic-cyan/80 transition-colors duration-300 z-10 font-sans">
+                                {client.industry}
                             </span>
                         </motion.div>
                     ))}

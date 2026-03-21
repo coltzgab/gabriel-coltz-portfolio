@@ -2,7 +2,7 @@ import React from 'react';
 import { Hero } from '../components/Hero';
 import { Services } from '../components/Services';
 import { ClientList } from '../components/ClientList';
-
+import { Testimonials } from '../components/Testimonials';
 import { Portfolio } from '../components/Portfolio';
 import { NeonCarousel } from '../components/ui/NeonCarousel';
 import { Globe, Users, Palette, Rocket, Search, Zap } from 'lucide-react';
@@ -22,8 +22,8 @@ export const Home: React.FC = () => {
                 ]}
             />
             <Services />
-
             <ClientList />
+            <Testimonials />
             <Portfolio />
         </main>
     );
