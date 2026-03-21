@@ -1,0 +1,62 @@
+name: Auto Blog Generator
+
+on:
+  # Roda todo dia às 08:00 horário de Brasília (UTC-3 = 11:00 UTC)
+  schedule:
+    - cron: '0 11 * * *'
+
+  # Permite disparar manualmente pela aba Actions no GitHub
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (não gera posts, só testa conexão)'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  generate-blog-posts:
+    name: Gerar Posts do Blog
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Disparar Edge Function do Supabase
+        id: trigger
+        run: |
+          echo "🚀 Chamando auto-blog-generator..."
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" \
+            --max-time 300 \
+            -X POST \
+            "${{ secrets.SUPABASE_URL }}/functions/v1/auto-blog-generator" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Content-Type: application/json" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -d '{}')
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+
+          echo "HTTP Status: $HTTP_CODE"
+          echo "Response: $BODY"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ Erro: HTTP $HTTP_CODE"
+            echo "Body: $BODY"
+            exit 1
+          fi
+
+          echo "✅ Geração concluída!"
+          echo "response=$BODY" >> $GITHUB_OUTPUT
+
+      - name: Resumo da Geração
+        if: always()
+        run: |
+          echo "## 📝 Resultado da Geração Automática" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Data/Hora:** $(TZ='America/Sao_Paulo' date '+%d/%m/%Y %H:%M') (Brasília)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.trigger.outputs.response }}' >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
