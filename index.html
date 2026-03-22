@@ -1,964 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml"
+    href="https://organic-mkt.com.br/wp-content/uploads/2021/09/cropped-favicon-organic-32x32.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabriel Coltz — Estratégia, Branding e IA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <title>Organic | Branding & Marketing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    :root {
-      --bg: #080808;
-      --surface: #111111;
-      --surface2: #181818;
-      --border: #222222;
-      --accent: #F59E0B;
-      --accent-dim: rgba(245, 158, 11, 0.12);
-      --accent-glow: rgba(245, 158, 11, 0.25);
-      --text: #F0F0F0;
-      --text-muted: #888888;
-      --text-dim: #555555;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#47e4be',
+            organic: {
+              cyan: '#47e4be',
+              purple: '#5a3d7f',
+              black: '#232323',
+              white: '#e6e6e6',
+              gray: '#333333'
+            }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            display: ['Bebas Neue', 'cursive'],
+          },
+          keyframes: {
+            "pulse-slow": {
+              '0%, 100%': { transform: 'translateX(-100%)' },
+              '50%': { transform: 'translateX(100%)' },
+            },
+          },
+          animation: {
+            "pulse-slow": "pulse-slow 3s ease-in-out infinite",
+          },
+          letterSpacing: {
+            tighter: '0',
+            tight: '0.01em',
+            normal: '0.025em',
+          },
+        }
+      }
     }
-
-    html { scroll-behavior: smooth; }
+  </script>
+  <style>
+    html,
+    body,
+    #root {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+      touch-action: pan-y;
+      position: relative;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 60px;
-      background: rgba(8,8,8,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-    nav.scrolled { border-bottom-color: var(--border); }
-    .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 60px 80px;
+      background-color: #232323;
+      color: #e6e6e6;
       position: relative;
-      overflow: hidden;
     }
-    .hero-noise {
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
+
+    #root {
+      position: relative;
     }
-    .hero-glow {
-      position: absolute;
-      width: 700px; height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 70%);
-      top: -200px; right: -200px;
-      pointer-events: none;
+
+    /* Custom Scrollbar — thin & subtle */
+    ::-webkit-scrollbar {
+      width: 3px;
     }
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(245,158,11,0.3);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 32px;
-      width: fit-content;
-    }
-    .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-    .hero-headline {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-      max-width: 800px;
-    }
-    .hero-headline .name { color: var(--text); }
-    .hero-sub-headline {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      font-weight: 400;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-      margin-bottom: 40px;
-    }
-    .hero-divider {
-      width: 48px;
-      height: 2px;
-      background: var(--accent);
-      margin-bottom: 28px;
-    }
-    .hero-intro {
-      font-size: clamp(1rem, 1.5vw, 1.15rem);
-      color: var(--text-muted);
-      max-width: 560px;
-      line-height: 1.75;
-      margin-bottom: 48px;
-    }
-    .hero-intro strong { color: var(--text); font-weight: 500; }
-    .hero-cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: #000;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-      padding: 14px 28px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-primary:hover { background: #FBBF24; transform: translateY(-1px); box-shadow: 0 8px 24px var(--accent-glow); }
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+
+    ::-webkit-scrollbar-track {
       background: transparent;
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      padding: 14px 28px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 40px; left: 60px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .scroll-line {
-      width: 40px;
-      height: 1px;
-      background: var(--text-dim);
     }
 
-    /* ── SECTIONS ── */
-    section { padding: 100px 60px; }
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .section-title em {
-      font-style: normal;
-      color: var(--accent);
-    }
-    .section-lead {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      line-height: 1.8;
-    }
-
-    /* ── JORNADA ── */
-    #jornada { background: var(--surface); }
-    .jornada-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 80px;
-      align-items: start;
-      margin-top: 60px;
-    }
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 19px;
-      top: 28px;
-      bottom: 28px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-    }
-    .tl-item {
-      display: flex;
-      gap: 24px;
-      padding-bottom: 40px;
-      position: relative;
-    }
-    .tl-dot {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent-dim);
-      border: 1px solid rgba(245,158,11,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-    }
-    .tl-content h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-    .tl-content p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-    .jornada-quote {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 8px;
-      padding: 40px;
-      align-self: center;
-    }
-    .jornada-quote blockquote {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-      font-weight: 500;
-      line-height: 1.5;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-    .jornada-quote blockquote span { color: var(--accent); }
-    .jornada-quote cite {
-      display: block;
-      margin-top: 20px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-style: normal;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── ORGANIC ── */
-    #organic { background: var(--bg); }
-    .organic-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 60px;
-    }
-    .organic-text p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-    .organic-text p strong { color: var(--text); font-weight: 500; }
-    .organic-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    ::-webkit-scrollbar-thumb {
+      background: #47e4be22;
       border-radius: 10px;
-      padding: 28px 24px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .stat-number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.4;
     }
 
-    /* ── FINUP ── */
-    #finup { background: var(--surface); }
-    .finup-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 60px;
-    }
-    .finup-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .feature-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-    .feature-chip:hover { border-color: var(--accent); color: var(--text); }
-    .feature-chip .icon {
-      width: 28px; height: 28px;
-      border-radius: 6px;
-      background: var(--accent-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .finup-text p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-    .finup-text p strong { color: var(--text); font-weight: 500; }
-
-    /* ── PILARES ── */
-    #pilares { background: var(--bg); }
-    .pilares-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-    .pilar-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 40px 32px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-    .pilar-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s;
-    }
-    .pilar-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .pilar-card:hover::before { transform: scaleX(1); }
-    .pilar-number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 16px;
-      transition: color 0.3s;
-    }
-    .pilar-card:hover .pilar-number { color: var(--accent-dim); }
-    .pilar-icon {
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-    }
-    .pilar-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-    .pilar-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.7;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #47e4be66;
     }
 
-    /* ── PROJETOS ── */
-    #projetos { background: var(--surface); }
-    .projetos-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-    .projeto-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.35s;
-      cursor: default;
-    }
-    .projeto-card:hover { border-color: rgba(245,158,11,0.4); transform: translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
-    .projeto-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s;
-    }
-    .projeto-card:hover .projeto-img { transform: scale(1.02); }
-    .projeto-info {
-      padding: 24px 28px;
-    }
-    .projeto-tag {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .projeto-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .projeto-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ── CTA ── */
-    #contato {
-      background: var(--bg);
-      text-align: center;
-      padding: 120px 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-    .cta-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-    .cta-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .cta-title em { font-style: normal; color: var(--accent); }
-    .cta-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto 48px;
-      line-height: 1.75;
-    }
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg);
-    }
-    .footer-brand {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-    .footer-brand span { color: var(--accent); }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-    }
-
-    /* ── ANIMATIONS ── */
-    .fade-up {
+    /* Animations */
+    .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
-    .fade-up.visible {
+
+    .animate-fade-in-up {
       opacity: 1;
       transform: translateY(0);
     }
-    .fade-up.delay-1 { transition-delay: 0.1s; }
-    .fade-up.delay-2 { transition-delay: 0.2s; }
-    .fade-up.delay-3 { transition-delay: 0.3s; }
-    .fade-up.delay-4 { transition-delay: 0.4s; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      section { padding: 72px 24px; }
-      #hero { padding: 100px 24px 72px; }
-      .jornada-grid,
-      .organic-grid,
-      .finup-grid { grid-template-columns: 1fr; gap: 48px; }
-      .pilares-grid { grid-template-columns: 1fr; }
-      .projetos-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
-      .hero-scroll-hint { display: none; }
-      #contato { padding: 80px 24px; }
+    /* Utility to hide scrollbar */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      50% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .stars {
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      animation: twinkle 5s ease-in-out infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 0.8;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
     }
   </style>
 </head>
+
 <body>
-
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-logo">Gabriel<span>.</span></div>
-    <ul class="nav-links">
-      <li><a href="#jornada">Jornada</a></li>
-      <li><a href="#organic">Organic</a></li>
-      <li><a href="#finup">FinUp</a></li>
-      <li><a href="#projetos">Projetos</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-noise"></div>
-    <div class="hero-glow"></div>
-
-    <div class="hero-tag">Disponível para novos projetos</div>
-
-    <h1 class="hero-headline">
-      <span class="name">Gabriel Coltz</span>
-    </h1>
-    <p class="hero-sub-headline">Estratégia · Branding · Inteligência Artificial</p>
-    <div class="hero-divider"></div>
-    <p class="hero-intro">
-      Antes da inteligência artificial virar hype, eu já estava no jogo.<br><br>
-      Desde 2021, construo marcas, estratégias e presença digital
-      <strong>partindo do zero</strong> — e uso tecnologia como alavanca,
-      não como atalho.
-    </p>
-    <div class="hero-cta-group">
-      <a href="#contato" class="btn-primary">Vamos conversar →</a>
-      <a href="#projetos" class="btn-secondary">Ver projetos</a>
-    </div>
-
-    <div class="hero-scroll-hint">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <!-- JORNADA -->
-  <section id="jornada">
-    <p class="section-label fade-up">A história</p>
-    <h2 class="section-title fade-up delay-1">Uma jornada construída<br><em>antes do hype</em></h2>
-    <p class="section-lead fade-up delay-2">Do zero ao zero — mas de formas completamente diferentes. Da construção manual à IA aplicada.</p>
-
-    <div class="jornada-grid">
-      <div class="timeline">
-        <div class="tl-item fade-up">
-          <div class="tl-dot">2021</div>
-          <div class="tl-content">
-            <h3>O início sem atalhos</h3>
-            <p>Pesquisa de mercado feita no braço. Análise de conteúdo baseada em comportamento real. Branding sem ferramentas mágicas. A base mais sólida possível.</p>
-          </div>
-        </div>
-        <div class="tl-item fade-up delay-1">
-          <div class="tl-dot">2022</div>
-          <div class="tl-content">
-            <h3>Nasce a Organic</h3>
-            <p>O tráfego pago estava ficando caro e imprevisível. A decisão estratégica: focar em branding, posicionamento e crescimento orgânico sustentável.</p>
-          </div>
-        </div>
-        <div class="tl-item fade-up delay-2">
-          <div class="tl-dot">2024</div>
-          <div class="tl-content">
-            <h3>Problema vira produto</h3>
-            <p>Dificuldade pessoal com finanças → criação de um agente de IA no WhatsApp. O que era solução pessoal virou a FinUp.</p>
-          </div>
-        </div>
-        <div class="tl-item fade-up delay-3">
-          <div class="tl-dot">hoje</div>
-          <div class="tl-content">
-            <h3>Estratégia + Branding + IA</h3>
-            <p>Três pilares integrados. Não apenas usar ferramentas — construir soluções com elas. Transformar ideias em ativos reais de crescimento.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="jornada-quote fade-up delay-2">
-        <blockquote>
-          "Eu não sou apenas alguém que usa ferramentas.<br>
-          Sou alguém que entende o fundamento, constrói a base e usa a
-          <span>tecnologia como alavanca.</span>"
-        </blockquote>
-        <cite>— Gabriel Coltz</cite>
-      </div>
-    </div>
-  </section>
-
-  <!-- ORGANIC -->
-  <section id="organic">
-    <p class="section-label fade-up">Empresa</p>
-    <h2 class="section-title fade-up delay-1">Organic — Branding que<br><em>gera crescimento real</em></h2>
-
-    <div class="organic-grid">
-      <div class="organic-text fade-up delay-2">
-        <p>
-          A Organic nasceu de uma decisão estratégica: enquanto o mercado corria atrás de tráfego pago,
-          eu apostei no que é <strong>sustentável a longo prazo</strong> — marca forte, posicionamento claro
-          e crescimento orgânico.
-        </p>
-        <p>
-          Mais de <strong>50 projetos entregues</strong> — entre identidades visuais completas, estratégias
-          de conteúdo e construção de marca do zero. Cada projeto com um único foco:
-          <strong>clareza, percepção de valor e crescimento</strong>.
-        </p>
-        <p>
-          Lideramos rebrandings que transformaram negócios: a <strong>MP4 Contábil</strong> saiu
-          de um nome regional limitado para uma marca escalável. A <strong>Olivers Vistorias</strong>
-          evoluiu para refletir tecnologia e autoridade no setor.
-        </p>
-      </div>
-
-      <div class="organic-stats fade-up delay-3">
-        <div class="stat-card">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Projetos entregues com excelência</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">5</div>
-          <div class="stat-label">Anos construindo marcas do zero</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Foco em crescimento sustentável</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">2x</div>
-          <div class="stat-label">Média de aumento em percepção de valor</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINUP -->
-  <section id="finup">
-    <p class="section-label fade-up">Produto</p>
-    <h2 class="section-title fade-up delay-1">FinUp — IA que <em>simplifica</em><br>o seu dia a dia</h2>
-
-    <div class="finup-grid">
-      <div class="finup-text fade-up delay-1">
-        <p>
-          Tudo começou com um problema pessoal: <strong>eu não conseguia gerir minhas finanças</strong>
-          e não me adaptava a planilhas. Em vez de aceitar o problema, resolvi ele da única
-          forma que conheço — construindo.
-        </p>
-        <p>
-          Criei um agente de IA dentro do WhatsApp. Simples, conversacional, acessível.
-          Esse projeto evoluiu e se tornou a <strong>FinUp</strong> — uma fintech que vai
-          além do financeiro.
-        </p>
-        <p>
-          Hoje, a FinUp é um assistente pessoal inteligente que centraliza decisões,
-          automatiza rotinas e devolve o que mais importa: <strong>tempo e clareza mental</strong>.
-        </p>
-      </div>
-
-      <div class="finup-features fade-up delay-2">
-        <div class="feature-chip">
-          <div class="icon">💸</div>
-          Registro automático de gastos
-        </div>
-        <div class="feature-chip">
-          <div class="icon">📅</div>
-          Integração Google Agenda
-        </div>
-        <div class="feature-chip">
-          <div class="icon">💡</div>
-          Captura de ideias instantânea
-        </div>
-        <div class="feature-chip">
-          <div class="icon">⚡</div>
-          Automação de rotinas
-        </div>
-        <div class="feature-chip">
-          <div class="icon">🎯</div>
-          Centralização de decisões
-        </div>
-        <div class="feature-chip">
-          <div class="icon">💬</div>
-          Interface conversacional (WhatsApp)
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PILARES -->
-  <section id="pilares">
-    <p class="section-label fade-up">Método</p>
-    <h2 class="section-title fade-up delay-1">Três pilares.<br><em>Um objetivo.</em></h2>
-    <p class="section-lead fade-up delay-2">Transformar ideias em ativos reais de crescimento.</p>
-
-    <div class="pilares-grid">
-      <div class="pilar-card fade-up delay-1">
-        <div class="pilar-number">01</div>
-        <div class="pilar-icon">🎯</div>
-        <div class="pilar-title">Estratégia</div>
-        <p class="pilar-desc">
-          Entender o mercado, o momento e o posicionamento certo. Nenhuma marca cresce
-          sem clareza estratégica — e é por aí que tudo começa. Análise real, decisões
-          fundamentadas, visão de longo prazo.
-        </p>
-      </div>
-      <div class="pilar-card fade-up delay-2">
-        <div class="pilar-number">02</div>
-        <div class="pilar-icon">✦</div>
-        <div class="pilar-title">Branding</div>
-        <p class="pilar-desc">
-          Marca não é logo. É percepção, é consistência, é o que as pessoas sentem
-          quando interagem com o seu negócio. Construo identidades que crescem junto
-          com o negócio — com propósito e sem atalhos.
-        </p>
-      </div>
-      <div class="pilar-card fade-up delay-3">
-        <div class="pilar-number">03</div>
-        <div class="pilar-icon">◈</div>
-        <div class="pilar-title">Inteligência Artificial</div>
-        <p class="pilar-desc">
-          Não sou usuário de IA. Sou construtor. Desenvolvo soluções com IA que geram
-          resultado real — agentes, automações, produtos. A tecnologia como alavanca,
-          nunca como substituto do pensamento.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJETOS -->
-  <section id="projetos">
-    <p class="section-label fade-up">Portfolio</p>
-    <h2 class="section-title fade-up delay-1">Projetos que<br><em>falam por si</em></h2>
-    <p class="section-lead fade-up delay-2">Cada marca construída com intenção, estratégia e identidade única.</p>
-
-    <div class="projetos-grid">
-      <a href="olivers.html" class="projeto-card fade-up delay-1" style="text-decoration:none; color:inherit; display:block;">
-        <img src="images/olivers.png" alt="Olivers Vistorias" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Rebranding · Identidade Visual</div>
-          <div class="projeto-name">Olivers Vistorias</div>
-          <p class="projeto-desc">Evolução do posicionamento para refletir tecnologia, inovação e autoridade no setor de vistorias. Identidade completa com aplicações premium.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
-        </div>
-      </a>
-
-      <div class="projeto-card fade-up delay-2">
-        <img src="images/mp4.png" alt="MP4 Contábil" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Rebranding · Marca Escalável</div>
-          <div class="projeto-name">MP4 Contábil</div>
-          <p class="projeto-desc">Transformação de um nome regional limitado em uma marca escalável — mantendo a essência e história da empresa, ampliando o alcance.</p>
-        </div>
-      </div>
-
-      <div class="projeto-card fade-up delay-3">
-        <img src="images/gislaine.png" alt="Gislaine Coltz" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Identidade Visual · Branding Pessoal</div>
-          <div class="projeto-name">Gislaine Coltz</div>
-          <p class="projeto-desc">Branding pessoal sofisticado com identidade rose gold e aplicações de alto padrão. Elegância e exclusividade em cada detalhe.</p>
-        </div>
-      </div>
-
-      <div class="projeto-card fade-up delay-4">
-        <img src="images/finup.png" alt="FinUp" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Produto · Fintech · IA</div>
-          <div class="projeto-name">FinUp</div>
-          <p class="projeto-desc">Identidade tech dark com laranja vibrante para uma fintech que vai além do financeiro. Marca construída para escalar no mercado de IA.</p>
-        </div>
-      </div>
-
-      <a href="jjlima.html" class="projeto-card fade-up delay-5" style="text-decoration:none; color:inherit; display:block;">
-        <img src="images/jjlima.png" alt="JJ Lima Contabilidade" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Identidade Visual · Estratégia de Conteúdo</div>
-          <div class="projeto-name">JJ Lima Contabilidade</div>
-          <p class="projeto-desc">Projeto completo: identidade visual com manual de marca, paleta e tipografia. Estratégia de conteúdo com personas mapeadas, 4 pilares editoriais, análise SWOT e plano digital para Instagram, LinkedIn, YouTube e Blog.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
-        </div>
-      </a>
-
-      <a href="olivers-treinamento.html" class="projeto-card fade-up delay-1" style="text-decoration:none; color:inherit; display:block;">
-        <img src="images/olivers-treinamento.png" alt="Treinamento de Croquis Olivers" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Processo · Treinamento · Gestao Operacional</div>
-          <div class="projeto-name">Treinamento de Croquis — Olivers</div>
-          <p class="projeto-desc">Transformacao de processos caóticos em sistema padronizado. Treinamento gravado unico para todos os colaboradores — economia de horas e consistencia operacional.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
-        </div>
-      </a>
-
-      <a href="juliano-camello.html" class="projeto-card fade-up delay-2" style="text-decoration:none; color:inherit; display:block;">
-        <img src="images/juliano-camello.png" alt="Juliano Camello" class="projeto-img" />
-        <div class="projeto-info">
-          <div class="projeto-tag">Marca Pessoal · Estrategia de Conteudo</div>
-          <div class="projeto-name">Juliano Camello — Especialista em Holding</div>
-          <p class="projeto-desc">Posicionamento de marca pessoal completo: do contador ao especialista reconhecido. Estrategia editorial com 6 linhas, 3 personas e presenca em 4 canais digitais.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="contato">
-    <div class="cta-glow"></div>
-    <p class="cta-label fade-up">Próximo passo</p>
-    <h2 class="cta-title fade-up delay-1">
-      Pronto para transformar<br>sua ideia em um<br><em>ativo real?</em>
-    </h2>
-    <p class="cta-sub fade-up delay-2">
-      Seja criando uma marca do zero, reposicionando um negócio ou desenvolvendo
-      soluções com IA — o objetivo é sempre o mesmo.
-    </p>
-    <div class="cta-buttons fade-up delay-3">
-      <a href="https://wa.me/5551993909150" class="btn-primary" target="_blank">
-        WhatsApp →
-      </a>
-      <a href="mailto:gabriel@organic.com.br" class="btn-secondary">
-        Enviar e-mail
-      </a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-brand">Gabriel Coltz<span>.</span></div>
-    <div class="footer-copy">© 2025 · Estratégia, Branding & IA</div>
-  </footer>
-
-  <script>
-    // Nav scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // Intersection Observer for fade-up animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
-
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
+
 </html>
