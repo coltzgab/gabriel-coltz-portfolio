@@ -1,6 +1,16 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "**", "use": "@vercel/static" }
+  ],
   "routes": [
-    { "handle": "filesystem" }
+    { "src": "/olivers.html", "dest": "/olivers.html" },
+    { "src": "/olivers-treinamento.html", "dest": "/olivers-treinamento.html" },
+    { "src": "/finup.html", "dest": "/finup.html" },
+    { "src": "/jjlima.html", "dest": "/jjlima.html" },
+    { "src": "/juliano-camello.html", "dest": "/juliano-camello.html" },
+    { "src": "/portfolio.html", "dest": "/portfolio.html" },
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
