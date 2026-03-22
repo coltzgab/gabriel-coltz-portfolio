@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Coltz — Estratégia, Branding e IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --surface2: #181818;
+      --border: #222222;
+      --accent: #F59E0B;
+      --accent-dim: rgba(245, 158, 11, 0.10);
+      --accent-glow: rgba(245, 158, 11, 0.20);
+      --text: #F0F0F0;
+      --text-muted: #888888;
+      --text-dim: #444444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 64px;
+      background: rgba(8,8,8,0.90);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow-left {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+      top: 50%; left: -100px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    .hero-text-col {
+      padding: 80px 64px 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+    .hero-role {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 32px;
+      letter-spacing: 0.01em;
+    }
+    .hero-divider {
+      width: 40px; height: 2px;
+      background: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-bio {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+    .hero-bio strong { color: var(--text); font-weight: 500; }
+    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 13px 26px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: #FBBF24; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 13px 26px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* HERO PHOTO */
+    .hero-photo-col {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-photo-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(20%) contrast(1.05);
+      display: block;
+    }
+    .hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 30%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 20%);
+    }
+
+    /* SECTIONS */
+    section { padding: 96px 64px; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-style: normal; color: var(--accent); }
+    .section-lead {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.8;
+      margin-bottom: 56px;
+    }
+
+    /* O QUE EU TRAGO */
+    #valor { background: var(--surface); }
+    .valor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .valor-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 28px;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .valor-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 28px; right: 28px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .valor-card:hover { border-color: rgba(245,158,11,0.25); transform: translateY(-3px); }
+    .valor-card:hover::after { transform: scaleX(1); }
+    .valor-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .valor-card-icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .valor-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .valor-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* HABILIDADES */
+    #habilidades { background: var(--bg); }
+    .hab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hab-group { margin-bottom: 32px; }
+    .hab-group:last-child { margin-bottom: 0; }
+    .hab-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .hab-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hab-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .hab-tag:hover { border-color: var(--accent); color: var(--text); }
+    .hab-right-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 36px;
+    }
+    .hab-right-block h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .hab-right-block p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .hab-right-block p:last-child { margin-bottom: 0; }
+    .hab-right-block p strong { color: var(--text); font-weight: 500; }
+
+    /* CONSTRUCOES */
+    #construcoes { background: var(--surface); }
+    .constr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .constr-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 36px 32px;
+      transition: all 0.3s;
+    }
+    .constr-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-3px); }
+    .constr-year {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .constr-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .constr-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .constr-desc strong { color: var(--text); font-weight: 500; }
+    .constr-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .constr-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(245,158,11,0.2);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* PROJETOS */
+    #projetos { background: var(--bg); }
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.35s;
+    }
+    .proj-card:hover { border-color: rgba(245,158,11,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .proj-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+    .proj-card:hover .proj-img { transform: scale(1.02); }
+    .proj-info { padding: 22px 26px; }
+    .proj-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .proj-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .proj-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* POR QUE EU */
+    #porque { background: var(--surface); }
+    .porque-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .porque-text p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .porque-text p strong { color: var(--text); font-weight: 500; }
+    .porque-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .porque-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .porque-bullet {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid rgba(245,158,11,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .porque-item-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .porque-item-text strong { color: var(--text); font-weight: 500; }
+
+    /* CONTATO */
+    #contato {
+      background: var(--bg);
+      text-align: center;
+      padding: 120px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contato-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .contato-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .contato-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .contato-title em { font-style: normal; color: var(--accent); }
+    .contato-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 460px;
+      margin: 0 auto 48px;
+      line-height: 1.8;
+    }
+    .contato-buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-right {
+      font-size: 0.76rem;
+      color: var(--text-dim);
+    }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.d1 { transition-delay: 0.08s; }
+    .fade-up.d2 { transition-delay: 0.16s; }
+    .fade-up.d3 { transition-delay: 0.24s; }
+    .fade-up.d4 { transition-delay: 0.32s; }
+    .fade-up.d5 { transition-delay: 0.40s; }
+    .fade-up.d6 { transition-delay: 0.48s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text-col { padding: 110px 24px 60px; }
+      .hero-photo-col { height: 420px; }
+      .hero-photo-overlay { background: linear-gradient(to top, var(--bg) 0%, transparent 40%); }
+      section { padding: 64px 24px; }
+      .valor-grid { grid-template-columns: 1fr; }
+      .hab-grid { grid-template-columns: 1fr; gap: 40px; }
+      .constr-grid { grid-template-columns: 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .porque-inner { grid-template-columns: 1fr; gap: 48px; }
+      #contato { padding: 80px 24px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-logo">Gabriel Coltz<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#valor">O que trago</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#construcoes">Construções</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-glow-left"></div>
+
+    <div class="hero-text-col">
+      <div class="hero-status">Aberto a oportunidades</div>
+      <h1 class="hero-name">Gabriel Coltz</h1>
+      <p class="hero-role">Estratégia · Branding · Inteligência Artificial</p>
+      <div class="hero-divider"></div>
+      <p class="hero-bio">
+        Desde 2021 construindo marcas e negócios do zero, com <strong>resultados reais antes
+        de existirem ferramentas para facilitar o trabalho</strong>. Fundei duas empresas,
+        liderei mais de 50 projetos e desenvolvi um produto com IA do zero para resolver
+        um problema que o mercado ainda não havia endereçado.
+        <br><br>
+        Hoje busco levar essa combinação de visao estrategica, execucao em branding
+        e pensamento com IA para dentro de uma empresa que quer crescer de verdade.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#contato" class="btn-primary">Entrar em contato</a>
+        <a href="#projetos" class="btn-secondary">Ver projetos</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-col">
+      <img src="images/gabriel coltz.png" alt="Gabriel Coltz" onerror="this.parentElement.style.background='#111111'" />
+      <div class="hero-photo-overlay"></div>
+    </div>
+  </section>
+
+  <!-- O QUE EU TRAGO -->
+  <section id="valor">
+    <p class="section-label fade-up">Proposta de valor</p>
+    <h2 class="section-title fade-up d1">O que eu trago<br>para dentro de <em>uma empresa</em></h2>
+    <p class="section-lead fade-up d2">
+      Nao sou especialista em uma coisa so. Sou especialista na intersecao entre tres areas
+      que raramente coexistem na mesma pessoa. Essa e a diferenca.
+    </p>
+
+    <div class="valor-grid">
+      <div class="valor-card fade-up d1">
+        <div class="valor-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Visao estrategica aplicada</h3>
+        <p>
+          Cinco anos tomando decisoes de posicionamento com impacto real em faturamento e percepcao de marca.
+          Nao apenas analiso o cenario. Defino a direcao e executo.
+        </p>
+      </div>
+
+      <div class="valor-card fade-up d2">
+        <div class="valor-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Branding com profundidade</h3>
+        <p>
+          Identidade visual e muito mais do que estetica. E percepcao de valor construida
+          ao longo do tempo. Entendo o que faz uma marca crescer porque construi marcas
+          que cresceram.
+        </p>
+      </div>
+
+      <div class="valor-card fade-up d3">
+        <div class="valor-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>IA como construtor, nao usuario</h3>
+        <p>
+          Desenvolvi um agente de IA funcional com integracao ao WhatsApp e Google Agenda.
+          Entendo o que e possivel construir com IA e como isso se traduz em
+          resultado de negocio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades">
+    <p class="section-label fade-up">Competencias</p>
+    <h2 class="section-title fade-up d1">Habilidades que<br><em>geram resultado</em></h2>
+
+    <div class="hab-grid">
+      <div>
+        <div class="hab-group fade-up d1">
+          <div class="hab-category">Estrategia e Negocio</div>
+          <div class="hab-tags">
+            <span class="hab-tag">Posicionamento de marca</span>
+            <span class="hab-tag">Pesquisa de mercado</span>
+            <span class="hab-tag">Estrategia de conteudo</span>
+            <span class="hab-tag">Crescimento organico</span>
+            <span class="hab-tag">Rebranding</span>
+            <span class="hab-tag">Analise competitiva</span>
+          </div>
+        </div>
+
+        <div class="hab-group fade-up d2">
+          <div class="hab-category">Branding e Design</div>
+          <div class="hab-tags">
+            <span class="hab-tag">Identidade visual</span>
+            <span class="hab-tag">Brand strategy</span>
+            <span class="hab-tag">Arquitetura de marca</span>
+            <span class="hab-tag">Brandbook</span>
+            <span class="hab-tag">Naming</span>
+            <span class="hab-tag">Adobe Illustrator</span>
+            <span class="hab-tag">Figma</span>
+          </div>
+        </div>
+
+        <div class="hab-group fade-up d3">
+          <div class="hab-category">Tecnologia e IA</div>
+          <div class="hab-tags">
+            <span class="hab-tag">Desenvolvimento de agentes IA</span>
+            <span class="hab-tag">Automacao de processos</span>
+            <span class="hab-tag">Integracao com APIs</span>
+            <span class="hab-tag">Prompt engineering</span>
+            <span class="hab-tag">ChatGPT</span>
+            <span class="hab-tag">Claude</span>
+            <span class="hab-tag">Make / Zapier</span>
+          </div>
+        </div>
+
+        <div class="hab-group fade-up d4">
+          <div class="hab-category">Marketing Digital</div>
+          <div class="hab-tags">
+            <span class="hab-tag">Gestao de trafego</span>
+            <span class="hab-tag">Meta Ads</span>
+            <span class="hab-tag">Copywriting</span>
+            <span class="hab-tag">Funis de vendas</span>
+            <span class="hab-tag">Instagram</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up d2">
+        <div class="hab-right-block">
+          <h3>O que me diferencia</h3>
+          <p>
+            A maioria das pessoas escolhe entre ser estrategista, designer ou profissional de tecnologia.
+            Eu nunca fiz essa escolha, e isso nao foi por falta de foco.
+          </p>
+          <p>
+            Foi porque percebi que <strong>os problemas reais de uma empresa nao respeitam
+            fronteiras entre departamentos</strong>. Uma marca fraca e um problema de estrategia
+            tanto quanto de design. Uma ferramenta de IA mal implementada e um problema
+            de negocio tanto quanto de tecnologia.
+          </p>
+          <p>
+            Trabalhar no ponto de intersecao dessas tres areas e o que me permite entregar
+            solucoes que <strong>especialistas isolados nao conseguem ver</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSTRUCOES -->
+  <section id="construcoes">
+    <p class="section-label fade-up">Experiencia</p>
+    <h2 class="section-title fade-up d1">Empresas que<br><em>eu construi</em></h2>
+    <p class="section-lead fade-up d2">
+      Nao aprendi em sala de aula. Aprendi construindo, errando e ajustando ate funcionar.
+    </p>
+
+    <div class="constr-grid">
+      <div class="constr-card fade-up d1">
+        <div class="constr-year">2022 — presente</div>
+        <div class="constr-name">Organic</div>
+        <p class="constr-desc">
+          Agencia focada em branding, posicionamento e crescimento organico.
+          Mais de <strong>50 projetos entregues</strong> para empresas de diferentes setores.
+          Identidades visuais, estrategias de conteudo e construcao de marca do zero.
+          <br><br>
+          Lideramos rebrandings que transformaram negócios com posicionamento
+          limitado em marcas escaláveis e preparadas para crescer.
+        </p>
+        <div class="constr-tags">
+          <span class="constr-tag">Branding</span>
+          <span class="constr-tag">Estrategia</span>
+          <span class="constr-tag">50+ projetos</span>
+        </div>
+      </div>
+
+      <div class="constr-card fade-up d2">
+        <div class="constr-year">2024 — presente</div>
+        <div class="constr-name">FinUp</div>
+        <p class="constr-desc">
+          Fintech nascida de um problema pessoal: eu nao conseguia gerir financas
+          com planilhas tradicionais. Solucao encontrada: <strong>construir um agente de IA
+          dentro do WhatsApp</strong> com integracao ao Google Agenda.
+          <br><br>
+          O produto evoluiu para um assistente pessoal completo, capaz de registrar gastos,
+          organizar agenda, capturar ideias e automatizar rotinas do dia a dia.
+        </p>
+        <div class="constr-tags">
+          <span class="constr-tag">IA</span>
+          <span class="constr-tag">Produto</span>
+          <span class="constr-tag">Fintech</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <p class="section-label fade-up">Portfolio</p>
+    <h2 class="section-title fade-up d1">Projetos<br><em>executados</em></h2>
+    <p class="section-lead fade-up d2">Cada entrega com intencao, estrategia e identidade construida para durar.</p>
+
+    <div class="proj-grid">
+      <a href="olivers.html" class="proj-card fade-up d1" style="text-decoration:none; color:inherit; display:block;">
+        <img src="images/olivers.png" alt="Olivers Vistorias" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Rebranding · Identidade Visual</div>
+          <div class="proj-name">Olivers Vistorias</div>
+          <p class="proj-desc">Reposicionamento completo da marca para refletir tecnologia e autoridade no setor de vistorias. Identidade visual, brandbook e todas as aplicacoes.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+        </div>
+      </a>
+
+      <div class="proj-card fade-up d2">
+        <img src="images/mp4.png" alt="MP4 Contabil" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Rebranding</div>
+          <div class="proj-name">MP4 Contabil</div>
+          <p class="proj-desc">Transformacao de uma marca regional com crescimento limitado em uma marca escalavel, mantendo a essencia e historia da empresa.</p>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up d3">
+        <img src="images/gislaine.png" alt="Gislaine Coltz" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Identidade Visual</div>
+          <div class="proj-name">Gislaine Coltz</div>
+          <p class="proj-desc">Branding pessoal sofisticado com aplicacoes de alto padrao. Conceito premium desenvolvido do briefing ate a entrega final.</p>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up d4">
+        <img src="images/finup.png" alt="FinUp" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Produto e Marca</div>
+          <div class="proj-name">FinUp</div>
+          <p class="proj-desc">Identidade completa para uma fintech com IA. Design pensado para escalar em um mercado onde velocidade e clareza de marca sao vantagem competitiva.</p>
+        </div>
+      </div>
+
+      <a href="jjlima.html" class="proj-card fade-up d5" style="text-decoration:none; color:inherit; display:block;">
+        <img src="images/jjlima.png" alt="JJ Lima Contabilidade" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Identidade Visual e Estrategia de Conteudo</div>
+          <div class="proj-name">JJ Lima Contabilidade</div>
+          <p class="proj-desc">Projeto completo: identidade visual com manual de marca, paleta e tipografia. Estrategia de conteudo com 3 personas mapeadas, 4 pilares editoriais, analise SWOT e plano digital para Instagram, LinkedIn, YouTube e Blog.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+        </div>
+      </a>
+
+      <a href="olivers-treinamento.html" class="proj-card fade-up d2" style="text-decoration:none; color:inherit; display:block;">
+        <img src="images/olivers-treinamento.png" alt="Treinamento de Croquis Olivers" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Processo · Treinamento · Gestao Operacional</div>
+          <div class="proj-name">Treinamento de Croquis — Olivers</div>
+          <p class="proj-desc">Processos desorganizados onde cada um ensinava de um jeito. Criei o processo padronizado e o treinamento gravado definitivo — mesmo conteudo para todos, economia real de horas e mao de obra.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+        </div>
+      </a>
+
+      <a href="juliano-camello.html" class="proj-card fade-up d3" style="text-decoration:none; color:inherit; display:block;">
+        <img src="images/juliano-camello.png" alt="Juliano Camello" class="proj-img" />
+        <div class="proj-info">
+          <div class="proj-tag">Marca Pessoal · Estrategia de Conteudo</div>
+          <div class="proj-name">Juliano Camello — Especialista em Holding</div>
+          <p class="proj-desc">Posicionamento de marca pessoal do zero: contador a referencia em holding para contadores empresarios. 3 personas, 6 linhas editoriais e estrategia para 4 canais digitais.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- POR QUE EU -->
+  <section id="porque">
+    <p class="section-label fade-up">Para a empresa</p>
+    <h2 class="section-title fade-up d1">O que uma empresa<br>ganha ao me <em>contratar</em></h2>
+
+    <div class="porque-inner">
+      <div class="porque-text fade-up d1">
+        <p>
+          A maioria das empresas tem um problema especifico: contratam especialistas
+          que sao excelentes dentro da sua caixa, mas nao conseguem enxergar o que
+          esta fora dela.
+        </p>
+        <p>
+          Quando marca, estrategia e tecnologia sao tratadas como silos separados,
+          o resultado e fragmentado. A campanha nao conversa com a identidade.
+          O produto nao reflete o posicionamento. A IA e implementada sem
+          <strong>logica de negocio por tras</strong>.
+        </p>
+        <p>
+          Eu resolvo esses tres problemas juntos porque os entendo juntos.
+          Nao e multitarefa. E visao integrada.
+        </p>
+      </div>
+
+      <div class="porque-list fade-up d2">
+        <div class="porque-item">
+          <div class="porque-bullet">01</div>
+          <div class="porque-item-text">
+            <strong>Estrategia que conecta com execucao.</strong> Nao entrego relatorios que ficam na gaveta. Entrego direcao com capacidade de executar o que foi definido.
+          </div>
+        </div>
+        <div class="porque-item">
+          <div class="porque-bullet">02</div>
+          <div class="porque-item-text">
+            <strong>Branding com resultado mensuravel.</strong> Posicionamento, identidade visual e percepcao de valor sao ativoS. Construo esses ativos com criterio.
+          </div>
+        </div>
+        <div class="porque-item">
+          <div class="porque-bullet">03</div>
+          <div class="porque-item-text">
+            <strong>IA aplicada, nao teorizada.</strong> Ja construi solucoes funcionando com IA. Sei o que e possivel, o que nao e, e como estruturar um projeto para que funcione.
+          </div>
+        </div>
+        <div class="porque-item">
+          <div class="porque-bullet">04</div>
+          <div class="porque-item-text">
+            <strong>Mentalidade de fundador dentro de um time.</strong> Cinco anos construindo do zero ensinam responsabilidade, adaptacao e orientacao a resultado que cursos nao ensinam.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="contato-glow"></div>
+    <p class="contato-label fade-up">Proximo passo</p>
+    <h2 class="contato-title fade-up d1">
+      Vamos conversar<br>sobre o que posso<br><em>construir com voce</em>
+    </h2>
+    <p class="contato-sub fade-up d2">
+      Estou disponivel para uma conversa sem compromisso. Se o que voce leu faz sentido
+      para o momento da sua empresa, entre em contato.
+    </p>
+    <div class="contato-buttons fade-up d3">
+      <a href="https://wa.me/5551993909150" class="btn-primary" target="_blank">WhatsApp</a>
+      <a href="mailto:gabriel@organic.com.br" class="btn-secondary">Enviar e-mail</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Gabriel Coltz<span>.</span></div>
+    <div class="footer-right">Estrategia, Branding e IA — 2025</div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
