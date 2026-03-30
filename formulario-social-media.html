@@ -767,14 +767,23 @@
       };
 
       try {
-        // ── SUBSTITUA SEU_ID_FORMSPREE pelo seu endpoint em formspree.io ──
-        const res = await fetch('https://formspree.io/f/SEU_ID_FORMSPREE', {
+        // ── Web3Forms: para ativar, faça em 1 minuto: ──────────────────────
+        // 1. Acesse https://web3forms.com/create-access-key
+        // 2. Digite: menteorganica.07@gmail.com  →  clique em Create
+        // 3. Copie a chave que chegar no seu email e cole abaixo
+        const WEB3FORMS_KEY = 'COLE_SUA_KEY_AQUI';
+        // ────────────────────────────────────────────────────────────────────
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: '🔥 Novo lead qualificado — Gestão de Redes Sociais',
+            from_name: 'Formulário Organic',
+            ...payload
+          })
         });
-        // Se falhar o envio, mostra o resultado mesmo assim (não bloqueia o UX)
-        if (!res.ok) console.warn('Formspree retornou erro — verifique o endpoint.');
+        if (!res.ok) console.warn('Web3Forms erro — verifique a access_key.');
       } catch (e) {
         console.warn('Erro ao enviar formulário:', e);
       }
