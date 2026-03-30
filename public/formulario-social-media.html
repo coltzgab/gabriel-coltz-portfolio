@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestão de Redes Sociais — Organic</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan:       #47e4be;
+    --purple:     #5a3d7f;
+    --black:      #232323;
+    --white:      #e6e6e6;
+    --bg:         #161616;
+    --surface:    #1e1e1e;
+    --surface2:   #242424;
+    --border:     #2a2a2a;
+    --muted:      #7a7a7a;
+    --cyan-dim:   rgba(71,228,190,0.08);
+    --cyan-glow:  rgba(71,228,190,0.18);
+    --purple-dim: rgba(90,61,127,0.20);
+    --red:        #ff5757;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(22,22,22,.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cyan);
+  }
+  .nav-link {
+    color: var(--muted); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-link:hover { color: var(--cyan); }
+
+  /* ── HERO STRIP ── */
+  .hero {
+    padding: 120px 24px 64px;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--cyan-dim);
+    border: 1px solid rgba(71,228,190,0.22);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 28px;
+  }
+  .hero-tag span { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 18px;
+  }
+  .hero h1 em { font-style: normal; color: var(--cyan); }
+
+  .hero p {
+    font-size: 15px; color: var(--muted); line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* ── FORM WRAPPER ── */
+  .form-wrapper {
+    max-width: 600px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    margin-bottom: 36px;
+  }
+  .progress-top {
+    display: flex; justify-content: space-between;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .progress-top .step-label { color: var(--cyan); }
+  .progress-bar-bg {
+    width: 100%; height: 3px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), #8ff5dc);
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ── STEP CARD ── */
+  .step {
+    display: none;
+    animation: fadeUp .35s ease both;
+  }
+  .step.active { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  .step-header {
+    margin-bottom: 32px;
+  }
+  .step-number {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 8px;
+  }
+  .step-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .step-header p { font-size: 13px; color: var(--muted); }
+
+  /* ── FIELD ── */
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"] {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 14px; font-family: 'Inter', sans-serif;
+    color: var(--white);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .field input:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px var(--cyan-dim);
+  }
+  .field input::placeholder { color: var(--muted); }
+
+  /* ── OPTIONS (cards) ── */
+  .options-grid {
+    display: grid;
+    gap: 10px;
+  }
+  .options-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+
+  .option-card {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+  }
+  .option-card:hover {
+    border-color: rgba(71,228,190,0.35);
+    background: var(--surface2);
+  }
+  .option-card.selected {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+  .option-radio {
+    width: 18px; height: 18px; min-width: 18px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+  .option-card.selected .option-radio {
+    border-color: var(--cyan);
+    background: var(--cyan);
+  }
+  .option-card.selected .option-radio::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: block;
+  }
+  .option-text {
+    font-size: 13px; font-weight: 500; color: var(--white);
+    line-height: 1.3;
+  }
+  .option-text small { display: block; font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 1px; }
+
+  /* ── BUTTONS ── */
+  .btn-row {
+    display: flex; gap: 12px;
+    margin-top: 32px;
+  }
+  .btn-back {
+    flex: 0 0 auto;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-back:hover { border-color: var(--muted); color: var(--white); }
+
+  .btn-next {
+    flex: 1;
+    background: var(--cyan);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-size: 14px; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.04em;
+    color: var(--bg);
+    cursor: pointer;
+    transition: all .2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-next:hover { background: #6aefd0; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(71,228,190,0.25); }
+  .btn-next:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* ── ERROR ── */
+  .error-msg {
+    font-size: 12px; color: var(--red);
+    margin-top: 10px; display: none;
+  }
+  .error-msg.visible { display: block; }
+
+  /* ── RESULT SCREENS ── */
+  #result-screen { display: none; }
+  #result-screen.active { display: block; animation: fadeUp .4s ease both; }
+
+  .result-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 48px 40px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .result-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 24px;
+  }
+  .result-icon.success { background: var(--cyan-glow); }
+  .result-icon.sorry  { background: var(--purple-dim); }
+
+  .result-card h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px; font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .result-card p {
+    font-size: 14px; color: var(--muted);
+    line-height: 1.7; max-width: 420px; margin: 0 auto;
+  }
+  .result-card p strong { color: var(--cyan); }
+
+  .result-divider {
+    width: 40px; height: 2px;
+    background: var(--cyan);
+    margin: 20px auto;
+    border-radius: 2px;
+  }
+  .result-divider.muted { background: var(--border); }
+
+  .result-note {
+    margin-top: 24px;
+    font-size: 12px; color: var(--muted);
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px; color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--cyan); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 520px) {
+    nav { padding: 0 20px; }
+    .options-grid.cols-2 { grid-template-columns: 1fr; }
+    .result-card { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Organic</span>
+  <a class="nav-link" href="#">organic.com.br</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag"><span></span>Vagas abertas · Gestão de Redes</div>
+  <h1>Sua marca nas redes<br><em>gerando resultado de verdade</em></h1>
+  <p>Preencha o formulário abaixo para verificar se o seu negócio está pronto para uma gestão profissional de redes sociais. Leva menos de 2 minutos.</p>
+</div>
+
+<!-- FORM -->
+<div class="form-wrapper">
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="step-label" id="prog-label">Etapa 1 de 4</span>
+      <span id="prog-pct">25%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="prog-bar" style="width:25%"></div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Identificação -->
+  <div class="step active" id="step-1">
+    <div class="step-header">
+      <div class="step-number">01 — Identificação</div>
+      <h2>Quem é você?</h2>
+      <p>Precisamos dessas informações para entrar em contato caso você seja selecionado.</p>
+    </div>
+
+    <div class="field">
+      <label>Nome completo</label>
+      <input type="text" id="f-nome" placeholder="Ex: João da Silva" />
+    </div>
+    <div class="field">
+      <label>WhatsApp (com DDD)</label>
+      <input type="tel" id="f-whatsapp" placeholder="(11) 99999-9999" />
+    </div>
+    <div class="field">
+      <label>E-mail</label>
+      <input type="email" id="f-email" placeholder="seuemail@exemplo.com" />
+    </div>
+
+    <p class="error-msg" id="err-1">Preencha todos os campos para continuar.</p>
+
+    <div class="btn-row">
+      <button class="btn-next" onclick="nextStep(1)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Negócio -->
+  <div class="step" id="step-2">
+    <div class="step-header">
+      <div class="step-number">02 — Seu Negócio</div>
+      <h2>Conta um pouco sobre você</h2>
+      <p>Atendemos perfis específicos que têm maior potencial com gestão profissional de conteúdo.</p>
+    </div>
+
+    <div class="field">
+      <label>Como você se define?</label>
+      <div class="options-grid" data-group="perfil">
+        <div class="option-card" data-value="empresario" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Empresário / Sócio<small>Tenho um negócio estabelecido</small></div>
+        </div>
+        <div class="option-card" data-value="autonomo" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Profissional Autônomo<small>Presto serviços por conta própria</small></div>
+        </div>
+        <div class="option-card" data-value="marca-pessoal" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Marca Pessoal<small>Construo minha autoridade digital</small></div>
+        </div>
+        <div class="option-card" data-value="outro" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Outro perfil<small>Não me encaixo nas opções acima</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:24px">
+      <label>Qual é o seu segmento?</label>
+      <div class="options-grid" data-group="segmento">
+        <div class="option-card" data-value="servicos" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Serviços Profissionais<small>Consultoria, advocacia, contabilidade…</small></div>
+        </div>
+        <div class="option-card" data-value="saude" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Saúde & Bem-estar<small>Clínicas, nutrição, estética…</small></div>
+        </div>
+        <div class="option-card" data-value="negocio-local" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Negócio Local<small>Restaurante, academia, pet shop…</small></div>
+        </div>
+        <div class="option-card" data-value="educacao" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Educação & Coaching<small>Cursos, mentorias, treinamentos…</small></div>
+        </div>
+        <div class="option-card" data-value="imobiliario" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Imobiliário / Corretagem<small>Venda e locação de imóveis</small></div>
+        </div>
+        <div class="option-card" data-value="outro-seg" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Outro segmento</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="error-msg" id="err-2">Selecione uma opção em cada campo para continuar.</p>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(2)">← Voltar</button>
+      <button class="btn-next" onclick="nextStep(2)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Qualificação financeira -->
+  <div class="step" id="step-3">
+    <div class="step-header">
+      <div class="step-number">03 — Situação Atual</div>
+      <h2>Vamos entender o seu momento</h2>
+      <p>Essas informações nos ajudam a propor a estratégia certa para o seu negócio.</p>
+    </div>
+
+    <div class="field">
+      <label>Qual é o faturamento mensal do seu negócio?</label>
+      <div class="options-grid" data-group="faturamento">
+        <div class="option-card" data-value="ate-5k" data-qualify="no" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Abaixo de R$ 5.000/mês</div>
+        </div>
+        <div class="option-card" data-value="5k-15k" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">R$ 5.000 – R$ 15.000/mês</div>
+        </div>
+        <div class="option-card" data-value="15k-50k" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">R$ 15.000 – R$ 50.000/mês</div>
+        </div>
+        <div class="option-card" data-value="acima-50k" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Acima de R$ 50.000/mês</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:24px">
+      <label>Você tem orçamento mensal para gestão profissional de conteúdo?</label>
+      <div class="options-grid" data-group="orcamento">
+        <div class="option-card" data-value="sem-orcamento" data-qualify="no" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Ainda não tenho orçamento<small>Não está no meu planejamento agora</small></div>
+        </div>
+        <div class="option-card" data-value="ate-800" data-qualify="no" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Até R$ 800/mês<small>Orçamento inicial</small></div>
+        </div>
+        <div class="option-card" data-value="1k-2k" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">R$ 1.000 – R$ 2.000/mês<small>Invisto na minha presença digital</small></div>
+        </div>
+        <div class="option-card" data-value="acima-2k" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Acima de R$ 2.000/mês<small>Prioridade estratégica para mim</small></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="error-msg" id="err-3">Selecione uma opção em cada campo para continuar.</p>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(3)">← Voltar</button>
+      <button class="btn-next" onclick="nextStep(3)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Objetivos -->
+  <div class="step" id="step-4">
+    <div class="step-header">
+      <div class="step-number">04 — Objetivo</div>
+      <h2>O que você quer alcançar?</h2>
+      <p>Última etapa! Nos conte qual resultado é mais importante para você agora.</p>
+    </div>
+
+    <div class="field">
+      <label>Quais são seus objetivos com redes sociais? (Selecione quantos quiser)</label>
+      <div class="options-grid" data-group="objetivo" data-multiple="true">
+        <div class="option-card" data-value="vender-mais" onclick="selectMultiple(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Vender mais<small>Converter seguidores em clientes</small></div>
+        </div>
+        <div class="option-card" data-value="autoridade" onclick="selectMultiple(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Construir autoridade<small>Ser referência no meu mercado</small></div>
+        </div>
+        <div class="option-card" data-value="atrair-clientes" onclick="selectMultiple(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Atrair clientes qualificados<small>Geração de leads pelo digital</small></div>
+        </div>
+        <div class="option-card" data-value="crescer" onclick="selectMultiple(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Crescer e me profissionalizar<small>Ter um perfil que represente minha marca</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:24px">
+      <label>Qual melhor descreve sua situação atual nas redes?</label>
+      <div class="options-grid" data-group="situacao">
+        <div class="option-card" data-value="nunca-investi" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Nunca investi em redes sociais<small>Quero começar do zero</small></div>
+        </div>
+        <div class="option-card" data-value="sem-resultado" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Tenho redes, mas não geram resultado<small>Perfil parado ou sem retorno</small></div>
+        </div>
+        <div class="option-card" data-value="quero-escalar" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Já tive resultado, quero escalar<small>Preciso de uma equipe profissional</small></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="error-msg" id="err-4">Selecione uma opção em cada campo para continuar.</p>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(4)">← Voltar</button>
+      <button class="btn-next" id="btn-submit" onclick="submitForm()">
+        <span id="btn-submit-text">Enviar candidatura</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="result-screen">
+
+    <!-- QUALIFICADO -->
+    <div id="result-qualified" style="display:none">
+      <div class="result-card">
+        <div class="result-icon success">🎯</div>
+        <h2>Ótimo, você foi pré-selecionado!</h2>
+        <div class="result-divider"></div>
+        <p>
+          Seu perfil está alinhado com o que procuramos.<br><br>
+          <strong>Gabriel entrará em contato via WhatsApp</strong> em até 48h para agendar uma conversa e entender melhor o seu negócio.
+        </p>
+        <div class="result-note">
+          📱 Fique de olho no WhatsApp informado no formulário.
+        </div>
+      </div>
+    </div>
+
+    <!-- NÃO QUALIFICADO -->
+    <div id="result-sorry" style="display:none">
+      <div class="result-card">
+        <div class="result-icon sorry">🙏</div>
+        <h2>Obrigado pelo interesse!</h2>
+        <div class="result-divider muted"></div>
+        <p>
+          No momento, nossos serviços são voltados para negócios em um estágio mais avançado de faturamento e investimento em marketing.<br><br>
+          Isso não significa que não podemos trabalhar juntos no futuro — quando estiver pronto para dar esse passo, <strong>estaremos aqui</strong>.
+        </p>
+        <div class="result-note">
+          💾 Guardamos suas informações. Poderemos entrar em contato em uma próxima oportunidade.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Organic · Branding & Crescimento · <a href="#">organic.com.br</a></p>
+</footer>
+
+<script>
+  // ── STATE ──────────────────────────────────────────────
+  const state = {
+    currentStep: 1,
+    totalSteps: 4,
+    answers: {}
+  };
+
+  // ── PROGRESS ───────────────────────────────────────────
+  function updateProgress(step) {
+    const pct = Math.round((step / state.totalSteps) * 100);
+    document.getElementById('prog-bar').style.width = pct + '%';
+    document.getElementById('prog-pct').textContent = pct + '%';
+    document.getElementById('prog-label').textContent = `Etapa ${step} de ${state.totalSteps}`;
+  }
+
+  // ── SELECT OPTION (radio) ──────────────────────────────
+  function selectOption(el) {
+    const group = el.closest('[data-group]').dataset.group;
+    el.closest('[data-group]').querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.answers[group] = { value: el.dataset.value, qualify: el.dataset.qualify };
+  }
+
+  // ── SELECT MULTIPLE (checkboxes) ────────────────────────
+  function selectMultiple(el) {
+    const group = el.closest('[data-group]').dataset.group;
+    el.classList.toggle('selected');
+
+    // Coleta todas as seleções do grupo
+    const selected = el.closest('[data-group]')
+      .querySelectorAll('.option-card.selected')
+      .map(c => c.dataset.value);
+
+    state.answers[group] = { value: selected, qualify: 'yes' };
+  }
+
+  // ── VALIDATION ─────────────────────────────────────────
+  function validateStep(step) {
+    if (step === 1) {
+      const nome = document.getElementById('f-nome').value.trim();
+      const wpp  = document.getElementById('f-whatsapp').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      if (!nome || !wpp || !email || !email.includes('@')) {
+        document.getElementById('err-1').classList.add('visible');
+        return false;
+      }
+      document.getElementById('err-1').classList.remove('visible');
+      state.answers.nome     = nome;
+      state.answers.whatsapp = wpp;
+      state.answers.email    = email;
+      return true;
+    }
+    if (step === 2) {
+      if (!state.answers.perfil || !state.answers.segmento) {
+        document.getElementById('err-2').classList.add('visible');
+        return false;
+      }
+      document.getElementById('err-2').classList.remove('visible');
+      return true;
+    }
+    if (step === 3) {
+      if (!state.answers.faturamento || !state.answers.orcamento) {
+        document.getElementById('err-3').classList.add('visible');
+        return false;
+      }
+      document.getElementById('err-3').classList.remove('visible');
+      return true;
+    }
+    if (step === 4) {
+      if (!state.answers.objetivo || !state.answers.situacao) {
+        document.getElementById('err-4').classList.add('visible');
+        return false;
+      }
+      // Objetivo pode ter múltiplas seleções, então precisa ser um array
+      if (Array.isArray(state.answers.objetivo?.value) && state.answers.objetivo.value.length === 0) {
+        document.getElementById('err-4').classList.add('visible');
+        return false;
+      }
+      document.getElementById('err-4').classList.remove('visible');
+      return true;
+    }
+    return true;
+  }
+
+  // ── NAVIGATION ─────────────────────────────────────────
+  function nextStep(current) {
+    if (!validateStep(current)) return;
+    document.getElementById(`step-${current}`).classList.remove('active');
+    const next = current + 1;
+    state.currentStep = next;
+    document.getElementById(`step-${next}`).classList.add('active');
+    updateProgress(next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep(current) {
+    document.getElementById(`step-${current}`).classList.remove('active');
+    const prev = current - 1;
+    state.currentStep = prev;
+    document.getElementById(`step-${prev}`).classList.add('active');
+    updateProgress(prev);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── QUALIFY CHECK ──────────────────────────────────────
+  function isQualified() {
+    const fat = state.answers.faturamento?.qualify;
+    const orc = state.answers.orcamento?.qualify;
+    return fat === 'yes' && orc === 'yes';
+  }
+
+  // ── SUBMIT ─────────────────────────────────────────────
+  async function submitForm() {
+    if (!validateStep(4)) return;
+
+    const btn = document.getElementById('btn-submit');
+    const txt = document.getElementById('btn-submit-text');
+    btn.disabled = true;
+    txt.textContent = 'Enviando...';
+
+    const qualified = isQualified();
+
+    if (qualified) {
+      // Monta payload legível para o email
+      const objetivos = Array.isArray(state.answers.objetivo?.value)
+        ? state.answers.objetivo.value.join(', ')
+        : state.answers.objetivo?.value;
+
+      const payload = {
+        '👤 Nome':        state.answers.nome,
+        '📱 WhatsApp':    state.answers.whatsapp,
+        '📧 E-mail':      state.answers.email,
+        '🏷️ Perfil':      state.answers.perfil?.value,
+        '🏢 Segmento':    state.answers.segmento?.value,
+        '💰 Faturamento': state.answers.faturamento?.value,
+        '💳 Orçamento':   state.answers.orcamento?.value,
+        '🎯 Objetivos':   objetivos,
+        '📊 Situação':    state.answers.situacao?.value,
+      };
+
+      try {
+        // ── SUBSTITUA SEU_ID_FORMSPREE pelo seu endpoint em formspree.io ──
+        const res = await fetch('https://formspree.io/f/SEU_ID_FORMSPREE', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        // Se falhar o envio, mostra o resultado mesmo assim (não bloqueia o UX)
+        if (!res.ok) console.warn('Formspree retornou erro — verifique o endpoint.');
+      } catch (e) {
+        console.warn('Erro ao enviar formulário:', e);
+      }
+    }
+
+    // Esconde todos os steps + progress
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('.progress-wrap').style.display = 'none';
+
+    // Mostra resultado
+    document.getElementById('result-screen').classList.add('active');
+    if (qualified) {
+      document.getElementById('result-qualified').style.display = 'block';
+    } else {
+      document.getElementById('result-sorry').style.display = 'block';
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── PHONE MASK ─────────────────────────────────────────
+  document.getElementById('f-whatsapp').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'');
+    if (v.length > 11) v = v.slice(0,11);
+    if (v.length > 6)      v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    else if (v.length > 0) v = `(${v}`;
+    this.value = v;
+  });
+</script>
+
+</body>
+</html>

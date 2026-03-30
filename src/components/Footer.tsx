@@ -90,6 +90,7 @@ export const Footer: React.FC = () => {
           <p>© {new Date().getFullYear()} Organic Assessoria. Todos os direitos reservados.</p>
           <p className="text-organic-white/20">CNPJ: XX.XXX.XXX/0001-XX</p>
           <p>Design & Code by Organic.</p>
+          <a href="/formulario-social-media.html" className="text-organic-white/20 hover:text-organic-cyan transition-colors text-[10px] uppercase tracking-widest">Formulário</a>
         </div>
       </div>
     </footer>

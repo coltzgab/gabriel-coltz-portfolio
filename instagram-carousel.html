@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Carousel — Gabriel Coltz</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* =========================================================
+   COMO CAPTURAR CADA SLIDE (node screenshot Chrome DevTools)
+   =========================================================
+   1. Abra o DevTools (F12)
+   2. Va na aba "Elements"
+   3. Clique com botao direito no elemento <div class="slide" id="s1">
+   4. Selecione "Capture node screenshot"
+   5. O Chrome salva automaticamente um PNG de 1080x1350px
+   Repita para cada slide (s1 ate s7).
+   ========================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #040404;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 48px 0 80px;
+}
+
+.slide-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 64px;
+}
+
+.slide-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+/* ---- SLIDE BASE ---- */
+.slide {
+  width: 1080px;
+  height: 1350px;
+  background: #080808;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- HEADER ---- */
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36px 56px 0;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: #F0F0F0;
+}
+
+.logo span {
+  color: #F59E0B;
+}
+
+.slide-counter {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #3a3a3a;
+}
+
+/* ---- FOOTER ---- */
+.slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 56px 36px;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.footer-handle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: #3a3a3a;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background: #222;
+  border-radius: 50%;
+}
+
+.dot.active {
+  background: #F59E0B;
+  width: 18px;
+  border-radius: 2px;
+}
+
+/* ==========================================
+   SLIDE 1 — CAPA
+   ========================================== */
+#s1 {
+  background: #080808;
+}
+
+#s1 .slide-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245, 158, 11, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 158, 11, 0.04) 1px, transparent 1px);
+  background-size: 90px 90px;
+  z-index: 0;
+}
+
+#s1 .s1-accent-line {
+  position: absolute;
+  left: 56px;
+  top: 200px;
+  width: 3px;
+  height: 80px;
+  background: #F59E0B;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+#s1 .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px;
+  position: relative;
+  z-index: 2;
+}
+
+#s1 .s1-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-bottom: 32px;
+  padding-left: 20px;
+}
+
+#s1 .s1-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 136px;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: #F0F0F0;
+  margin-bottom: 52px;
+}
+
+#s1 .s1-headline em {
+  font-style: normal;
+  color: #F59E0B;
+}
+
+#s1 .s1-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.75;
+  color: #888;
+  max-width: 680px;
+  margin-bottom: 56px;
+  border-left: 1px solid #1e1e1e;
+  padding-left: 28px;
+}
+
+#s1 .s1-anchor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  color: #F0F0F0;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+#s1 .s1-anchor::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #F59E0B;
+  opacity: 0.5;
+}
+
+#s1 .s1-ghost-text {
+  position: absolute;
+  bottom: 80px;
+  right: -20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 220px;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(245, 158, 11, 0.06);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* ==========================================
+   SLIDE 2 — O PROBLEMA
+   ========================================== */
+#s2 {
+  background: #050505;
+}
+
+#s2 .photo-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/gabriel coltz.png');
+  background-size: cover;
+  background-position: center top;
+  z-index: 0;
+}
+
+#s2 .photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,5,0.55) 0%,
+    rgba(5,5,5,0.72) 35%,
+    rgba(5,5,5,0.90) 65%,
+    rgba(5,5,5,0.98) 100%
+  );
+  z-index: 1;
+}
+
+#s2 .slide-header { z-index: 10; }
+#s2 .slide-footer { z-index: 10; }
+
+#s2 .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 16px;
+  position: relative;
+  z-index: 5;
+}
+
+#s2 .s2-tag {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-bottom: 20px;
+}
+
+#s2 .s2-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 88px;
+  line-height: 0.93;
+  letter-spacing: -0.035em;
+  color: #F0F0F0;
+  margin-bottom: 36px;
+}
+
+#s2 .s2-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #aaa;
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+#s2 .s2-body strong {
+  color: #F0F0F0;
+  font-weight: 500;
+}
+
+#s2 .s2-anchor-block {
+  background: #F59E0B;
+  padding: 16px 24px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+#s2 .s2-anchor-block p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  color: #080808;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   SLIDE 3 — A VIRADA
+   ========================================== */
+#s3 {
+  background: #0a0a0a;
+}
+
+#s3 .s3-diagonal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#s3 .s3-diagonal::before {
+  content: '';
+  position: absolute;
+  top: 340px;
+  left: -100px;
+  width: 140%;
+  height: 3px;
+  background: #F59E0B;
+  transform: rotate(-12deg);
+  transform-origin: left center;
+  opacity: 0.7;
+}
+
+#s3 .s3-diagonal::after {
+  content: '';
+  position: absolute;
+  top: 360px;
+  left: -100px;
+  width: 140%;
+  height: 1px;
+  background: #F59E0B;
+  transform: rotate(-12deg);
+  transform-origin: left center;
+  opacity: 0.2;
+}
+
+#s3 .s3-ghost-num {
+  position: absolute;
+  right: -30px;
+  bottom: 60px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 360px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.06em;
+}
+
+#s3 .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px;
+  position: relative;
+  z-index: 2;
+}
+
+#s3 .s3-num-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: #F59E0B;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+#s3 .s3-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 90px;
+  line-height: 0.93;
+  letter-spacing: -0.03em;
+  color: #F0F0F0;
+  margin-bottom: 52px;
+  max-width: 900px;
+}
+
+#s3 .s3-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 1.8;
+  color: #777;
+  max-width: 700px;
+  margin-bottom: 56px;
+}
+
+#s3 .s3-body em {
+  font-style: normal;
+  color: #F0F0F0;
+  font-weight: 400;
+}
+
+#s3 .s3-anchor {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#s3 .s3-anchor-line {
+  width: 48px;
+  height: 2px;
+  background: #F59E0B;
+  flex-shrink: 0;
+}
+
+#s3 .s3-anchor-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: #F0F0F0;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================
+   SLIDE 4 — A ABORDAGEM
+   ========================================== */
+#s4 {
+  background: #080808;
+}
+
+#s4 .s4-top-rule {
+  position: absolute;
+  top: 110px;
+  left: 56px;
+  right: 56px;
+  height: 1px;
+  background: #1a1a1a;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+#s4 .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+
+#s4 .s4-words-col {
+  width: 420px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 56px;
+  gap: 0;
+}
+
+#s4 .s4-word {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 76px;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  display: block;
+  padding: 10px 0;
+}
+
+#s4 .s4-word.w1 { color: #F0F0F0; }
+#s4 .s4-word.w2 { color: #F59E0B; }
+#s4 .s4-word.w3 { color: rgba(240,240,240,0.18); }
+
+#s4 .s4-sep {
+  width: 32px;
+  height: 2px;
+  background: #F59E0B;
+  margin: 6px 0;
+  opacity: 0.4;
+}
+
+#s4 .s4-text-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px 0 52px;
+  border-left: 1px solid #161616;
+}
+
+#s4 .s4-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #F0F0F0;
+  margin-bottom: 32px;
+}
+
+#s4 .s4-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.85;
+  color: #666;
+  margin-bottom: 44px;
+}
+
+#s4 .s4-body strong {
+  color: #c0c0c0;
+  font-weight: 400;
+}
+
+#s4 .s4-anchor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #F59E0B;
+  text-transform: uppercase;
+  border-top: 1px solid #1e1e1e;
+  padding-top: 24px;
+}
+
+/* ==========================================
+   SLIDE 5 — O QUE MUDA
+   ========================================== */
+#s5 {
+  background: #080808;
+  flex-direction: column;
+}
+
+#s5 .s5-body-area {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+}
+
+#s5 .s5-left {
+  width: 520px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 48px 0 56px;
+  position: relative;
+  z-index: 3;
+}
+
+#s5 .s5-amber-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 520px;
+  width: 4px;
+  background: #F59E0B;
+  z-index: 5;
+}
+
+#s5 .s5-right {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+#s5 .s5-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/gabriel coltz.png');
+  background-size: cover;
+  background-position: center top;
+}
+
+#s5 .s5-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(8,8,8,0.3) 0%,
+    rgba(8,8,8,0.0) 60%
+  );
+}
+
+#s5 .s5-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-bottom: 24px;
+}
+
+#s5 .s5-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 0.93;
+  letter-spacing: -0.035em;
+  color: #F0F0F0;
+  margin-bottom: 40px;
+}
+
+#s5 .s5-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #777;
+  margin-bottom: 40px;
+}
+
+#s5 .s5-body strong {
+  color: #F0F0F0;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
+}
+
+#s5 .s5-anchor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #F0F0F0;
+  letter-spacing: -0.01em;
+  border-top: 1px solid #1c1c1c;
+  padding-top: 24px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   SLIDE 6 — MANIFESTO
+   ========================================== */
+#s6 {
+  background: #080808;
+}
+
+#s6 .s6-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: #F59E0B;
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+#s6 .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px;
+  position: relative;
+  z-index: 2;
+}
+
+#s6 .s6-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 110px;
+  line-height: 0.90;
+  letter-spacing: -0.045em;
+  color: #F0F0F0;
+  margin-bottom: 64px;
+}
+
+#s6 .s6-headline em {
+  font-style: normal;
+  display: block;
+  color: rgba(240,240,240,0.22);
+}
+
+#s6 .s6-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 1.7;
+  color: #666;
+  max-width: 820px;
+  margin-bottom: 64px;
+}
+
+#s6 .s6-body strong {
+  color: #F0F0F0;
+  font-weight: 500;
+}
+
+#s6 .s6-anchor-block {
+  background: #F59E0B;
+  padding: 22px 32px;
+  display: inline-block;
+  max-width: 820px;
+}
+
+#s6 .s6-anchor-block p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: #080808;
+  line-height: 1.35;
+}
+
+/* ==========================================
+   SLIDE 7 — CTA
+   ========================================== */
+#s7 {
+  background: #050505;
+}
+
+#s7 .photo-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/gabriel coltz.png');
+  background-size: cover;
+  background-position: center top;
+  z-index: 0;
+}
+
+#s7 .photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,5,0.28) 0%,
+    rgba(5,5,5,0.52) 30%,
+    rgba(5,5,5,0.82) 60%,
+    rgba(5,5,5,0.97) 100%
+  );
+  z-index: 1;
+}
+
+#s7 .slide-header { z-index: 10; }
+#s7 .slide-footer { z-index: 10; }
+
+#s7 .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 24px;
+  position: relative;
+  z-index: 5;
+}
+
+#s7 .s7-name-big {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-bottom: 10px;
+}
+
+#s7 .s7-rule {
+  width: 100%;
+  height: 1px;
+  background: rgba(245, 158, 11, 0.25);
+  margin-bottom: 36px;
+  flex-shrink: 0;
+}
+
+#s7 .s7-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 96px;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: #F0F0F0;
+  margin-bottom: 40px;
+}
+
+#s7 .s7-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.75;
+  color: #999;
+  max-width: 740px;
+  margin-bottom: 44px;
+}
+
+#s7 .s7-body strong {
+  color: #F0F0F0;
+  font-weight: 400;
+}
+
+#s7 .s7-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#s7 .s7-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#s7 .s7-contact-dot {
+  width: 6px;
+  height: 6px;
+  background: #F59E0B;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+#s7 .s7-contact-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: #F0F0F0;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SLIDE 1 — CAPA
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 01 / 07 &nbsp;&mdash;&nbsp; Capa</p>
+  <div class="slide" id="s1">
+    <div class="slide-bg-grid"></div>
+    <div class="s1-ghost-text">MUDA</div>
+
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">01 / 07</div>
+    </div>
+
+    <div class="s1-accent-line"></div>
+
+    <div class="slide-content">
+      <p class="s1-eyebrow">Branding &middot; Estrat&eacute;gia &middot; IA</p>
+      <h1 class="s1-headline">
+        Sua<br>
+        marca<br>
+        n&atilde;o &eacute; feia<span style="color:#F59E0B;">.</span><br>
+        &Eacute; <em>muda.</em>
+      </h1>
+      <p class="s1-body">
+        Tem produto bom. Tem servi&ccedil;o real.<br>
+        Mas ningu&eacute;m para pra ouvir.<br>
+        Porque marca sem narrativa &eacute; s&oacute; decora&ccedil;&atilde;o.
+      </p>
+      <span class="s1-anchor">Visualmente bonito. Estrategicamente inexistente.</span>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 2 — O PROBLEMA
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 02 / 07 &nbsp;&mdash;&nbsp; O Problema</p>
+  <div class="slide" id="s2">
+    <div class="photo-bg"></div>
+    <div class="photo-overlay"></div>
+
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">02 / 07</div>
+    </div>
+
+    <div class="slide-content">
+      <p class="s2-tag">Ponto de vista</p>
+      <h2 class="s2-headline">O mercado<br>de branding<br>est&aacute; errado.</h2>
+      <p class="s2-body">
+        Vi marcas incr&iacute;veis morrendo em sil&ecirc;ncio.<br>
+        Produtos reais sendo ignorados por falta de posicionamento.<br>
+        <strong>Designers entregando logo. Ag&ecirc;ncias entregando manual.</strong><br>
+        Ningu&eacute;m entregando identidade de verdade.<br>
+        Branding virou embalagem. E embalagem n&atilde;o vende ideia.
+      </p>
+      <div class="s2-anchor-block">
+        <p>Logo n&atilde;o &eacute; marca. Logo &eacute; o fim do processo, n&atilde;o o come&ccedil;o.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 3 — A VIRADA
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 03 / 07 &nbsp;&mdash;&nbsp; A Virada</p>
+  <div class="slide" id="s3">
+    <div class="s3-diagonal"></div>
+    <div class="s3-ghost-num">03</div>
+
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">03 / 07</div>
+    </div>
+
+    <div class="slide-content">
+      <p class="s3-num-label">&mdash; Caso real</p>
+      <h2 class="s3-headline">
+        Quando parei<br>
+        de desenhar<br>
+        e come&ccedil;ei<br>
+        a ouvir.
+      </h2>
+      <p class="s3-body">
+        Tinha um cliente com produto bom, visual impec&aacute;vel.<br>
+        E zero resultado.<br>
+        <em>A&iacute; entendi: o problema n&atilde;o era o logo.</em><br>
+        Era que a marca n&atilde;o sabia o que queria dizer.<br>
+        Branding n&atilde;o &eacute; est&eacute;tica. &Eacute; convic&ccedil;&atilde;o com forma.
+      </p>
+      <div class="s3-anchor">
+        <div class="s3-anchor-line"></div>
+        <span class="s3-anchor-text">Desde esse dia, eu come&ccedil;o pela narrativa. Sempre.</span>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 4 — A ABORDAGEM
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 04 / 07 &nbsp;&mdash;&nbsp; A Abordagem</p>
+  <div class="slide" id="s4">
+    <div class="s4-top-rule"></div>
+
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">04 / 07</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="s4-words-col">
+        <span class="s4-word w1">ESTRA&shy;T&Eacute;GIA</span>
+        <div class="s4-sep"></div>
+        <span class="s4-word w2">NARRA&shy;TIVA</span>
+        <div class="s4-sep"></div>
+        <span class="s4-word w3">IA</span>
+      </div>
+
+      <div class="s4-text-col">
+        <h2 class="s4-headline">Estrat&eacute;gia.<br>Narrativa.<br>IA.<br>Nessa ordem.</h2>
+        <p class="s4-body">
+          N&atilde;o entrego logo. <strong>Entrego sistema de marca.</strong><br>
+          Come&ccedil;o pela hist&oacute;ria &mdash; quem &eacute;, pra quem fala, o que defende.<br>
+          Uso IA pra acelerar o processo, n&atilde;o pra substituir o pensamento.<br>
+          A ferramenta muda. A l&oacute;gica n&atilde;o.<br>
+          Marca forte come&ccedil;a antes do Figma abrir.
+        </p>
+        <p class="s4-anchor">IA sem estrat&eacute;gia &eacute; s&oacute; velocidade pra lugar nenhum.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 5 — O QUE MUDA
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 05 / 07 &nbsp;&mdash;&nbsp; O Que Muda</p>
+  <div class="slide" id="s5">
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">05 / 07</div>
+    </div>
+
+    <div class="s5-body-area">
+      <div class="s5-left">
+        <p class="s5-tag">Resultado concreto</p>
+        <h2 class="s5-headline">
+          Com<br>
+          estrat&eacute;gia<br>
+          real, a<br>
+          marca<br>
+          para de<br>
+          pedir<br>
+          licen&ccedil;a.
+        </h2>
+        <p class="s5-body">
+          <strong>Antes: &ldquo;somos como os outros, s&oacute; que melhores.&rdquo;</strong>
+          Depois: a marca sabe exatamente o que n&atilde;o &eacute;.<br>
+          Isso muda o pre&ccedil;o que voc&ecirc; cobra.<br>
+          Muda quem bate na sua porta.<br>
+          Muda como as pessoas lembram de voc&ecirc;.
+        </p>
+        <p class="s5-anchor">Posicionamento de verdade &eacute; saber dizer n&atilde;o sem culpa.</p>
+      </div>
+
+      <div class="s5-amber-bar"></div>
+
+      <div class="s5-right">
+        <div class="s5-photo"></div>
+        <div class="s5-photo-overlay"></div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 6 — MANIFESTO
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 06 / 07 &nbsp;&mdash;&nbsp; Manifesto</p>
+  <div class="slide" id="s6">
+    <div class="s6-top-bar"></div>
+
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">06 / 07</div>
+    </div>
+
+    <div class="slide-content">
+      <h2 class="s6-headline">
+        Marca fraca<br>
+        n&atilde;o &eacute;<br>
+        <em>problema<br>de design.</em>
+      </h2>
+      <p class="s6-body">
+        &Eacute; problema de <strong>coragem</strong>.<br>
+        De ter ponto de vista.<br>
+        De rejeitar o cliente errado.<br>
+        De dizer algo que <strong>divide</strong> &mdash;<br>
+        porque quem n&atilde;o divide, n&atilde;o une ningu&eacute;m.
+      </p>
+      <div class="s6-anchor-block">
+        <p>Marca que agrada todo mundo n&atilde;o pertence a ningu&eacute;m.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 7 — CTA
+     ============================================================ -->
+<div class="slide-wrapper">
+  <p class="slide-label">Slide 07 / 07 &nbsp;&mdash;&nbsp; CTA</p>
+  <div class="slide" id="s7">
+    <div class="photo-bg"></div>
+    <div class="photo-overlay"></div>
+
+    <div class="slide-header">
+      <div class="logo">Gabriel Coltz<span>.</span></div>
+      <div class="slide-counter">07 / 07</div>
+    </div>
+
+    <div class="slide-content">
+      <p class="s7-name-big">Gabriel Coltz</p>
+      <div class="s7-rule"></div>
+      <h2 class="s7-headline">
+        Sua marca<br>
+        tem algo<br>
+        a dizer<span style="color:#F59E0B;">?</span>
+      </h2>
+      <p class="s7-body">
+        Se voc&ecirc; tem um produto s&eacute;rio e uma marca que ainda n&atilde;o chegou l&aacute; &mdash;<br>
+        <strong>me manda uma mensagem.</strong><br>
+        N&atilde;o pra pitch. Pra conversa.<br>
+        Se fizer sentido, a gente constr&oacute;i junto.
+      </p>
+      <div class="s7-contacts">
+        <div class="s7-contact-item">
+          <div class="s7-contact-dot"></div>
+          <span class="s7-contact-text">@gabrielcoltz</span>
+        </div>
+        <div class="s7-contact-item">
+          <div class="s7-contact-dot"></div>
+          <span class="s7-contact-text">menteorganica.07@gmail.com</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span class="footer-handle">@gabrielcoltz</span>
+      <div class="progress-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
