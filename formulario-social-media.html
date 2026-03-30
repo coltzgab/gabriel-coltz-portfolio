@@ -655,9 +655,9 @@
     el.classList.toggle('selected');
 
     // Coleta todas as seleções do grupo
-    const selected = el.closest('[data-group]')
-      .querySelectorAll('.option-card.selected')
-      .map(c => c.dataset.value);
+    const selected = Array.from(
+      el.closest('[data-group]').querySelectorAll('.option-card.selected')
+    ).map(c => c.dataset.value);
 
     state.answers[group] = { value: selected, qualify: 'yes' };
   }
