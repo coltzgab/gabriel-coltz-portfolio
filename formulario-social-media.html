@@ -571,6 +571,25 @@
       </div>
     </div>
 
+    <div class="field" style="margin-top:24px">
+      <label>Você tem disponibilidade para colaborar com o processo?</label>
+      <p style="font-size:13px;color:var(--muted);margin:-8px 0 14px;line-height:1.5;">Gravação de vídeos, reuniões de acompanhamento e aprovações quando necessário. Nossa parceria exige participação ativa do cliente.</p>
+      <div class="options-grid" data-group="disponibilidade">
+        <div class="option-card" data-value="sim-tenho" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Sim, tenho disponibilidade<small>Posso participar e gravar quando precisar</small></div>
+        </div>
+        <div class="option-card" data-value="parcial" data-qualify="yes" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Tenho disponibilidade parcial<small>Agenda limitada, mas consigo me organizar</small></div>
+        </div>
+        <div class="option-card" data-value="nao-tenho" data-qualify="no" onclick="selectOption(this)">
+          <div class="option-radio"></div>
+          <div class="option-text">Não tenho disponibilidade<small>Minha rotina não permite participação ativa</small></div>
+        </div>
+      </div>
+    </div>
+
     <p class="error-msg" id="err-4">Selecione uma opção em cada campo para continuar.</p>
 
     <div class="btn-row">
@@ -695,11 +714,11 @@
       return true;
     }
     if (step === 4) {
-      if (!state.answers.objetivo || !state.answers.situacao) {
+      if (!state.answers.objetivo || !state.answers.situacao || !state.answers.disponibilidade) {
         document.getElementById('err-4').classList.add('visible');
         return false;
       }
-      // Objetivo pode ter múltiplas seleções, então precisa ser um array
+      // Objetivo pode ter múltiplas seleções, então precisa ser um array não vazio
       if (Array.isArray(state.answers.objetivo?.value) && state.answers.objetivo.value.length === 0) {
         document.getElementById('err-4').classList.add('visible');
         return false;
@@ -732,9 +751,10 @@
 
   // ── QUALIFY CHECK ──────────────────────────────────────
   function isQualified() {
-    const fat = state.answers.faturamento?.qualify;
-    const orc = state.answers.orcamento?.qualify;
-    return fat === 'yes' && orc === 'yes';
+    const fat  = state.answers.faturamento?.qualify;
+    const orc  = state.answers.orcamento?.qualify;
+    const disp = state.answers.disponibilidade?.qualify;
+    return fat === 'yes' && orc === 'yes' && disp === 'yes';
   }
 
   // ── SUBMIT ─────────────────────────────────────────────
@@ -762,8 +782,9 @@
         '🏢 Segmento':    state.answers.segmento?.value,
         '💰 Faturamento': state.answers.faturamento?.value,
         '💳 Orçamento':   state.answers.orcamento?.value,
-        '🎯 Objetivos':   objetivos,
-        '📊 Situação':    state.answers.situacao?.value,
+        '🎯 Objetivos':      objetivos,
+        '📊 Situação':       state.answers.situacao?.value,
+        '⏰ Disponibilidade': state.answers.disponibilidade?.value,
       };
 
       try {
