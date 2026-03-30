@@ -15,9 +15,11 @@
       --surface: #111111;
       --surface2: #181818;
       --border: #222222;
-      --accent: #F59E0B;
-      --accent-dim: rgba(245, 158, 11, 0.10);
-      --accent-glow: rgba(245, 158, 11, 0.20);
+      --accent: #47e4be;
+      --accent-dim: rgba(71, 228, 190, 0.10);
+      --accent-glow: rgba(71, 228, 190, 0.22);
+      --purple: #5a3d7f;
+      --purple-dim: rgba(90, 61, 127, 0.18);
       --text: #F0F0F0;
       --text-muted: #888888;
       --text-dim: #444444;
@@ -84,7 +86,7 @@
       position: absolute;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(71,228,190,0.06) 0%, transparent 70%);
       top: 50%; left: -100px;
       transform: translateY(-50%);
       pointer-events: none;
@@ -162,7 +164,7 @@
       transition: all 0.2s;
       letter-spacing: 0.01em;
     }
-    .btn-primary:hover { background: #FBBF24; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .btn-primary:hover { background: #62edd0; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -253,7 +255,7 @@
       transform-origin: left;
       transition: transform 0.4s;
     }
-    .valor-card:hover { border-color: rgba(245,158,11,0.25); transform: translateY(-3px); }
+    .valor-card:hover { border-color: rgba(71,228,190,0.25); transform: translateY(-3px); }
     .valor-card:hover::after { transform: scaleX(1); }
     .valor-card-icon {
       width: 40px; height: 40px;
@@ -350,7 +352,7 @@
       padding: 36px 32px;
       transition: all 0.3s;
     }
-    .constr-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-3px); }
+    .constr-card:hover { border-color: rgba(71,228,190,0.3); transform: translateY(-3px); }
     .constr-year {
       font-size: 0.7rem;
       font-weight: 700;
@@ -381,7 +383,7 @@
       text-transform: uppercase;
       color: var(--accent);
       background: var(--accent-dim);
-      border: 1px solid rgba(245,158,11,0.2);
+      border: 1px solid rgba(71,228,190,0.2);
       padding: 4px 10px;
       border-radius: 4px;
     }
@@ -402,7 +404,7 @@
       pointer-events: auto;
     }
     a.proj-card { cursor: pointer; }
-    .proj-card:hover { border-color: rgba(245,158,11,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .proj-card:hover { border-color: rgba(71,228,190,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
     .proj-img {
       width: 100%;
       aspect-ratio: 16/9;
@@ -462,7 +464,7 @@
       width: 28px; height: 28px;
       border-radius: 50%;
       background: var(--accent-dim);
-      border: 1px solid rgba(245,158,11,0.3);
+      border: 1px solid rgba(71,228,190,0.3);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       font-family: 'Space Grotesk', sans-serif;
@@ -490,7 +492,7 @@
       position: absolute;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(71,228,190,0.05) 0%, transparent 70%);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -803,7 +805,7 @@
           <div class="proj-tag">Rebranding · Identidade Visual</div>
           <div class="proj-name">Olivers Vistorias</div>
           <p class="proj-desc">Reposicionamento completo da marca para refletir tecnologia e autoridade no setor de vistorias. Identidade visual, brandbook e todas as aplicacoes.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#47e4be; letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
 
@@ -833,7 +835,7 @@
           <div class="proj-tag">Produto e Marca · Narrativa</div>
           <div class="proj-name">FinUp</div>
           <p class="proj-desc">Identidade completa para uma fintech com IA. Narrativa central com vilao e heroi, sistema de conteudo e estrategia editorial para construir audiencia de longo prazo.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#47e4be; letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
 
@@ -843,7 +845,7 @@
           <div class="proj-tag">Identidade Visual e Estrategia de Conteudo</div>
           <div class="proj-name">JJ Lima Contabilidade</div>
           <p class="proj-desc">Projeto completo: identidade visual com manual de marca, paleta e tipografia. Estrategia de conteudo com 3 personas mapeadas, 4 pilares editoriais, analise SWOT e plano digital para Instagram, LinkedIn, YouTube e Blog.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#47e4be; letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
 
@@ -853,7 +855,7 @@
           <div class="proj-tag">Processo · Treinamento · Gestao Operacional</div>
           <div class="proj-name">Treinamento de Croquis — Olivers</div>
           <p class="proj-desc">Processos desorganizados onde cada um ensinava de um jeito. Criei o processo padronizado e o treinamento gravado definitivo — mesmo conteudo para todos, economia real de horas e mao de obra.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#47e4be; letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
 
@@ -863,7 +865,7 @@
           <div class="proj-tag">Marca Pessoal · Estrategia de Conteudo</div>
           <div class="proj-name">Juliano Camello — Especialista em Holding</div>
           <p class="proj-desc">Posicionamento de marca pessoal do zero: contador a referencia em holding para contadores empresarios. 3 personas, 6 linhas editoriais e estrategia para 4 canais digitais.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#47e4be; letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
     </div>
