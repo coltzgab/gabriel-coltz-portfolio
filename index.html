@@ -22,7 +22,7 @@
       --purple-dim: rgba(90, 61, 127, 0.18);
       --text: #F0F0F0;
       --text-muted: #888888;
-      --text-dim: #444444;
+      --text-dim: #808080;
     }
 
     html { scroll-behavior: smooth; }
@@ -543,6 +543,17 @@
       color: var(--text-dim);
     }
 
+    /* FOCUS ACCESSIBILITY */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     /* ANIMATIONS */
     .fade-up {
       opacity: 0;
@@ -578,7 +589,7 @@
 </head>
 <body>
 
-  <nav id="navbar">
+  <nav id="navbar" aria-label="Navegação principal">
     <div class="nav-logo">Gabriel Coltz<span>.</span></div>
     <ul class="nav-links">
       <li><a href="#valor">O que trago</a></li>
@@ -589,8 +600,10 @@
     </ul>
   </nav>
 
+  <main id="conteudo-principal">
+
   <!-- HERO -->
-  <section id="hero">
+  <section id="hero" aria-label="Apresentação">
     <div class="hero-glow-left"></div>
 
     <div class="hero-text-col">
@@ -620,7 +633,7 @@
   </section>
 
   <!-- O QUE EU TRAGO -->
-  <section id="valor">
+  <section id="valor" aria-label="Proposta de valor">
     <p class="section-label fade-up">Proposta de valor</p>
     <h2 class="section-title fade-up d1">O que eu trago<br>para dentro de <em>uma empresa</em></h2>
     <p class="section-lead fade-up d2">
@@ -667,7 +680,7 @@
   </section>
 
   <!-- HABILIDADES -->
-  <section id="habilidades">
+  <section id="habilidades" aria-label="Habilidades">
     <p class="section-label fade-up">Competencias</p>
     <h2 class="section-title fade-up d1">Habilidades que<br><em>geram resultado</em></h2>
 
@@ -746,7 +759,7 @@
   </section>
 
   <!-- CONSTRUCOES -->
-  <section id="construcoes">
+  <section id="construcoes" aria-label="Empresas construídas">
     <p class="section-label fade-up">Experiencia</p>
     <h2 class="section-title fade-up d1">Empresas que<br><em>eu construi</em></h2>
     <p class="section-lead fade-up d2">
@@ -793,7 +806,7 @@
   </section>
 
   <!-- PROJETOS -->
-  <section id="projetos">
+  <section id="projetos" aria-label="Projetos executados">
     <p class="section-label fade-up">Portfolio</p>
     <h2 class="section-title fade-up d1">Projetos<br><em>executados</em></h2>
     <p class="section-lead fade-up d2">Cada entrega com intencao, estrategia e identidade construida para durar.</p>
@@ -872,7 +885,7 @@
   </section>
 
   <!-- POR QUE EU -->
-  <section id="porque">
+  <section id="porque" aria-label="Por que me contratar">
     <p class="section-label fade-up">Para a empresa</p>
     <h2 class="section-title fade-up d1">O que uma empresa<br>ganha ao me <em>contratar</em></h2>
 
@@ -925,7 +938,7 @@
   </section>
 
   <!-- CONTATO -->
-  <section id="contato">
+  <section id="contato" aria-label="Contato">
     <div class="contato-glow"></div>
     <p class="contato-label fade-up">Proximo passo</p>
     <h2 class="contato-title fade-up d1">
@@ -940,6 +953,8 @@
       <a href="mailto:gabriel@organic.com.br" class="btn-secondary">Enviar e-mail</a>
     </div>
   </section>
+
+  </main><!-- /main -->
 
   <footer>
     <div class="footer-brand">Gabriel Coltz<span>.</span></div>
