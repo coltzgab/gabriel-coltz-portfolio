@@ -13,14 +13,13 @@
 
     :root {
       --bg:     #0a0a0a;
-      --card:   #141414;
-      --card2:  #111111;
+      --card:   #111111;
       --border: #1e1e1e;
       --cyan:   #47e4be;
       --purple: #a78bca;
       --text:   #f0f0f0;
       --muted:  #888888;
-      --dim:    #444444;
+      --dim:    #555555;
     }
 
     html { scroll-behavior: smooth; }
@@ -32,17 +31,16 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── WRAPPER ── */
     .wrapper {
       max-width: 440px;
       margin: 0 auto;
       min-height: 100vh;
     }
 
-    /* ── HERO PHOTO ── */
+    /* ── HERO ── */
     .hero {
       width: 100%;
-      height: 460px;
+      height: 480px;
       position: relative;
       overflow: hidden;
     }
@@ -52,22 +50,20 @@
       object-fit: cover;
       object-position: top center;
       display: block;
-      filter: grayscale(5%) contrast(1.04);
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, rgba(10,10,10,0.05) 0%, transparent 30%, rgba(10,10,10,0.55) 65%, var(--bg) 100%),
-        linear-gradient(to right, rgba(10,10,10,0.2) 0%, transparent 50%);
+        linear-gradient(to bottom, transparent 35%, rgba(10,10,10,0.6) 68%, var(--bg) 100%),
+        linear-gradient(to right, rgba(10,10,10,0.15) 0%, transparent 60%);
     }
 
     /* ── NOME ── */
     .name-wrap {
       text-align: center;
       padding: 0 24px 28px;
-      margin-top: -10px;
-      position: relative;
+      margin-top: -8px;
     }
     .name {
       font-family: 'Bebas Neue', sans-serif;
@@ -78,7 +74,7 @@
       margin-bottom: 10px;
     }
     .subtitle {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
@@ -101,6 +97,7 @@
       gap: 14px;
     }
 
+    /* Card base */
     .card {
       display: block;
       background: var(--card);
@@ -111,23 +108,16 @@
       color: var(--text);
       position: relative;
       overflow: hidden;
+      min-height: 150px;
       transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
     }
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      opacity: 0;
-      transition: opacity 0.25s;
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
     }
-    .card.c-cyan::before  { background: linear-gradient(135deg, rgba(71,228,190,0.05), transparent 55%); }
-    .card.c-purple::before { background: linear-gradient(135deg, rgba(167,139,202,0.06), transparent 55%); }
-    .card.c-dim::before   { background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent 55%); }
-    .card:hover { border-color: rgba(71,228,190,0.3); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
-    .card:hover::before { opacity: 1; }
-    .card.c-purple:hover  { border-color: rgba(167,139,202,0.4); }
-    .card.c-dim:hover     { border-color: rgba(255,255,255,0.12); }
+    .card.c-cyan:hover  { border-color: rgba(71,228,190,0.35); }
+    .card.c-purple:hover { border-color: rgba(167,139,202,0.4); }
+    .card.c-dim:hover   { border-color: rgba(255,255,255,0.14); }
 
     /* Label pill */
     .card-label {
@@ -138,33 +128,33 @@
       font-weight: 700;
       letter-spacing: 0.13em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       position: relative;
+      z-index: 2;
     }
     .card-label::before {
       content: '';
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      animation: pulse 2.4s infinite;
-    }
-    @keyframes pulse {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50%      { opacity: 0.4; transform: scale(0.85); }
+      flex-shrink: 0;
     }
     .card-label.cyan   { color: var(--cyan); }
-    .card-label.cyan::before   { background: var(--cyan); }
+    .card-label.cyan::before   { background: var(--cyan); animation: pulse 2.4s infinite; }
     .card-label.purple { color: var(--purple); }
-    .card-label.purple::before { background: var(--purple); }
+    .card-label.purple::before { background: var(--purple); animation: pulse 2.4s infinite; }
     .card-label.dim    { color: var(--muted); }
-    .card-label.dim::before    { background: var(--muted); animation: none; }
+    .card-label.dim::before    { background: var(--muted); }
 
-    /* Card inner layout: texto + thumb */
-    .card-row {
-      display: grid;
-      grid-template-columns: 1fr 88px;
-      gap: 14px;
-      align-items: end;
+    @keyframes pulse {
+      0%,100% { opacity: 1; } 50% { opacity: 0.35; }
+    }
+
+    /* Conteúdo do card — deixa espaço à direita para a foto */
+    .card-content {
+      position: relative;
+      z-index: 2;
+      padding-right: 42%;
     }
 
     .card-title {
@@ -195,22 +185,32 @@
     .card-cta.purple { color: var(--purple); }
     .card-cta.dim    { color: var(--muted); }
 
-    /* Thumbnail */
-    .card-thumb {
-      width: 88px;
-      height: 108px;
-      border-radius: 12px;
-      overflow: hidden;
-      flex-shrink: 0;
-      align-self: end;
-      background: #1a1a1a;
-      border: 1px solid var(--border);
+    /* Foto dentro do card — absoluta, lado direito, sem fundo */
+    .card-photo {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 44%;
+      z-index: 1;
+      pointer-events: none;
     }
-    .card-thumb img {
+    .card-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
       display: block;
+      /* Fundo preto some no card dark — efeito "sem fundo" */
+      mix-blend-mode: screen;
+    }
+    /* Fade lateral: funde suavemente a foto com o card */
+    .card-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--card) 0%, transparent 35%);
+      z-index: 2;
     }
 
     /* ── SOCIAIS ── */
@@ -223,73 +223,48 @@
       gap: 12px;
       margin-bottom: 20px;
     }
-    .socials-sep::before,
-    .socials-sep::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .socials-sep::before, .socials-sep::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
     }
     .socials-sep span {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--dim);
-      white-space: nowrap;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--dim); white-space: nowrap;
     }
     .socials-row {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
+      display: flex; justify-content: center; gap: 10px;
     }
     .s-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      width: 48px; height: 48px; border-radius: 50%;
       border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--dim);
-      text-decoration: none;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--dim); text-decoration: none;
       transition: border-color 0.2s, color 0.2s, transform 0.2s, background 0.2s;
     }
     .s-btn:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      background: rgba(71,228,190,0.06);
-      transform: translateY(-2px);
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(71,228,190,0.06); transform: translateY(-2px);
     }
     .s-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
     .s-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      width: 18px; height: 18px; stroke: currentColor; fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
     }
 
     /* ── FOOTER ── */
     .footer {
-      text-align: center;
-      padding: 4px 20px 44px;
-      font-size: 0.65rem;
-      color: var(--dim);
-      letter-spacing: 0.07em;
+      text-align: center; padding: 4px 20px 44px;
+      font-size: 0.65rem; color: var(--dim); letter-spacing: 0.07em;
     }
     .footer a { color: var(--cyan); text-decoration: none; }
 
-    /* Focus global */
     a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
   </style>
 </head>
 <body>
 <div class="wrapper">
 
-  <!-- ── HERO FOTO ── -->
-  <div class="hero">
+  <!-- ── HERO ── -->
+  <div class="hero" aria-hidden="true">
     <img src="/foto-hero.png" alt="Gabriel Coltz" />
     <div class="hero-overlay"></div>
   </div>
@@ -307,51 +282,45 @@
     <!-- Portfólio -->
     <a href="https://gabriel-coltz-portfolio.vercel.app/" class="card c-cyan" target="_blank" rel="noopener" aria-label="Ver portfólio de Gabriel Coltz">
       <div class="card-label cyan">Portfólio</div>
-      <div class="card-row">
-        <div>
-          <div class="card-title">Projetos &amp;<br>Cases</div>
-          <p class="card-desc">Branding, estratégia e IA aplicada — mais de 50 projetos entregues</p>
-          <span class="card-cta cyan">Ver portfólio &rsaquo;</span>
-        </div>
-        <div class="card-thumb">
-          <img src="/gabriel-coltz-slide-01.png" alt="Slide portfólio" />
-        </div>
+      <div class="card-content">
+        <div class="card-title">Projetos &amp;<br>Cases</div>
+        <p class="card-desc">Branding, estratégia e IA — mais de 50 projetos entregues</p>
+        <span class="card-cta cyan">Ver portfólio &rsaquo;</span>
+      </div>
+      <div class="card-photo">
+        <img src="/foto-gabriel-2.png" alt="" />
       </div>
     </a>
 
-    <!-- Gestão de Redes Sociais -->
+    <!-- Gestão de Redes -->
     <a href="/formulario-social-media.html" class="card c-purple" aria-label="Formulário de gestão de redes sociais">
       <div class="card-label purple">Gestão de Redes Sociais</div>
-      <div class="card-row">
-        <div>
-          <div class="card-title">Assessoria<br>de Redes</div>
-          <p class="card-desc">Vagas abertas para novos clientes — preencha enquanto disponível</p>
-          <span class="card-cta purple">Preencher formulário &rsaquo;</span>
-        </div>
-        <div class="card-thumb">
-          <img src="/foto-gabriel-2.png" alt="Gabriel Coltz" />
-        </div>
+      <div class="card-content">
+        <div class="card-title">Assessoria<br>de Redes</div>
+        <p class="card-desc">Vagas abertas para novos clientes — preencha enquanto disponível</p>
+        <span class="card-cta purple">Preencher formulário &rsaquo;</span>
+      </div>
+      <div class="card-photo">
+        <img src="/foto-hero.png" alt="" />
       </div>
     </a>
 
     <!-- Organic -->
     <a href="https://www.organic-mkt.com.br/" class="card c-dim" target="_blank" rel="noopener" aria-label="Visitar site da Organic">
       <div class="card-label dim">Agência</div>
-      <div class="card-row">
-        <div>
-          <div class="card-title">Organic</div>
-          <p class="card-desc">Branding e posicionamento de marca para empresas que querem crescer</p>
-          <span class="card-cta dim">Conhecer &rsaquo;</span>
-        </div>
-        <div class="card-thumb">
-          <img src="/foto-gabriel.png" alt="Gabriel Coltz" style="object-position: top center;" />
-        </div>
+      <div class="card-content">
+        <div class="card-title">Organic</div>
+        <p class="card-desc">Branding e posicionamento para empresas que querem crescer</p>
+        <span class="card-cta dim">Conhecer &rsaquo;</span>
+      </div>
+      <div class="card-photo">
+        <img src="/foto-gabriel.png" alt="" />
       </div>
     </a>
 
   </div>
 
-  <!-- ── REDES SOCIAIS ── -->
+  <!-- ── SOCIAIS ── -->
   <div class="socials-wrap">
     <div class="socials-sep"><span>Redes sociais</span></div>
     <div class="socials-row">
@@ -375,7 +344,6 @@
     </div>
   </div>
 
-  <!-- ── RODAPÉ ── -->
   <p class="footer">© 2026 Gabriel Coltz &nbsp;·&nbsp; <a href="https://www.organic-mkt.com.br/">Organic</a></p>
 
 </div>
