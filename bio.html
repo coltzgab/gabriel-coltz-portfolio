@@ -12,13 +12,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #080808;
-      --surface: #111111;
-      --border:  #1e1e1e;
-      --cyan:    #47e4be;
-      --purple:  #5a3d7f;
-      --text:    #f0f0f0;
-      --muted:   #555555;
+      --bg:     #0a0a0a;
+      --card:   #141414;
+      --card2:  #111111;
+      --border: #1e1e1e;
+      --cyan:   #47e4be;
+      --purple: #a78bca;
+      --text:   #f0f0f0;
+      --muted:  #888888;
+      --dim:    #444444;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,314 +29,355 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── WRAPPER ── */
+    .wrapper {
+      max-width: 440px;
+      margin: 0 auto;
       min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 52px 20px 72px;
     }
 
-    /* Glow de fundo */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(71,228,190,0.07) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
+    /* ── HERO PHOTO ── */
+    .hero {
       width: 100%;
-      max-width: 460px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* ── FOTO ── */
-    .profile-wrap {
+      height: 460px;
       position: relative;
-      margin-bottom: 24px;
+      overflow: hidden;
     }
-    .profile-photo {
-      width: 108px;
-      height: 108px;
-      border-radius: 50%;
+    .hero img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: top center;
-      border: 2px solid var(--cyan);
       display: block;
-      filter: grayscale(15%);
+      filter: grayscale(5%) contrast(1.04);
     }
-    .profile-dot {
+    .hero-overlay {
       position: absolute;
-      bottom: 5px;
-      right: 5px;
-      width: 14px;
-      height: 14px;
-      background: #1adf8e;
-      border-radius: 50%;
-      border: 2px solid var(--bg);
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,10,0.05) 0%, transparent 30%, rgba(10,10,10,0.55) 65%, var(--bg) 100%),
+        linear-gradient(to right, rgba(10,10,10,0.2) 0%, transparent 50%);
     }
 
     /* ── NOME ── */
+    .name-wrap {
+      text-align: center;
+      padding: 0 24px 28px;
+      margin-top: -10px;
+      position: relative;
+    }
     .name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.4rem;
-      letter-spacing: 0.06em;
+      font-size: clamp(3rem, 14vw, 3.8rem);
+      letter-spacing: 0.1em;
       color: var(--text);
-      text-align: center;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-
-    .tagline {
-      font-size: 0.78rem;
-      color: var(--cyan);
-      letter-spacing: 0.14em;
+    .subtitle {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      color: var(--muted);
       font-weight: 500;
-      text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 16px;
+    }
+    .name-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--cyan);
+      margin: 0 auto;
+      border-radius: 2px;
     }
 
-    /* ── BLOCOS ── */
-    .links {
-      width: 100%;
+    /* ── CARDS ── */
+    .cards {
+      padding: 8px 18px 12px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      margin-bottom: 36px;
     }
 
-    .block {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      width: 100%;
-      padding: 20px 22px;
-      background: var(--surface);
+    .card {
+      display: block;
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
+      padding: 22px 20px 20px;
       text-decoration: none;
       color: var(--text);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
+      transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
     }
-    .block::after {
+    .card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(71,228,190,0.04), transparent 60%);
+      border-radius: 20px;
       opacity: 0;
       transition: opacity 0.25s;
     }
-    .block:hover {
-      border-color: rgba(71,228,190,0.4);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-    }
-    .block:hover::after { opacity: 1; }
+    .card.c-cyan::before  { background: linear-gradient(135deg, rgba(71,228,190,0.05), transparent 55%); }
+    .card.c-purple::before { background: linear-gradient(135deg, rgba(167,139,202,0.06), transparent 55%); }
+    .card.c-dim::before   { background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent 55%); }
+    .card:hover { border-color: rgba(71,228,190,0.3); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+    .card:hover::before { opacity: 1; }
+    .card.c-purple:hover  { border-color: rgba(167,139,202,0.4); }
+    .card.c-dim:hover     { border-color: rgba(255,255,255,0.12); }
 
-    .block-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
+    /* Label pill */
+    .card-label {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      gap: 7px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      position: relative;
     }
-    .block-icon svg { width: 22px; height: 22px; }
+    .card-label::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.85); }
+    }
+    .card-label.cyan   { color: var(--cyan); }
+    .card-label.cyan::before   { background: var(--cyan); }
+    .card-label.purple { color: var(--purple); }
+    .card-label.purple::before { background: var(--purple); }
+    .card-label.dim    { color: var(--muted); }
+    .card-label.dim::before    { background: var(--muted); animation: none; }
 
-    .block-icon.cyan   { background: rgba(71,228,190,0.12);  }
-    .block-icon.purple { background: rgba(90,61,127,0.30);   }
-    .block-icon.white  { background: rgba(240,240,240,0.07); }
-
-    .block-icon.cyan   svg { stroke: var(--cyan);   }
-    .block-icon.purple svg { stroke: #a78bca;       }
-    .block-icon.white  svg { stroke: #c0c0c0;       }
-
-    .block-label {
-      flex: 1;
-      min-width: 0;
-    }
-    .block-label strong {
-      display: block;
-      font-weight: 600;
-      font-size: 0.97rem;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-    .block-label span {
-      display: block;
-      font-size: 0.76rem;
-      color: var(--muted);
-      font-weight: 400;
-      margin-top: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .block-arrow {
-      color: var(--muted);
-      font-size: 1rem;
-      flex-shrink: 0;
-      transition: color 0.2s, transform 0.2s;
-    }
-    .block:hover .block-arrow {
-      color: var(--cyan);
-      transform: translateX(3px);
-    }
-
-    /* ── DIVISOR ── */
-    .divider {
-      width: 100%;
-      display: flex;
-      align-items: center;
+    /* Card inner layout: texto + thumb */
+    .card-row {
+      display: grid;
+      grid-template-columns: 1fr 88px;
       gap: 14px;
-      margin-bottom: 28px;
+      align-items: end;
     }
-    .divider-line { flex: 1; height: 1px; background: var(--border); }
-    .divider-text { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .card:hover .card-cta { gap: 8px; }
+    .card-cta.cyan   { color: var(--cyan); }
+    .card-cta.purple { color: var(--purple); }
+    .card-cta.dim    { color: var(--muted); }
+
+    /* Thumbnail */
+    .card-thumb {
+      width: 88px;
+      height: 108px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      align-self: end;
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+    }
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* ── SOCIAIS ── */
-    .socials {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
+    .socials-wrap {
+      padding: 28px 18px 20px;
     }
-    .social {
-      width: 46px;
-      height: 46px;
+    .socials-sep {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .socials-sep::before,
+    .socials-sep::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .socials-sep span {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      white-space: nowrap;
+    }
+    .socials-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .s-btn {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
+      color: var(--dim);
       text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s, background 0.2s;
     }
-    .social:hover {
+    .s-btn:hover {
       border-color: var(--cyan);
       color: var(--cyan);
+      background: rgba(71,228,190,0.06);
       transform: translateY(-2px);
     }
-    .social svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .s-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+    .s-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
 
-    /* ── RODAPÉ ── */
+    /* ── FOOTER ── */
     .footer {
-      font-size: 0.7rem;
-      color: var(--muted);
       text-align: center;
-      letter-spacing: 0.08em;
+      padding: 4px 20px 44px;
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.07em;
     }
     .footer a { color: var(--cyan); text-decoration: none; }
+
+    /* Focus global */
+    a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="wrapper">
 
-    <!-- Foto -->
-    <div class="profile-wrap">
-      <img src="/foto-gabriel.png" alt="Gabriel Coltz" class="profile-photo" />
-      <div class="profile-dot"></div>
-    </div>
+  <!-- ── HERO FOTO ── -->
+  <div class="hero">
+    <img src="/foto-gabriel.png" alt="Gabriel Coltz" />
+    <div class="hero-overlay"></div>
+  </div>
 
-    <!-- Nome -->
-    <h1 class="name">Gabriel Coltz</h1>
-    <p class="tagline">Estratégia &nbsp;·&nbsp; Branding &nbsp;·&nbsp; IA</p>
+  <!-- ── NOME ── -->
+  <div class="name-wrap">
+    <h1 class="name">GABRIEL COLTZ</h1>
+    <p class="subtitle">Estratégia &nbsp;·&nbsp; Branding &nbsp;·&nbsp; IA</p>
+    <div class="name-divider"></div>
+  </div>
 
-    <!-- Blocos principais -->
-    <div class="links">
+  <!-- ── CARDS ── -->
+  <div class="cards">
 
-      <!-- Portfólio -->
-      <a href="https://gabriel-coltz-portfolio.vercel.app/" class="block" target="_blank" rel="noopener">
-        <div class="block-icon cyan">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2"/>
-            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-          </svg>
+    <!-- Portfólio -->
+    <a href="https://gabriel-coltz-portfolio.vercel.app/" class="card c-cyan" target="_blank" rel="noopener" aria-label="Ver portfólio de Gabriel Coltz">
+      <div class="card-label cyan">Portfólio</div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">Projetos &amp;<br>Cases</div>
+          <p class="card-desc">Branding, estratégia e IA aplicada — mais de 50 projetos entregues</p>
+          <span class="card-cta cyan">Ver portfólio &rsaquo;</span>
         </div>
-        <div class="block-label">
-          <strong>Meu Portfólio</strong>
-          <span>Projetos de estratégia, branding e IA</span>
+        <div class="card-thumb">
+          <img src="/gabriel-coltz-slide-01.png" alt="Slide portfólio" />
         </div>
-        <span class="block-arrow">→</span>
-      </a>
+      </div>
+    </a>
 
-      <!-- Formulário Redes Sociais -->
-      <a href="/formulario-social-media.html" class="block">
-        <div class="block-icon purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
+    <!-- Gestão de Redes Sociais -->
+    <a href="/formulario-social-media.html" class="card c-purple" aria-label="Formulário de gestão de redes sociais">
+      <div class="card-label purple">Gestão de Redes Sociais</div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">Assessoria<br>de Redes</div>
+          <p class="card-desc">Vagas abertas para novos clientes — preencha enquanto disponível</p>
+          <span class="card-cta purple">Preencher formulário &rsaquo;</span>
         </div>
-        <div class="block-label">
-          <strong>Gestão de Redes Sociais</strong>
-          <span>Vagas abertas — preencha o formulário</span>
+        <div class="card-thumb">
+          <img src="/gabriel-conteudos.png" alt="Conteúdo" />
         </div>
-        <span class="block-arrow">→</span>
-      </a>
+      </div>
+    </a>
 
-      <!-- Organic -->
-      <a href="https://www.organic-mkt.com.br/" class="block" target="_blank" rel="noopener">
-        <div class="block-icon white">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4"/>
-            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/>
-          </svg>
+    <!-- Organic -->
+    <a href="https://www.organic-mkt.com.br/" class="card c-dim" target="_blank" rel="noopener" aria-label="Visitar site da Organic">
+      <div class="card-label dim">Agência</div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">Organic</div>
+          <p class="card-desc">Branding e posicionamento de marca para empresas que querem crescer</p>
+          <span class="card-cta dim">Conhecer &rsaquo;</span>
         </div>
-        <div class="block-label">
-          <strong>Organic</strong>
-          <span>organic-mkt.com.br</span>
+        <div class="card-thumb">
+          <img src="/foto-gabriel.png" alt="Organic" style="object-position: top center;" />
         </div>
-        <span class="block-arrow">→</span>
-      </a>
-
-    </div>
-
-    <!-- Divisor -->
-    <div class="divider">
-      <div class="divider-line"></div>
-      <span class="divider-text">Redes sociais</span>
-      <div class="divider-line"></div>
-    </div>
-
-    <!-- Sociais -->
-    <div class="socials">
-      <!-- Instagram -->
-      <a href="https://instagram.com/orgnicmkt" class="social" target="_blank" rel="noopener" title="Instagram">
-        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <!-- LinkedIn -->
-      <a href="https://linkedin.com/in/gabrielcoltz" class="social" target="_blank" rel="noopener" title="LinkedIn">
-        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <!-- WhatsApp -->
-      <a href="https://wa.me/5551993909150" class="social" target="_blank" rel="noopener" title="WhatsApp">
-        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      </a>
-      <!-- Email -->
-      <a href="mailto:gabriel@organic.com.br" class="social" title="E-mail">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      </a>
-    </div>
-
-    <!-- Rodapé -->
-    <p class="footer">© 2026 Gabriel Coltz &nbsp;·&nbsp; <a href="https://www.organic-mkt.com.br/">Organic</a></p>
+      </div>
+    </a>
 
   </div>
+
+  <!-- ── REDES SOCIAIS ── -->
+  <div class="socials-wrap">
+    <div class="socials-sep"><span>Redes sociais</span></div>
+    <div class="socials-row">
+
+      <a href="https://instagram.com/orgnicmkt" class="s-btn" target="_blank" rel="noopener" title="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+      </a>
+
+      <a href="https://linkedin.com/in/gabrielcoltz" class="s-btn" target="_blank" rel="noopener" title="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+
+      <a href="https://wa.me/5551993909150" class="s-btn" target="_blank" rel="noopener" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+
+      <a href="mailto:gabriel@organic.com.br" class="s-btn" title="E-mail">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── RODAPÉ ── -->
+  <p class="footer">© 2026 Gabriel Coltz &nbsp;·&nbsp; <a href="https://www.organic-mkt.com.br/">Organic</a></p>
+
+</div>
 </body>
 </html>
