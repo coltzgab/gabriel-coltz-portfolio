@@ -46,19 +46,18 @@ export const MobileNavBar: React.FC<MobileNavBarProps> = ({ items }) => {
 
     return (
         <div className="md:hidden">
-            {/* Header Flutuante (Capsule style) */}
-            <div className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[400px] h-16 bg-black/40 border border-white/10 backdrop-blur-xl rounded-full z-[100] flex items-center justify-between px-6 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+            {/* Header transparente sobre o hero */}
+            <div className="fixed top-5 left-0 right-0 z-[100] flex items-center justify-between px-6">
                 <Link to="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-                    <img
-                        src="/logo.png"
-                        alt="Organic"
-                        className="h-4 w-auto object-contain hover:scale-105 transition-transform"
-                    />
+                    <span className="font-display text-sm font-bold uppercase tracking-[0.24em] text-white">
+                        Gabriel
+                    </span>
                 </Link>
 
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white transition-all active:scale-90 hover:bg-white/10"
+                    className="flex h-10 w-10 items-center justify-center text-white transition-all active:scale-90"
+                    aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
                 >
                     {isOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>

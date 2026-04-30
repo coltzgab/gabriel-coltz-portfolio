@@ -52,10 +52,10 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
     if (!mounted) return null
 
     return (
-        <div className="fixed top-4 left-0 right-0 z-[9999] px-4 pointer-events-none">
-            <div className="flex justify-center pt-10 sm:pt-14">
+        <div className="fixed top-0 left-0 right-0 z-[9999] px-6 pointer-events-none">
+            <div className="flex justify-center py-8">
                 <motion.div
-                    className="flex items-center gap-1 sm:gap-4 bg-black/60 border border-white/10 backdrop-blur-xl py-2 px-6 rounded-full shadow-2xl relative pointer-events-auto"
+                    className="flex items-center gap-1 sm:gap-4 bg-transparent py-2 px-0 relative pointer-events-auto"
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{
@@ -64,15 +64,6 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                         damping: 20,
                     }}
                 >
-                    <Link to="/" className="flex items-center mr-4">
-                        <img
-                            src="/logo.png"
-                            alt="Organic Logo"
-                            className="h-4 w-auto hover:scale-105 transition-transform"
-                        />
-                    </Link>
-
-                    <div className="h-4 w-px bg-white/10 mr-4 hidden md:block" />
                     <div className="flex items-center gap-1 sm:gap-2">
                         {items.map((item) => {
                             const Icon = item.icon
@@ -92,14 +83,14 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                                         <span
                                             onClick={(e) => { e.stopPropagation(); setOpenDropdown(openDropdown === item.name ? null : item.name) }}
                                             className={cn(
-                                                "relative cursor-pointer text-[10px] sm:text-xs font-bold px-3 py-2 sm:px-6 sm:py-3 rounded-full transition-all duration-300 uppercase tracking-widest inline-block",
-                                                "text-white/60 hover:text-white",
-                                                isActive && "text-white"
+                                                "relative cursor-pointer text-[10px] sm:text-xs font-bold px-3 py-2 sm:px-5 sm:py-3 transition-all duration-300 uppercase tracking-widest inline-block",
+                                                "text-white/70 hover:text-white",
+                                                isActive && "text-organic-cyan"
                                             )}
                                         >
                                             {isActive && (
                                                 <motion.div
-                                                    className="absolute inset-0 rounded-full -z-10 overflow-hidden"
+                                                    className="absolute inset-0 -z-10 overflow-hidden"
                                                     initial={{ opacity: 0 }}
                                                     animate={{
                                                         opacity: [0.3, 0.5, 0.3],
@@ -111,8 +102,7 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                                                         ease: "easeInOut"
                                                     }}
                                                 >
-                                                    <div className="absolute inset-0 bg-organic-cyan/25 rounded-full blur-md" />
-                                                    <div className="absolute inset-[-4px] bg-organic-cyan/20 rounded-full blur-xl" />
+                                                    <div className="absolute left-3 right-3 bottom-1 h-px bg-organic-cyan/80" />
                                                 </motion.div>
                                             )}
                                             <motion.span
@@ -135,7 +125,7 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                                                         initial={{ opacity: 0, scale: 0.8 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
-                                                        className="absolute inset-0 bg-white/5 rounded-full -z-10"
+                                                        className="absolute left-3 right-3 bottom-1 h-px bg-white/40 -z-10"
                                                     />
                                                 )}
                                             </AnimatePresence>
@@ -145,14 +135,14 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                                             to={item.url}
                                             onClick={() => setActiveTab(item.name)}
                                             className={cn(
-                                                "relative cursor-pointer text-[10px] sm:text-xs font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-full transition-all duration-300 uppercase tracking-widest",
-                                                "text-white/60 hover:text-white",
-                                                isActive && "text-white"
+                                                "relative cursor-pointer text-[10px] sm:text-xs font-bold px-4 py-2 sm:px-5 sm:py-3 transition-all duration-300 uppercase tracking-widest",
+                                                "text-white/70 hover:text-white",
+                                                isActive && "text-organic-cyan"
                                             )}
                                         >
                                             {isActive && (
                                                 <motion.div
-                                                    className="absolute inset-0 rounded-full -z-10 overflow-hidden"
+                                                    className="absolute inset-0 -z-10 overflow-hidden"
                                                     initial={{ opacity: 0 }}
                                                     animate={{
                                                         opacity: [0.3, 0.5, 0.3],
@@ -164,14 +154,7 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                                                         ease: "easeInOut"
                                                     }}
                                                 >
-                                                    <div className="absolute inset-0 bg-organic-cyan/25 rounded-full blur-md" />
-                                                    <div className="absolute inset-[-4px] bg-organic-cyan/20 rounded-full blur-xl" />
-                                                    <div className="absolute inset-[-8px] bg-organic-cyan/15 rounded-full blur-2xl" />
-                                                    <div className="absolute inset-[-12px] bg-organic-cyan/5 rounded-full blur-3xl" />
-
-                                                    <div
-                                                        className="absolute inset-0 bg-gradient-to-r from-organic-cyan/0 via-organic-cyan/20 to-organic-cyan/0 animate-pulse-slow"
-                                                    />
+                                                    <div className="absolute left-4 right-4 bottom-1 h-px bg-organic-cyan/80" />
                                                 </motion.div>
                                             )}
 
@@ -195,7 +178,7 @@ export function AnimeNavBar({ items, className, defaultActive = "Home" }: NavBar
                                                         initial={{ opacity: 0, scale: 0.8 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
-                                                        className="absolute inset-0 bg-white/5 rounded-full -z-10"
+                                                        className="absolute left-4 right-4 bottom-1 h-px bg-white/40 -z-10"
                                                     />
                                                 )}
                                             </AnimatePresence>

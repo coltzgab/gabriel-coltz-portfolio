@@ -45,23 +45,21 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 64px;
-      background: rgba(8,8,8,0.90);
-      backdrop-filter: blur(14px);
+      background: transparent;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
     }
-    nav.scrolled { border-bottom-color: var(--border); }
+    nav.scrolled { border-bottom-color: transparent; }
     .nav-logo {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 1rem;
-      color: var(--text-muted);
+      color: var(--text);
       letter-spacing: 0.01em;
     }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a {
-      color: var(--text-muted);
+      color: rgba(240,240,240,0.72);
       text-decoration: none;
       font-size: 0.82rem;
       font-weight: 500;
@@ -74,28 +72,33 @@
     /* HERO */
     #hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       align-items: center;
-      gap: 0;
-      padding-top: 80px;
       position: relative;
       overflow: hidden;
+      background: #000 url('/hero-gabriel-cinematic.jpeg') center center / cover no-repeat;
     }
-    .hero-glow-left {
+    #hero::before {
+      content: '';
       position: absolute;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(71,228,190,0.06) 0%, transparent 70%);
-      top: 50%; left: -100px;
-      transform: translateY(-50%);
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 42%, rgba(0,0,0,0.10) 100%),
+                  linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 42%, rgba(0,0,0,0.18) 100%);
       pointer-events: none;
     }
     .hero-text-col {
-      padding: 80px 64px 80px 64px;
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      bottom: clamp(7rem, 15vh, 11rem);
+      transform: translateX(-50%);
+      padding: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      width: min(420px, 82vw);
     }
     .hero-status {
       display: inline-flex;
@@ -121,24 +124,24 @@
     }
     .hero-name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-size: clamp(1.65rem, 2.7vw, 3.1rem);
       font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 6px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
     }
     .hero-role {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 1.8vw, 1.25rem);
-      font-weight: 400;
+      font-size: clamp(0.72rem, 0.95vw, 0.95rem);
+      font-weight: 500;
       color: var(--accent);
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       letter-spacing: 0.01em;
     }
     .hero-divider {
-      width: 40px; height: 2px;
+      width: 42px; height: 2px;
       background: var(--accent);
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
     .hero-bio {
       font-size: 1.02rem;
@@ -572,10 +575,17 @@
     @media (max-width: 960px) {
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-text-col { padding: 110px 24px 60px; }
-      .hero-photo-col { height: 420px; }
-      .hero-photo-overlay { background: linear-gradient(to top, var(--bg) 0%, transparent 40%); }
+      #hero { min-height: 100vh; background-position: 58% center; }
+      .hero-text-col {
+        left: 50%;
+        bottom: 96px;
+        margin-bottom: 0;
+        padding: 0;
+        max-width: 320px;
+        width: calc(100vw - 48px);
+      }
+      .hero-name { font-size: clamp(1.7rem, 9vw, 2.7rem); }
+      .hero-role { font-size: clamp(0.72rem, 4vw, 0.95rem); }
       section { padding: 64px 24px; }
       .valor-grid { grid-template-columns: 1fr; }
       .hab-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -604,31 +614,10 @@
 
   <!-- HERO -->
   <section id="hero" aria-label="Apresentação">
-    <div class="hero-glow-left"></div>
-
     <div class="hero-text-col">
-      <div class="hero-status">Aberto a oportunidades</div>
       <h1 class="hero-name">Gabriel Coltz</h1>
       <p class="hero-role">Estratégia · Branding · Inteligência Artificial</p>
       <div class="hero-divider"></div>
-      <p class="hero-bio">
-        Desde 2021 construindo marcas e negócios do zero, com <strong>resultados reais antes
-        de existirem ferramentas para facilitar o trabalho</strong>. Fundei duas empresas,
-        liderei mais de 50 projetos e desenvolvi um produto com IA do zero para resolver
-        um problema que o mercado ainda não havia endereçado.
-        <br><br>
-        Hoje busco levar essa combinação de visao estrategica, execucao em branding
-        e pensamento com IA para dentro de uma empresa que quer crescer de verdade.
-      </p>
-      <div class="hero-cta-row">
-        <a href="#contato" class="btn-primary">Entrar em contato</a>
-        <a href="#projetos" class="btn-secondary">Ver projetos</a>
-      </div>
-    </div>
-
-    <div class="hero-photo-col">
-      <img src="images/gabriel coltz.png" alt="Gabriel Coltz" onerror="this.parentElement.style.background='#111111'" />
-      <div class="hero-photo-overlay"></div>
     </div>
   </section>
 
