@@ -438,6 +438,126 @@
       line-height: 1.65;
     }
 
+    /* CARROSSÉIS DE POSTS */
+    .post-showcase {
+      overflow: hidden;
+      padding-bottom: 104px;
+      background:
+        radial-gradient(ellipse at 50% 42%, rgba(71,228,190,0.1) 0%, transparent 56%),
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.32) 100%);
+    }
+    .post-showcase .section-title,
+    .post-showcase .section-lead {
+      max-width: 760px;
+    }
+    .post-carousel {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      overflow: hidden;
+      padding: 18px 0 40px;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .post-carousel.is-dragging { cursor: grabbing; }
+    .post-carousel::before,
+    .post-carousel::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: min(22vw, 340px);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .post-carousel::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg) 0%, rgba(8,8,8,0.72) 42%, transparent 100%);
+    }
+    .post-carousel::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--bg) 0%, rgba(8,8,8,0.72) 42%, transparent 100%);
+    }
+    .post-track {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      will-change: transform;
+      transition: transform 0.55s cubic-bezier(.22,.61,.36,1);
+    }
+    .post-slide {
+      flex: 0 0 clamp(240px, 28vw, 470px);
+      aspect-ratio: 4 / 5;
+      border-radius: clamp(6px, 0.8vw, 12px);
+      overflow: hidden;
+      border: 1px solid rgba(240,240,240,0.08);
+      background: #0b0b0b;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.52);
+      transform: scale(0.84);
+      opacity: 0.34;
+      filter: saturate(0.82) brightness(0.66);
+      transition: transform 0.55s cubic-bezier(.22,.61,.36,1), opacity 0.35s, filter 0.35s, box-shadow 0.35s;
+      position: relative;
+    }
+    .post-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.32), transparent 45%);
+      pointer-events: none;
+    }
+    .post-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .post-slide.is-near {
+      transform: scale(0.96);
+      opacity: 0.82;
+      filter: saturate(0.96) brightness(0.88);
+    }
+    .post-slide.is-active {
+      transform: scale(1);
+      opacity: 1;
+      filter: none;
+      border-color: rgba(71,228,190,0.36);
+      box-shadow: 0 28px 72px rgba(0,0,0,0.66), 0 0 72px rgba(71,228,190,0.16);
+      z-index: 2;
+    }
+    .post-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 4;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(240,240,240,0.42);
+      background: rgba(240,240,240,0.9);
+      color: #111;
+      font-size: 28px;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transform: translateY(-50%);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.34);
+      transition: transform 0.2s, background 0.2s, opacity 0.2s;
+    }
+    .post-nav:hover { background: #fff; transform: translateY(-50%) scale(1.04); }
+    .post-nav.prev { left: max(22px, calc(50vw - 350px)); }
+    .post-nav.next { right: max(22px, calc(50vw - 350px)); }
+    .post-carousel-note {
+      margin-top: 12px;
+      color: rgba(240,240,240,0.46);
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
     /* POR QUE EU */
     #porque { background: var(--surface); }
     .porque-inner {
@@ -591,6 +711,12 @@
       .hab-grid { grid-template-columns: 1fr; gap: 40px; }
       .constr-grid { grid-template-columns: 1fr; }
       .proj-grid { grid-template-columns: 1fr; }
+      .post-carousel { padding: 8px 0 30px; }
+      .post-carousel::before, .post-carousel::after { width: 18vw; }
+      .post-slide { flex-basis: min(72vw, 340px); }
+      .post-nav { width: 42px; height: 42px; font-size: 26px; }
+      .post-nav.prev { left: 14px; }
+      .post-nav.next { right: 14px; }
       .porque-inner { grid-template-columns: 1fr; gap: 48px; }
       #contato { padding: 80px 24px; }
       footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
@@ -794,6 +920,62 @@
     </div>
   </section>
 
+  <!-- CARROSSÉIS -->
+  <section class="post-showcase" id="posts-finup" aria-label="Carrossel de posts e branding FinUp">
+    <p class="section-label fade-up">Peças digitais</p>
+    <h2 class="section-title fade-up d1">FinUp — posts, identidade<br><em>e aplicações digitais</em></h2>
+    <p class="section-lead fade-up d2">Carrossel estendido com peças de conteúdo, identidade visual, posts e aplicações digitais do projeto.</p>
+
+    <div class="post-carousel" data-post-carousel>
+      <button class="post-nav prev" type="button" aria-label="Post anterior">&lsaquo;</button>
+      <div class="post-track">
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/33.png" alt="Post FinUp 1"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/34.png" alt="Post FinUp 2"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/35.png" alt="Post FinUp 3"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/36.png" alt="Post FinUp 4"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/37.png" alt="Post FinUp 5"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/38.png" alt="Post FinUp 6"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (6)/Divis&atilde;o 2.png" alt="Divisão visual FinUp"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/32.png" alt="Branding FinUp 1"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/33.png" alt="Branding FinUp 2"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/34.png" alt="Branding FinUp 3"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/35.png" alt="Branding FinUp 4"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/36.png" alt="Branding FinUp 5"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/37.png" alt="Branding FinUp 6"></article>
+        <article class="post-slide"><img src="images/fotos de aplica&ccedil;oes/Design sem nome (7)/Divis&atilde;o 1.png" alt="Divisão visual do branding FinUp"></article>
+      </div>
+      <button class="post-nav next" type="button" aria-label="Próximo post">&rsaquo;</button>
+    </div>
+    <p class="post-carousel-note">Deslize para o lado ou use as setas</p>
+  </section>
+
+  <section class="post-showcase" id="branding-gislaine-coltz" aria-label="Carrossel de branding e papelaria Gislaine Coltz">
+    <p class="section-label fade-up">Aplicações</p>
+    <h2 class="section-title fade-up d1">Gislaine Coltz — identidade,<br><em>papelaria e aplicações</em></h2>
+    <p class="section-lead fade-up d2">Aplicações de marca em experiências sensoriais, materiais de spa, papelaria, embalagens e pontos de contato institucionais.</p>
+
+    <div class="post-carousel" data-post-carousel>
+      <button class="post-nav prev" type="button" aria-label="Projeto anterior">&lsaquo;</button>
+      <div class="post-track">
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 1.png" alt="Branding Gislaine Coltz 1"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 3.png" alt="Branding Gislaine Coltz 2"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 4.png" alt="Branding Gislaine Coltz 3"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 5.png" alt="Branding Gislaine Coltz 4"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 6.png" alt="Branding Gislaine Coltz 5"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 7.png" alt="Branding Gislaine Coltz 6"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome/Divis&atilde;o 8.png" alt="Branding Gislaine Coltz 7"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 1.png" alt="Papelaria Gislaine Coltz 1"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 2 (2).png" alt="Papelaria Gislaine Coltz 2"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 2.png" alt="Papelaria Gislaine Coltz 3"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 3.png" alt="Papelaria Gislaine Coltz 4"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 4.png" alt="Papelaria Gislaine Coltz 5"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 5.png" alt="Papelaria Gislaine Coltz 6"></article>
+        <article class="post-slide"><img src="images/Gislaine coltz/Design sem nome (1)/Divis&atilde;o 6.png" alt="Papelaria Gislaine Coltz 7"></article>
+      </div>
+      <button class="post-nav next" type="button" aria-label="Próximo projeto">&rsaquo;</button>
+    </div>
+    <p class="post-carousel-note">Deslize para o lado ou use as setas</p>
+  </section>
   <!-- PROJETOS -->
   <section id="projetos" aria-label="Projetos executados">
     <p class="section-label fade-up">Portfolio</p>
@@ -963,6 +1145,152 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('[data-post-carousel]').forEach(carousel => {
+      const track = carousel.querySelector('.post-track');
+      const prev = carousel.querySelector('.post-nav.prev');
+      const next = carousel.querySelector('.post-nav.next');
+      if (!track) return;
+
+      const originalSlides = Array.from(track.querySelectorAll('.post-slide'));
+      const total = originalSlides.length;
+      if (!total) return;
+
+      originalSlides.forEach((slide, index) => {
+        slide.dataset.realIndex = index;
+      });
+
+      const before = originalSlides.map(slide => slide.cloneNode(true));
+      const after = originalSlides.map(slide => slide.cloneNode(true));
+
+      before.forEach((slide, index) => {
+        slide.dataset.realIndex = index;
+        slide.setAttribute('aria-hidden', 'true');
+      });
+
+      after.forEach((slide, index) => {
+        slide.dataset.realIndex = index;
+        slide.setAttribute('aria-hidden', 'true');
+      });
+
+      track.prepend(...before);
+      track.append(...after);
+
+      let slides = Array.from(track.querySelectorAll('.post-slide'));
+      let active = total + Math.min(2, total - 1);
+      let isResetting = false;
+      let currentOffset = 0;
+      let pointerStartX = 0;
+      let pointerDeltaX = 0;
+      let isDragging = false;
+      let dragged = false;
+
+      function renderCarousel(animate = true) {
+        if (!slides.length) return;
+        const first = slides[0];
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || 0);
+        const slideWidth = first.offsetWidth;
+        const step = slideWidth + gap;
+        const center = carousel.clientWidth / 2 - slideWidth / 2;
+
+        currentOffset = center - active * step;
+        track.style.transition = animate ? '' : 'none';
+        track.style.transform = `translateX(${currentOffset}px)`;
+
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('is-active', index === active);
+          slide.classList.toggle('is-near', Math.abs(index - active) === 1);
+        });
+
+        if (!animate) {
+          track.offsetHeight;
+          track.style.transition = '';
+        }
+      }
+
+      function normalizeLoop() {
+        if (active >= total * 2) {
+          active -= total;
+          renderCarousel(false);
+        } else if (active < total) {
+          active += total;
+          renderCarousel(false);
+        }
+        isResetting = false;
+      }
+
+      track.addEventListener('transitionend', normalizeLoop);
+
+      prev?.addEventListener('click', () => {
+        if (isResetting) return;
+        isResetting = true;
+        active -= 1;
+        renderCarousel();
+      });
+
+      next?.addEventListener('click', () => {
+        if (isResetting) return;
+        isResetting = true;
+        active += 1;
+        renderCarousel();
+      });
+
+      function finishDrag(e) {
+        if (!isDragging) return;
+        carousel.classList.remove('is-dragging');
+        if (e?.pointerId !== undefined) track.releasePointerCapture?.(e.pointerId);
+        isDragging = false;
+
+        const slideWidth = slides[0]?.offsetWidth || 1;
+        const threshold = Math.min(90, slideWidth * 0.22);
+        if (Math.abs(pointerDeltaX) > threshold) {
+          isResetting = true;
+          active += pointerDeltaX < 0 ? 1 : -1;
+          renderCarousel();
+        } else {
+          renderCarousel();
+        }
+        pointerDeltaX = 0;
+        window.setTimeout(() => { dragged = false; }, 80);
+      }
+
+      track.addEventListener('pointerdown', e => {
+        if (e.button !== undefined && e.button !== 0) return;
+        isDragging = true;
+        dragged = false;
+        pointerStartX = e.clientX;
+        pointerDeltaX = 0;
+        carousel.classList.add('is-dragging');
+        track.style.transition = 'none';
+        track.setPointerCapture?.(e.pointerId);
+      });
+
+      track.addEventListener('pointermove', e => {
+        if (!isDragging) return;
+        pointerDeltaX = e.clientX - pointerStartX;
+        if (Math.abs(pointerDeltaX) > 6) dragged = true;
+        track.style.transform = `translateX(${currentOffset + pointerDeltaX}px)`;
+      });
+
+      track.addEventListener('pointerup', finishDrag);
+      track.addEventListener('pointercancel', finishDrag);
+      track.addEventListener('lostpointercapture', finishDrag);
+
+      slides.forEach((slide, index) => {
+        slide.addEventListener('click', e => {
+          if (dragged) {
+            e.preventDefault();
+            return;
+          }
+          active = index;
+          renderCarousel();
+        });
+      });
+
+      window.addEventListener('resize', () => renderCarousel(false), { passive: true });
+      renderCarousel(false);
+    });
   </script>
 
 </body>
