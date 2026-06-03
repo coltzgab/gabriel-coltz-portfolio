@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PROMPTBOOK IA — Crie Fotos Profissionais com Inteligência Artificial</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Aprenda o método prático para gerar imagens realistas, editoriais e cinematográficas utilizando Inteligência Artificial e ferramentas gratuitas." />
+  <meta name="keywords" content="Promptbook, IA, Inteligência Artificial, Fotos Profissionais, Prompts IA, Midjourney, Leonardo AI" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050505;
+      --surface: #0c0c0c;
+      --surface2: #121212;
+      --border: #1c1c1c;
+      --accent: #47e4be; /* Portfolio Mint Teal */
+      --accent-dim: rgba(71, 228, 190, 0.10);
+      --accent-glow: rgba(71, 228, 190, 0.22);
+      --text: #F5F5F5;
+      --text-muted: #9E9E9E;
+      --text-dim: #666666;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* Layout grid container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Typographic Styles */
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 0;
+      background: rgba(5, 5, 5, 0.84);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 22px;
+      font-size: 0.85rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-cta:hover {
+      background: transparent;
+      color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    /* Hero Section - Typographic Brutalism */
+    .hero {
+      position: relative;
+      min-height: clamp(580px, 48vw, 780px);
+      padding: clamp(240px, 18vw, 320px) 0 120px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0; right: 0;
+      width: 70%;
+      height: 100%;
+      background: url('images/gabriel-ia/clean_hero.jpeg') center 40% / cover no-repeat;
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
+      opacity: 0.8;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--accent-dim);
+      border: 1px solid rgba(71, 228, 190, 0.2);
+      padding: 6px 14px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 36px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .btn-main {
+      background: var(--accent);
+      color: #000;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-main:hover {
+      background: transparent;
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Section Global Headers */
+    .section-header {
+      margin-bottom: 64px;
+      max-width: 720px;
+    }
+
+    .section-header .section-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: #fff;
+    }
+
+    /* Features Grid (O que você vai aprender) */
+    .learn-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .learn-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px 30px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .learn-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .learn-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+
+    .learn-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .learn-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-dim);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--accent);
+    }
+
+    .learn-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .learn-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .learn-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Before/After Interactive Section */
+    .showcase-section {
+      padding: 100px 0;
+      background: #080808;
+      border-top: 1px solid var(--border);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .showcase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .showcase-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+
+    .showcase-img-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .showcase-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .showcase-badge {
+      position: absolute;
+      top: 20px;
+      padding: 6px 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-original {
+      background: #1a1a1a;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      left: 20px;
+    }
+
+    .badge-premium {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(71, 228, 190, 0.2);
+      left: 20px;
+    }
+
+    .showcase-card-info {
+      padding: 24px;
+    }
+
+    .showcase-card-info h3 {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .showcase-card-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Estilos IA Carousel Section */
+    .gallery-section {
+      padding: 100px 0;
+      background: #050505;
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .gallery-slider {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .gallery-track-container {
+      overflow: hidden;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      position: relative;
+    }
+
+    .gallery-track-container::before,
+    .gallery-track-container::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 150px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .gallery-track-container::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+    }
+
+    .gallery-track-container::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: ticker 45s linear infinite;
+      will-change: transform;
+    }
+
+    .gallery-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(calc(-50% - 10px), 0, 0);
+      }
+    }
+
+    .gallery-item {
+      flex: 0 0 320px;
+      aspect-ratio: 4/5;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
+      padding: 24px 20px 20px;
+      z-index: 2;
+    }
+
+    .gallery-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .gallery-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .gallery-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .gallery-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .gallery-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Deliverables (O que está incluso) */
+    .incluso-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .incluso-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    .incluso-item {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .incluso-item:nth-child(even) {
+      grid-template-columns: 1fr 1.2fr;
+    }
+
+    .incluso-visual {
+      position: relative;
+      border: 1px solid var(--border);
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .incluso-visual:hover {
+      border-color: var(--accent);
+      box-shadow: 0 15px 40px var(--accent-glow);
+    }
+
+    .incluso-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .incluso-visual:hover img {
+      transform: scale(1.05);
+    }
+
+    .incluso-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .incluso-info h3 span {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .incluso-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    /* List styling inside info cards */
+    .incluso-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .incluso-list li {
+      font-size: 0.85rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .incluso-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      display: block;
+    }
+
+    /* Bonus Card Section */
+    .bonus-card {
+      background: linear-gradient(135deg, var(--surface) 0%, #110e08 100%);
+      border: 1px solid rgba(71, 228, 190, 0.15);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .bonus-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .bonus-title {
+      font-size: 1.7rem;
+      color: #fff;
+    }
+
+    .bonus-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .bonus-list li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bonus-list li svg {
+      color: var(--accent);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Target Audience & Requirements */
+    .target-section {
+      padding: 100px 0;
+      background: #080808;
+      border-top: 1px solid var(--border);
+    }
+
+    .target-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .target-col {
+      background: var(--bg);
+      padding: 60px;
+    }
+
+    .target-col h3 {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .target-col h3 svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .target-col.yes h3 svg { color: var(--accent); }
+    .target-col.no h3 svg { color: #e53e3e; }
+
+    .target-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .target-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .target-list li svg {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .target-col.yes .target-list svg { color: var(--accent); }
+    .target-col.no .target-list svg { color: #e53e3e; }
+
+    /* Pricing Section */
+    .pricing-section {
+      padding: 120px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .pricing-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(71, 228, 190, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pricing-card {
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid rgba(71, 228, 190, 0.2);
+      padding: 60px 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pricing-card::after {
+      content: '';
+      position: absolute;
+      top: -1px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+
+    .pricing-title {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(71, 228, 190, 0.15);
+      padding: 4px 12px;
+      font-size: 0.72rem;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .price-original {
+      font-size: 1rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+
+    .price-current {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .price-current span {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .price-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      text-align: left;
+    }
+
+    .price-features li {
+      font-size: 0.9rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price-features li svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      background: #030303;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .footer-brand span {
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* Focus States for Accessibility */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Entry Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+
+    /* Responsive adjustments */
+    @media (max-width: 960px) {
+      .container { padding: 0 24px; }
+      nav { padding: 16px 0; }
+      .hero {
+        position: relative;
+        min-height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: center;
+        padding-top: 48px;
+        padding-bottom: 48px;
+      }
+      .hero-bg {
+        position: absolute;
+        top: 0; right: 0; left: 0; bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        mask-image: linear-gradient(to top, var(--bg) 10%, transparent 90%);
+        -webkit-mask-image: linear-gradient(to top, var(--bg) 10%, transparent 90%);
+        opacity: 0.45;
+        z-index: 1;
+        background-position: center 35%;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 100%;
+        padding: 0 10px;
+      }
+      .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.15;
+        margin-bottom: 16px;
+      }
+      .hero-desc {
+        font-size: 1.15rem;
+        margin-bottom: 28px;
+        line-height: 1.6;
+      }
+      .hero-cta-group {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        justify-content: center;
+      }
+      .btn {
+        width: 100%;
+        padding: 14px 24px;
+      }
+      .badge {
+        margin-bottom: 16px;
+        font-size: 0.65rem;
+      }
+      .learn-grid {
+        grid-template-columns: 1fr;
+      }
+      .showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .incluso-item, .incluso-item:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .incluso-visual {
+        order: -1;
+      }
+      .bonus-card {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+      }
+      .bonus-list {
+        grid-template-columns: 1fr;
+      }
+      .target-grid {
+        grid-template-columns: 1fr;
+      }
+      .target-col {
+        padding: 40px 24px;
+      }
+      .demo-box {
+        grid-template-columns: 1fr !important;
+        padding: 24px !important;
+        gap: 24px !important;
+      }
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Apresentação">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content fade-up">
+        <span class="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Método com ferramentas gratuitas
+        </span>
+        <h1 class="hero-title">Crie fotos profissionais com IA usando <span>ferramentas gratuitas.</span></h1>
+        <p class="hero-desc">Retratos corporativos de alto padrão sem gastar com estúdios ou fotógrafos.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#investimento" class="btn btn-main">Garantir Acesso (R$ 47)</a>
+          <a href="#estilos" class="btn btn-outline">Ver estilos criados</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O que vai aprender -->
+  <section id="aprender" class="learn-section" aria-label="O que você vai aprender">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Cronograma</span>
+        <h2>O que você vai aprender</h2>
+      </div>
+      
+      <div class="learn-grid">
+        <!-- Item 1 -->
+        <div class="learn-card fade-up d1">
+          <div class="learn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <h3>Fotos profissionais com IA</h3>
+          <p>Entenda como replicar iluminação de estúdio, texturas de pele ultra-realistas e poses naturais.</p>
+        </div>
+        <!-- Item 2 -->
+        <div class="learn-card fade-up d2">
+          <div class="learn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3>Ferramentas 100% gratuitas</h3>
+          <p>Domine as melhores plataformas gratuitas do mercado para criar sem limites de orçamento ou créditos.</p>
+        </div>
+        <!-- Item 3 -->
+        <div class="learn-card fade-up d3">
+          <div class="learn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Engenharia de Prompt Simples</h3>
+          <p>Aprenda a estruturar comandos que geram imagens perfeitas e consistentes na primeira tentativa.</p>
+        </div>
+        <!-- Item 4 -->
+        <div class="learn-card fade-up d1">
+          <div class="learn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </div>
+          <h3>Fotos comuns em premium</h3>
+          <p>Transforme fotos simples tiradas de celular em retratos corporativos de altíssimo valor e estúdio.</p>
+        </div>
+        <!-- Item 5 -->
+        <div class="learn-card fade-up d2">
+          <div class="learn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          </div>
+          <h3>Uso correto de referências</h3>
+          <p>Como guiar a IA utilizando referências de roupas, enquadramento e cenários sem distorcer seu rosto.</p>
+        </div>
+        <!-- Item 6 -->
+        <div class="learn-card fade-up d3">
+          <div class="learn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Instagram, LinkedIn e Vendas</h3>
+          <p>Crie imagens focadas para gerar autoridade no LinkedIn, posicionamento no Instagram ou campanhas comerciais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase-section" aria-label="Visualização Prática">
+    <div class="container">
+      <div class="section-header fade-up" style="text-align: center; margin: 0 auto 56px; max-width: 800px;">
+        <span class="section-tag">Diferença Visual</span>
+        <h2>Foto Enviada vs. Foto Criada</h2>
+        <p class="hero-desc" style="margin-top: 16px; font-size: 1.05rem;">Esqueça poses desconfortáveis em estúdios caros. Basta alimentar a Inteligência Artificial com uma foto de base (tirada com qualquer celular) e nosso Promptbook faz o resto — gerando consistência facial completa com iluminação profissional.</p>
+      </div>
+
+      <div class="showcase-grid fade-up d1">
+        <!-- Foto Enviada -->
+        <div class="showcase-card">
+          <div class="showcase-img-box">
+            <img src="images/gabriel-ia/before_portrait.jpeg" alt="Foto enviada de referência" />
+            <span class="showcase-badge badge-original">Foto Enviada</span>
+          </div>
+          <div class="showcase-card-info">
+            <h3>Foto de Referência (Antes)</h3>
+            <p>Iluminação comum de celular, roupas casuais e sem foco profissional adequado para posicionamento estratégico.</p>
+          </div>
+        </div>
+
+        <!-- Foto Criada -->
+        <div class="showcase-card">
+          <div class="showcase-img-box">
+            <img src="images/gabriel-ia/after_portrait.jpeg" alt="Foto profissional gerada por IA" />
+            <span class="showcase-badge badge-premium">Foto Criada por IA</span>
+          </div>
+          <div class="showcase-card-info">
+            <h3>Resultado Profissional (Depois)</h3>
+            <p>Retrato corporativo impecável. Terno ajustado por IA, luz de estúdio refinada e posicionamento que transmite autoridade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="estilos" class="gallery-section" aria-label="Estilos de Imagem">
+    <div class="container">
+      <div class="section-header fade-up" style="text-align: center; margin: 0 auto 56px; max-width: 800px;">
+        <span class="section-tag">Galeria</span>
+        <h2>Um clique. Infinitas possibilidades.</h2>
+        <p class="hero-desc" style="margin-top: 16px; font-size: 1.05rem;">Conheça a variedade de estilos corporativos e casuais de alto nível inclusos na nossa biblioteca de prompts.</p>
+      </div>
+
+      <div class="gallery-track-container fade-up">
+        <div class="gallery-track" id="gallery-track">
+          <!-- Slide 1 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/cinematic_bold.jpeg" alt="Estilo Cinematic Bold" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Cinematic Bold</span>
+              <div class="gallery-title">Alto contraste e atmosfera cinematográfica marcante</div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/high_fashion.jpeg" alt="Estilo High-Fashion Editorial" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">High-Fashion</span>
+              <div class="gallery-title">Estilo editorial de revistas internacionais</div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/clean_portrait.jpeg" alt="Estilo Clean Business Studio" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Clean Business</span>
+              <div class="gallery-title">Ideal para foto de perfil do LinkedIn e posicionamento</div>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/dark_portrait.jpeg" alt="Estilo Dark Corporate Studio" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Dark Mood Portrait</span>
+              <div class="gallery-title">Foco editorial em estúdio fechado com luz guiada</div>
+            </div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/futuristic.jpeg" alt="Estilo Futuristic Sci-Fi" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Futuristic Sci-Fi</span>
+              <div class="gallery-title">Pegada cyberpunk futurista refinada e limpa</div>
+            </div>
+          </div>
+          <!-- Slide 6 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/low_key.jpeg" alt="Estilo Low Key Cinematic" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Low-Key Studio</span>
+              <div class="gallery-title">Ambientes dinâmicos com alto contraste cinemático</div>
+            </div>
+          </div>
+          <!-- Slide 7 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/low_angle_cinematic.jpeg" alt="Estilo Low Angle Cinematic" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Low Angle Cinematic</span>
+              <div class="gallery-title">Perspectiva dinâmica e enquadramento cinemático</div>
+            </div>
+          </div>
+          <!-- Slide 8 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/dark_creative.jpeg" alt="Estilo Dark Creative Studio" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Dark Creative</span>
+              <div class="gallery-title">Luz criativa com sombras estilizadas de estúdio</div>
+            </div>
+          </div>
+          <!-- Slide 9 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/high_fashion_alt.jpeg" alt="Estilo Streetwear Editorial" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Streetwear Editorial</span>
+              <div class="gallery-title">Estilo urbano com pós-processamento de cores rico</div>
+            </div>
+          </div>
+          <!-- Slide 10 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/hyper_realistic.jpeg" alt="Estilo Hyper-Realism" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Hyper-Realism</span>
+              <div class="gallery-title">Nitidez extrema com foco na fidelidade dos poros</div>
+            </div>
+          </div>
+          <!-- Slide 11 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/warm_cinematic.jpeg" alt="Estilo Golden Hour Cinematic" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Golden Hour Cinematic</span>
+              <div class="gallery-title">Tom quente e atmosfera de fim de tarde profissional</div>
+            </div>
+          </div>
+          <!-- Slide 12 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/dramatic_bw.jpeg" alt="Estilo Dramatic Black & White" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Dramatic B&W</span>
+              <div class="gallery-title">Monocromático dramático com foco em textura e contraste</div>
+            </div>
+          </div>
+
+          <!-- DUPLICADOS PARA LOOP INFINITO (MÁGICA DO TICKER) -->
+          <!-- Slide 1 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/cinematic_bold.jpeg" alt="Estilo Cinematic Bold" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Cinematic Bold</span>
+              <div class="gallery-title">Alto contraste e atmosfera cinematográfica marcante</div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/high_fashion.jpeg" alt="Estilo High-Fashion Editorial" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">High-Fashion</span>
+              <div class="gallery-title">Estilo editorial de revistas internacionais</div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/clean_portrait.jpeg" alt="Estilo Clean Business Studio" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Clean Business</span>
+              <div class="gallery-title">Ideal para foto de perfil do LinkedIn e posicionamento</div>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/dark_portrait.jpeg" alt="Estilo Dark Corporate Studio" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Dark Mood Portrait</span>
+              <div class="gallery-title">Foco editorial em estúdio fechado com luz guiada</div>
+            </div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/futuristic.jpeg" alt="Estilo Futuristic Sci-Fi" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Futuristic Sci-Fi</span>
+              <div class="gallery-title">Pegada cyberpunk futurista refinada e limpa</div>
+            </div>
+          </div>
+          <!-- Slide 6 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/low_key.jpeg" alt="Estilo Low Key Cinematic" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Low-Key Studio</span>
+              <div class="gallery-title">Ambientes dinâmicos com alto contraste cinemático</div>
+            </div>
+          </div>
+          <!-- Slide 7 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/low_angle_cinematic.jpeg" alt="Estilo Low Angle Cinematic" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Low Angle Cinematic</span>
+              <div class="gallery-title">Perspectiva dinâmica e enquadramento cinemático</div>
+            </div>
+          </div>
+          <!-- Slide 8 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/dark_creative.jpeg" alt="Estilo Dark Creative Studio" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Dark Creative</span>
+              <div class="gallery-title">Luz criativa com sombras estilizadas de estúdio</div>
+            </div>
+          </div>
+          <!-- Slide 9 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/high_fashion_alt.jpeg" alt="Estilo Streetwear Editorial" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Streetwear Editorial</span>
+              <div class="gallery-title">Estilo urbano com pós-processamento de cores rico</div>
+            </div>
+          </div>
+          <!-- Slide 10 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/hyper_realistic.jpeg" alt="Estilo Hyper-Realism" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Hyper-Realism</span>
+              <div class="gallery-title">Nitidez extrema com foco na fidelidade dos poros</div>
+            </div>
+          </div>
+          <!-- Slide 11 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/warm_cinematic.jpeg" alt="Estilo Golden Hour Cinematic" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Golden Hour Cinematic</span>
+              <div class="gallery-title">Tom quente e atmosfera de fim de tarde profissional</div>
+            </div>
+          </div>
+          <!-- Slide 12 -->
+          <div class="gallery-item">
+            <img src="images/gabriel-ia/dramatic_bw.jpeg" alt="Estilo Dramatic Black & White" loading="lazy" />
+            <div class="gallery-info">
+              <span class="gallery-tag">Dramatic B&W</span>
+              <div class="gallery-title">Monocromático dramático com foco em textura e contraste</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O que está incluso -->
+  <section class="incluso-section" id="inclusos" aria-label="O que está incluso">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">O Método</span>
+        <h2>Tudo o que você vai receber</h2>
+      </div>
+
+      <div class="incluso-grid">
+        <!-- Item 1: Método na Prática -->
+        <div class="incluso-item">
+          <div class="incluso-info fade-up">
+            <h3><span>01 / Vídeo-Aulas & Passo a Passo</span>Método na Prática</h3>
+            <p>Acompanhe todo o processo através de aulas gravadas detalhadas. Veja na tela como transformar uma foto comum de celular em um retrato profissional de alta definição em 4K, utilizando apenas ferramentas 100% gratuitas.</p>
+            <p>Você terá acesso ao fluxo completo do início ao fim: configuração da ferramenta gratuita, ajuste dos prompts estruturados e técnicas para obter nitidez extrema de pele e iluminação realista de estúdio.</p>
+          </div>
+          <div class="incluso-visual fade-up d1">
+            <img src="images/gabriel-ia/dark_portrait_deliverable.jpeg" alt="Método na Prática - Aulas Gravadas 4K" />
+          </div>
+        </div>
+
+        <!-- Item 2: Assistente de IA -->
+        <div class="incluso-item">
+          <div class="incluso-visual fade-up">
+            <img src="images/gabriel-ia/futuristic.jpeg" alt="Assistente de IA - Criação de Prompts" />
+          </div>
+          <div class="incluso-info fade-up d1">
+            <h3><span>02 / Automação</span>Assistente de IA</h3>
+            <p>Tenha acesso ao assistente especializado que analisa imagens de referência e gera prompts estruturados automaticamente.</p>
+            <p>Basta enviar uma imagem e receber a estrutura de prompt pronta para utilizar em suas criações sem precisar escrever código ou engenharia de prompts complexa.</p>
+          </div>
+        </div>
+
+        <!-- Item 3: Biblioteca com 200 Prompts -->
+        <div class="incluso-item">
+          <div class="incluso-info fade-up">
+            <h3><span>03 / Biblioteca</span>Biblioteca com 200 Prompts</h3>
+            <p>Mais de 200 prompts testados organizados por categorias prontas. Copie e cole diretamente para criar novos resultados excepcionais.</p>
+            <ul class="incluso-list">
+              <li>Cinematic Editorial</li>
+              <li>Lifestyle</li>
+              <li>Profissional</li>
+              <li>Empresarial</li>
+              <li>Dark Mood</li>
+              <li>Fashion</li>
+              <li>Luxury</li>
+              <li>Creator</li>
+              <li>Retratos</li>
+              <li>Redes Sociais</li>
+            </ul>
+          </div>
+          <div class="incluso-visual fade-up d1">
+            <img src="images/gabriel-ia/high_fashion.jpeg" alt="Biblioteca com 200 Prompts - Variedade de Estilos" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Inline Prompt Demonstration -->
+      <div class="demo-box fade-up" style="margin-top: 60px; background: var(--surface); border: 1px solid rgba(71, 228, 190, 0.15); padding: 40px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center;">
+        <div style="position: relative; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--border);">
+          <img src="images/gabriel-ia/high_fashion.jpeg" alt="Exemplo de imagem gerada" style="width: 100%; height: 100%; object-fit: cover;" />
+          <span class="showcase-badge badge-premium" style="left: 15px; top: 15px;">Estilo Demonstrativo</span>
+        </div>
+        <div>
+          <span class="section-tag" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 8px; display: block;">Experiência Real</span>
+          <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: #fff; margin-bottom: 12px;">Como você vai receber os prompts</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Esta é uma amostra exata de como a biblioteca é estruturada. Copie o prompt estruturado abaixo e cole diretamente na ferramenta gratuita para testar o resultado.</p>
+          
+          <div class="prompt-preview-container" style="background: #050505; border: 1px solid var(--border); padding: 20px; position: relative;">
+            <pre id="demo-prompt-text" style="font-family: monospace; font-size: 0.85rem; color: var(--text); white-space: pre-wrap; word-break: break-all; margin: 0; line-height: 1.5;">{
+  "style": "High-Fashion Editorial",
+  "prompt": "A high-end cinematic editorial portrait of a man, dramatic studio shadow casting, sharp suit textures, photorealistic skin pores, shot on 85mm lens, soft backlight, rich color grading, ultra-detailed 4k resolution --ar 4:5"
+}</pre>
+            <button onclick="copyDemoPrompt()" id="copy-demo-btn" class="btn btn-outline" style="margin-top: 15px; padding: 8px 16px; font-size: 0.85rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>Copiar Prompt JSON</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Bônus Card -->
+      <div class="bonus-card fade-up">
+        <div>
+          <span class="bonus-badge">Presente Especial</span>
+          <h3 class="bonus-title">Bônus Inclusos</h3>
+        </div>
+        <div>
+          <ul class="bonus-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+              Biblioteca organizada visualmente
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+              Prompts prontos em formato JSON
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+              Acesso a futuras atualizações
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+              Novos prompts adicionados periodicamente
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para quem é / Não é necessário -->
+  <section class="target-section" aria-label="Perfil do Curso">
+    <div class="container target-grid">
+      <!-- Para quem é -->
+      <div class="target-col yes fade-up">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          Ideal para:
+        </h3>
+        <ul class="target-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span><strong>Criadores de Conteúdo</strong> que querem elevar a qualidade visual de suas postagens.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span><strong>Designers & Social Media</strong> que precisam entregar layouts premium mais rápido.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span><strong>Profissionais de Marketing & Empreendedores</strong> buscando economizar com ensaios fotográficos tradicionais.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span><strong>Pessoas comuns</strong> que desejam ter fotos profissionais incríveis no perfil social.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Não é necessário -->
+      <div class="target-col no fade-up d1">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          Você não precisa:
+        </h3>
+        <ul class="target-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <span><strong>Saber programar</strong> ou entender conceitos de programação de computadores.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <span><strong>Ter experiência anterior com IA</strong>. O guia ensina absolutamente tudo do zero.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <span><strong>Utilizar ferramentas pagas</strong>. Todas as técnicas demonstradas usam soluções 100% gratuitas.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <span><strong>Entender de Engenharia de Prompt avançada</strong>. Nós já entregamos os prompts e o assistente pronto.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing / Investimento Section -->
+  <section class="pricing-section" id="investimento" aria-label="Investimento">
+    <div class="pricing-glow"></div>
+    <div class="container">
+      <div class="pricing-card fade-up">
+        <span class="pricing-badge">Acesso imediato</span>
+        <h2 class="pricing-title">Método Promptbook IA</h2>
+        <p class="price-info">Área de membros completa com aulas, biblioteca e assistente de IA</p>
+        
+        <div class="price-original">De R$ 97,00 por apenas</div>
+        <div class="price-current"><span>R$</span> 47,00</div>
+        <div class="price-info" style="margin-bottom: 24px;">Pagamento único. Acesso vitalício com todas as futuras atualizações.</div>
+
+        <ul class="price-features">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+            Aulas passo a passo completas
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+            Biblioteca ativa com +200 Prompts
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+            Assistente IA de imagens de referência
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+            Atualizações e suporte inclusos
+          </li>
+        </ul>
+
+        <a href="https://pay.cakto.com.br/rs4i7pj" class="btn btn-main" style="width: 100%;" target="_blank">Quero Começar Agora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">Promptbook<span>.IA</span></div>
+      <div class="footer-copy">&copy; 2026 Gabriel Coltz. Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade up animations on scroll using Intersection Observer with a low threshold for fast mobile triggers
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+    // Auto-stagger animation delays for grids to load beautifully in order
+    document.querySelectorAll('.learn-grid, .showcase-grid, .incluso-grid').forEach(grid => {
+      Array.from(grid.children).forEach((item, idx) => {
+        item.style.transitionDelay = `${idx * 0.1}s`;
+        item.classList.add('fade-up');
+      });
+    });
+
+    document.querySelectorAll('.fade-up').forEach(element => {
+      observer.observe(element);
+    });
+
+
+
+
+    function copyDemoPrompt() {
+      const text = document.getElementById('demo-prompt-text').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-demo-btn');
+        const span = btn.querySelector('span');
+        const originalText = span.textContent;
+        
+        span.textContent = 'Prompt Copiado!';
+        btn.style.borderColor = 'var(--accent)';
+        btn.style.color = 'var(--accent)';
+        
+        setTimeout(() => {
+          span.textContent = originalText;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
