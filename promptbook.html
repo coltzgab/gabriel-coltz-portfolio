@@ -36,7 +36,11 @@
       --text-dim: #666666;
     }
 
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-x: clip;
+    }
 
     body {
       background: var(--bg);
@@ -45,6 +49,7 @@
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -451,20 +456,9 @@
       display: flex;
       gap: 20px;
       width: max-content;
-      animation: ticker 45s linear infinite;
-    }
-
-    .gallery-track:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes ticker {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-      100% {
-        transform: translate3d(calc(-50% - 10px), 0, 0);
-      }
+      will-change: transform;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .gallery-item {
@@ -474,13 +468,23 @@
       border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
+    .gallery-item picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+    }
+
+    .gallery-item picture img,
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
       transition: transform 0.5s ease;
     }
 
@@ -1646,7 +1650,7 @@
   </footer>
 
   <script>
-    // Fade up animations on scroll using Intersection Observer with a low threshold for fast mobile triggers
+    // Fade up animations on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1656,7 +1660,6 @@
       });
     }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
-    // Auto-stagger animation delays for grids to load beautifully in order
     document.querySelectorAll('.learn-grid, .showcase-grid, .incluso-grid').forEach(grid => {
       Array.from(grid.children).forEach((item, idx) => {
         item.style.transitionDelay = `${idx * 0.1}s`;
@@ -1664,12 +1667,154 @@
       });
     });
 
-    document.querySelectorAll('.fade-up').forEach(element => {
-      observer.observe(element);
-    });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+    // JS-driven infinite carousel with mouse & touch drag/swipe support
+    (function() {
+      const track = document.getElementById('gallery-track');
+      if (!track) return;
+      
+      const items = track.querySelectorAll('.gallery-item');
+      const totalOriginal = Math.floor(items.length / 2);
+      
+      let pos = 0;
+      let speed = 1.4; // px per frame - slightly faster for dynamic feel
+      let isPressed = false;
+      let startX = 0;
+      let startY = 0;
+      let dx = 0;
+      let initialPos = 0;
+      let isDragging = false;
+      let dragDirectionDecided = false;
+      let raf;
+      let paused = false;
 
+      function getResetPoint() {
+        let w = 0;
+        for (let i = 0; i < totalOriginal; i++) {
+          w += items[i].offsetWidth + 20; // 20 = gap (CSS gap: 20px)
+        }
+        return w;
+      }
 
+      function updatePosition(position) {
+        let resetAt = getResetPoint();
+        if (!resetAt || isNaN(resetAt) || resetAt <= 0) {
+          track.style.transform = `translate3d(0px, 0, 0)`;
+          return 0;
+        }
+        
+        let wrapped = position % resetAt;
+        if (wrapped < 0) wrapped += resetAt;
+        
+        track.style.transform = `translate3d(${-wrapped}px, 0, 0)`;
+        return wrapped;
+      }
+
+      function animate() {
+        if (!isPressed && !paused) {
+          pos += speed;
+          pos = updatePosition(pos);
+        }
+        raf = requestAnimationFrame(animate);
+      }
+
+      // Drag start (Mouse / Touch)
+      function dragStart(e) {
+        isPressed = true;
+        dragDirectionDecided = false;
+        isDragging = false;
+        initialPos = pos;
+        
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+        startX = clientX;
+        startY = clientY;
+        dx = 0;
+        
+        track.style.cursor = 'grabbing';
+      }
+
+      // Dragging (Mouse / Touch)
+      function dragMove(e) {
+        if (!isPressed) return;
+        
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+        
+        dx = clientX - startX;
+        const dy = clientY - startY;
+
+        if (!dragDirectionDecided) {
+          if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+            dragDirectionDecided = true;
+            if (Math.abs(dx) > Math.abs(dy)) {
+              isDragging = true;
+            }
+          }
+        }
+
+        if (isDragging) {
+          if (e.cancelable) e.preventDefault(); // Stop vertical scroll if dragging horizontally
+          pos = initialPos - dx;
+          updatePosition(pos);
+        }
+      }
+
+      // Drag end (Mouse / Touch)
+      function dragEnd() {
+        if (!isPressed) return;
+        isPressed = false;
+        track.style.cursor = 'grab';
+        
+        let resetAt = getResetPoint();
+        if (resetAt > 0) {
+          pos = pos % resetAt;
+          if (pos < 0) pos += resetAt;
+        }
+      }
+
+      // Hook up Mouse Events
+      track.addEventListener('mousedown', dragStart);
+      window.addEventListener('mousemove', dragMove);
+      window.addEventListener('mouseup', dragEnd);
+      track.addEventListener('mouseleave', dragEnd);
+
+      // Hook up Touch Events
+      track.addEventListener('touchstart', dragStart, { passive: false });
+      track.addEventListener('touchmove', dragMove, { passive: false });
+      track.addEventListener('touchend', dragEnd, { passive: true });
+
+      // Hover to pause auto scroll (desktop only)
+      track.addEventListener('mouseenter', () => {
+        if (!isPressed) paused = true;
+      });
+      track.addEventListener('mouseleave', () => {
+        if (!isPressed) paused = false;
+      });
+
+      // Intersection Observer with low threshold to start animation reliably
+      const carouselObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!raf) animate();
+          } else {
+            if (raf) {
+              cancelAnimationFrame(raf);
+              raf = null;
+            }
+          }
+        });
+      }, { threshold: 0.01 });
+      carouselObs.observe(track.parentElement);
+      
+      track.style.cursor = 'grab';
+      
+      // Prevent browser dragging of images/links inside track
+      track.querySelectorAll('img, a').forEach(el => {
+        el.addEventListener('dragstart', (e) => e.preventDefault());
+      });
+    })();
 
     function copyDemoPrompt() {
       const text = document.getElementById('demo-prompt-text').textContent;
@@ -1677,11 +1822,9 @@
         const btn = document.getElementById('copy-demo-btn');
         const span = btn.querySelector('span');
         const originalText = span.textContent;
-        
         span.textContent = 'Prompt Copiado!';
         btn.style.borderColor = 'var(--accent)';
         btn.style.color = 'var(--accent)';
-        
         setTimeout(() => {
           span.textContent = originalText;
           btn.style.borderColor = '';
