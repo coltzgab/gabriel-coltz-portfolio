@@ -3,15 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
   <title>PROMPTBOOK IA — Crie Fotos Profissionais com Inteligência Artificial</title>
   
   <!-- SEO Meta Tags -->
   <meta name="description" content="Aprenda o método prático para gerar imagens realistas, editoriais e cinematográficas utilizando Inteligência Artificial e ferramentas gratuitas." />
   <meta name="keywords" content="Promptbook, IA, Inteligência Artificial, Fotos Profissionais, Prompts IA, Midjourney, Leonardo AI" />
   
+  <!-- Preload LCP image -->
+  <link rel="preload" as="image" type="image/webp" href="images/gabriel-ia/webp/clean_hero.webp" fetchpriority="high" />
+  
+  <!-- Non-render-blocking Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
   
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,7 +36,7 @@
       --text-dim: #666666;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: var(--bg);
@@ -123,7 +130,7 @@
       top: 0; right: 0;
       width: 70%;
       height: 100%;
-      background: url('images/gabriel-ia/clean_hero.jpeg') center 40% / cover no-repeat;
+      background: url('images/gabriel-ia/webp/clean_hero.webp') center 40% / cover no-repeat;
       mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
       -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
       opacity: 0.8;
@@ -411,9 +418,13 @@
 
     .gallery-track-container {
       overflow: hidden;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
+      width: 100%;
       position: relative;
+      margin-left: -40px;
+      margin-right: -40px;
+      padding-left: 0;
+      padding-right: 0;
+      width: calc(100% + 80px);
     }
 
     .gallery-track-container::before,
@@ -441,7 +452,6 @@
       gap: 20px;
       width: max-content;
       animation: ticker 45s linear infinite;
-      will-change: transform;
     }
 
     .gallery-track:hover {
@@ -904,6 +914,12 @@
     .d2 { transition-delay: 0.2s; }
     .d3 { transition-delay: 0.3s; }
 
+    /* Reduced motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { transition: none; opacity: 1; transform: none; }
+      .gallery-track { animation: none; }
+    }
+
     /* Responsive adjustments */
     @media (max-width: 960px) {
       .container { padding: 0 24px; }
@@ -968,6 +984,14 @@
       .showcase-grid {
         grid-template-columns: 1fr;
         gap: 24px;
+      }
+      .gallery-track-container {
+        margin-left: -24px;
+        margin-right: -24px;
+        width: calc(100% + 48px);
+      }
+      .gallery-item {
+        flex: 0 0 260px;
       }
       .incluso-item, .incluso-item:nth-child(even) {
         grid-template-columns: 1fr;
@@ -1106,7 +1130,7 @@
         <!-- Foto Enviada -->
         <div class="showcase-card">
           <div class="showcase-img-box">
-            <img src="images/gabriel-ia/before_portrait.jpeg" alt="Foto enviada de referência" />
+            <picture><source srcset="images/gabriel-ia/webp/before_portrait.webp" type="image/webp" /><img src="images/gabriel-ia/before_portrait.jpeg" alt="Foto enviada de referência" width="640" height="800" decoding="async"  /></picture>
             <span class="showcase-badge badge-original">Foto Enviada</span>
           </div>
           <div class="showcase-card-info">
@@ -1118,7 +1142,7 @@
         <!-- Foto Criada -->
         <div class="showcase-card">
           <div class="showcase-img-box">
-            <img src="images/gabriel-ia/after_portrait.jpeg" alt="Foto profissional gerada por IA" />
+            <picture><source srcset="images/gabriel-ia/webp/after_portrait.webp" type="image/webp" /><img src="images/gabriel-ia/after_portrait.jpeg" alt="Foto profissional gerada por IA" width="800" height="1000" decoding="async"  /></picture>
             <span class="showcase-badge badge-premium">Foto Criada por IA</span>
           </div>
           <div class="showcase-card-info">
@@ -1134,7 +1158,7 @@
         <!-- Foto Enviada (Feminina) -->
         <div class="showcase-card">
           <div class="showcase-img-box">
-            <img src="images/gabriel-ia/before_woman.png" alt="Foto enviada de referência" />
+            <picture><source srcset="images/gabriel-ia/webp/before_woman.webp" type="image/webp" /><img src="images/gabriel-ia/before_woman.png" alt="Foto enviada de referência" width="640" height="800" loading="lazy" decoding="async"  /></picture>
             <span class="showcase-badge badge-original">Foto Enviada</span>
           </div>
           <div class="showcase-card-info">
@@ -1146,7 +1170,7 @@
         <!-- Foto Criada (Feminina) -->
         <div class="showcase-card">
           <div class="showcase-img-box">
-            <img src="images/gabriel-ia/after_woman.jpeg" alt="Foto profissional gerada por IA" />
+            <picture><source srcset="images/gabriel-ia/webp/after_woman.webp" type="image/webp" /><img src="images/gabriel-ia/after_woman.jpeg" alt="Foto profissional gerada por IA" width="800" height="1000" loading="lazy" decoding="async"  /></picture>
             <span class="showcase-badge badge-premium">Foto Criada por IA</span>
           </div>
           <div class="showcase-card-info">
@@ -1162,7 +1186,7 @@
         <!-- Foto Enviada (Barbeiro) -->
         <div class="showcase-card">
           <div class="showcase-img-box">
-            <img src="images/gabriel-ia/before_barber.jpeg" alt="Foto enviada de referência" />
+            <picture><source srcset="images/gabriel-ia/webp/before_barber.webp" type="image/webp" /><img src="images/gabriel-ia/before_barber.jpeg" alt="Foto enviada de referência" width="640" height="800" loading="lazy" decoding="async"  /></picture>
             <span class="showcase-badge badge-original">Foto Enviada</span>
           </div>
           <div class="showcase-card-info">
@@ -1174,7 +1198,7 @@
         <!-- Foto Criada (Barbeiro) -->
         <div class="showcase-card">
           <div class="showcase-img-box">
-            <img src="images/gabriel-ia/after_barber.jpeg" alt="Foto profissional gerada por IA" />
+            <picture><source srcset="images/gabriel-ia/webp/after_barber.webp" type="image/webp" /><img src="images/gabriel-ia/after_barber.jpeg" alt="Foto profissional gerada por IA" width="800" height="1000" loading="lazy" decoding="async"  /></picture>
             <span class="showcase-badge badge-premium">Foto Criada por IA</span>
           </div>
           <div class="showcase-card-info">
@@ -1198,7 +1222,7 @@
         <div class="gallery-track" id="gallery-track">
           <!-- Slide 1 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/cinematic_bold.jpeg" alt="Estilo Cinematic Bold" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/cinematic_bold.webp" type="image/webp" /><img src="images/gabriel-ia/cinematic_bold.jpeg" alt="Estilo Cinematic Bold" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Cinematic Bold</span>
               <div class="gallery-title">Alto contraste e atmosfera cinematográfica marcante</div>
@@ -1206,7 +1230,7 @@
           </div>
           <!-- Slide 2 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/high_fashion.jpeg" alt="Estilo High-Fashion Editorial" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/high_fashion.webp" type="image/webp" /><img src="images/gabriel-ia/high_fashion.jpeg" alt="Estilo High-Fashion Editorial" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">High-Fashion</span>
               <div class="gallery-title">Estilo editorial de revistas internacionais</div>
@@ -1214,7 +1238,7 @@
           </div>
           <!-- Slide 3 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/clean_portrait.jpeg" alt="Estilo Clean Business Studio" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/clean_portrait.webp" type="image/webp" /><img src="images/gabriel-ia/clean_portrait.jpeg" alt="Estilo Clean Business Studio" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Clean Business</span>
               <div class="gallery-title">Ideal para foto de perfil do LinkedIn e posicionamento</div>
@@ -1222,7 +1246,7 @@
           </div>
           <!-- Slide 4 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/dark_portrait.jpeg" alt="Estilo Dark Corporate Studio" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/dark_portrait.webp" type="image/webp" /><img src="images/gabriel-ia/dark_portrait.jpeg" alt="Estilo Dark Corporate Studio" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Dark Mood Portrait</span>
               <div class="gallery-title">Foco editorial em estúdio fechado com luz guiada</div>
@@ -1230,7 +1254,7 @@
           </div>
           <!-- Slide 5 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/futuristic.jpeg" alt="Estilo Futuristic Sci-Fi" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/futuristic.webp" type="image/webp" /><img src="images/gabriel-ia/futuristic.jpeg" alt="Estilo Futuristic Sci-Fi" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Futuristic Sci-Fi</span>
               <div class="gallery-title">Pegada cyberpunk futurista refinada e limpa</div>
@@ -1238,7 +1262,7 @@
           </div>
           <!-- Slide 6 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/low_key.jpeg" alt="Estilo Low Key Cinematic" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/low_key.webp" type="image/webp" /><img src="images/gabriel-ia/low_key.jpeg" alt="Estilo Low Key Cinematic" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Low-Key Studio</span>
               <div class="gallery-title">Ambientes dinâmicos com alto contraste cinemático</div>
@@ -1246,7 +1270,7 @@
           </div>
           <!-- Slide 7 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/low_angle_cinematic.jpeg" alt="Estilo Low Angle Cinematic" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/low_angle_cinematic.webp" type="image/webp" /><img src="images/gabriel-ia/low_angle_cinematic.jpeg" alt="Estilo Low Angle Cinematic" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Low Angle Cinematic</span>
               <div class="gallery-title">Perspectiva dinâmica e enquadramento cinemático</div>
@@ -1254,7 +1278,7 @@
           </div>
           <!-- Slide 8 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/dark_creative.jpeg" alt="Estilo Dark Creative Studio" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/dark_creative.webp" type="image/webp" /><img src="images/gabriel-ia/dark_creative.jpeg" alt="Estilo Dark Creative Studio" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Dark Creative</span>
               <div class="gallery-title">Luz criativa com sombras estilizadas de estúdio</div>
@@ -1262,7 +1286,7 @@
           </div>
           <!-- Slide 9 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/high_fashion_alt.jpeg" alt="Estilo Streetwear Editorial" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/high_fashion_alt.webp" type="image/webp" /><img src="images/gabriel-ia/high_fashion_alt.jpeg" alt="Estilo Streetwear Editorial" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Streetwear Editorial</span>
               <div class="gallery-title">Estilo urbano com pós-processamento de cores rico</div>
@@ -1270,7 +1294,7 @@
           </div>
           <!-- Slide 10 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/hyper_realistic.jpeg" alt="Estilo Hyper-Realism" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/hyper_realistic.webp" type="image/webp" /><img src="images/gabriel-ia/hyper_realistic.jpeg" alt="Estilo Hyper-Realism" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Hyper-Realism</span>
               <div class="gallery-title">Nitidez extrema com foco na fidelidade dos poros</div>
@@ -1278,7 +1302,7 @@
           </div>
           <!-- Slide 11 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/warm_cinematic.jpeg" alt="Estilo Golden Hour Cinematic" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/warm_cinematic.webp" type="image/webp" /><img src="images/gabriel-ia/warm_cinematic.jpeg" alt="Estilo Golden Hour Cinematic" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Golden Hour Cinematic</span>
               <div class="gallery-title">Tom quente e atmosfera de fim de tarde profissional</div>
@@ -1286,7 +1310,7 @@
           </div>
           <!-- Slide 12 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/dramatic_bw.jpeg" alt="Estilo Dramatic Black & White" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/dramatic_bw.webp" type="image/webp" /><img src="images/gabriel-ia/dramatic_bw.jpeg" alt="Estilo Dramatic Black & White" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Dramatic B&W</span>
               <div class="gallery-title">Monocromático dramático com foco em textura e contraste</div>
@@ -1296,7 +1320,7 @@
           <!-- DUPLICADOS PARA LOOP INFINITO (MÁGICA DO TICKER) -->
           <!-- Slide 1 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/cinematic_bold.jpeg" alt="Estilo Cinematic Bold" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/cinematic_bold.webp" type="image/webp" /><img src="images/gabriel-ia/cinematic_bold.jpeg" alt="Estilo Cinematic Bold" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Cinematic Bold</span>
               <div class="gallery-title">Alto contraste e atmosfera cinematográfica marcante</div>
@@ -1304,7 +1328,7 @@
           </div>
           <!-- Slide 2 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/high_fashion.jpeg" alt="Estilo High-Fashion Editorial" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/high_fashion.webp" type="image/webp" /><img src="images/gabriel-ia/high_fashion.jpeg" alt="Estilo High-Fashion Editorial" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">High-Fashion</span>
               <div class="gallery-title">Estilo editorial de revistas internacionais</div>
@@ -1312,7 +1336,7 @@
           </div>
           <!-- Slide 3 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/clean_portrait.jpeg" alt="Estilo Clean Business Studio" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/clean_portrait.webp" type="image/webp" /><img src="images/gabriel-ia/clean_portrait.jpeg" alt="Estilo Clean Business Studio" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Clean Business</span>
               <div class="gallery-title">Ideal para foto de perfil do LinkedIn e posicionamento</div>
@@ -1320,7 +1344,7 @@
           </div>
           <!-- Slide 4 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/dark_portrait.jpeg" alt="Estilo Dark Corporate Studio" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/dark_portrait.webp" type="image/webp" /><img src="images/gabriel-ia/dark_portrait.jpeg" alt="Estilo Dark Corporate Studio" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Dark Mood Portrait</span>
               <div class="gallery-title">Foco editorial em estúdio fechado com luz guiada</div>
@@ -1328,7 +1352,7 @@
           </div>
           <!-- Slide 5 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/futuristic.jpeg" alt="Estilo Futuristic Sci-Fi" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/futuristic.webp" type="image/webp" /><img src="images/gabriel-ia/futuristic.jpeg" alt="Estilo Futuristic Sci-Fi" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Futuristic Sci-Fi</span>
               <div class="gallery-title">Pegada cyberpunk futurista refinada e limpa</div>
@@ -1336,7 +1360,7 @@
           </div>
           <!-- Slide 6 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/low_key.jpeg" alt="Estilo Low Key Cinematic" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/low_key.webp" type="image/webp" /><img src="images/gabriel-ia/low_key.jpeg" alt="Estilo Low Key Cinematic" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Low-Key Studio</span>
               <div class="gallery-title">Ambientes dinâmicos com alto contraste cinemático</div>
@@ -1344,7 +1368,7 @@
           </div>
           <!-- Slide 7 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/low_angle_cinematic.jpeg" alt="Estilo Low Angle Cinematic" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/low_angle_cinematic.webp" type="image/webp" /><img src="images/gabriel-ia/low_angle_cinematic.jpeg" alt="Estilo Low Angle Cinematic" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Low Angle Cinematic</span>
               <div class="gallery-title">Perspectiva dinâmica e enquadramento cinemático</div>
@@ -1352,7 +1376,7 @@
           </div>
           <!-- Slide 8 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/dark_creative.jpeg" alt="Estilo Dark Creative Studio" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/dark_creative.webp" type="image/webp" /><img src="images/gabriel-ia/dark_creative.jpeg" alt="Estilo Dark Creative Studio" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Dark Creative</span>
               <div class="gallery-title">Luz criativa com sombras estilizadas de estúdio</div>
@@ -1360,7 +1384,7 @@
           </div>
           <!-- Slide 9 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/high_fashion_alt.jpeg" alt="Estilo Streetwear Editorial" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/high_fashion_alt.webp" type="image/webp" /><img src="images/gabriel-ia/high_fashion_alt.jpeg" alt="Estilo Streetwear Editorial" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Streetwear Editorial</span>
               <div class="gallery-title">Estilo urbano com pós-processamento de cores rico</div>
@@ -1368,7 +1392,7 @@
           </div>
           <!-- Slide 10 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/hyper_realistic.jpeg" alt="Estilo Hyper-Realism" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/hyper_realistic.webp" type="image/webp" /><img src="images/gabriel-ia/hyper_realistic.jpeg" alt="Estilo Hyper-Realism" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Hyper-Realism</span>
               <div class="gallery-title">Nitidez extrema com foco na fidelidade dos poros</div>
@@ -1376,7 +1400,7 @@
           </div>
           <!-- Slide 11 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/warm_cinematic.jpeg" alt="Estilo Golden Hour Cinematic" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/warm_cinematic.webp" type="image/webp" /><img src="images/gabriel-ia/warm_cinematic.jpeg" alt="Estilo Golden Hour Cinematic" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Golden Hour Cinematic</span>
               <div class="gallery-title">Tom quente e atmosfera de fim de tarde profissional</div>
@@ -1384,7 +1408,7 @@
           </div>
           <!-- Slide 12 -->
           <div class="gallery-item">
-            <img src="images/gabriel-ia/dramatic_bw.jpeg" alt="Estilo Dramatic Black & White" loading="lazy" />
+            <picture><source srcset="images/gabriel-ia/webp/dramatic_bw.webp" type="image/webp" /><img src="images/gabriel-ia/dramatic_bw.jpeg" alt="Estilo Dramatic Black & White" width="800" height="1000" loading="lazy" decoding="async" loading="lazy" /></picture>
             <div class="gallery-info">
               <span class="gallery-tag">Dramatic B&W</span>
               <div class="gallery-title">Monocromático dramático com foco em textura e contraste</div>
@@ -1412,14 +1436,14 @@
             <p>Você terá acesso ao fluxo completo do início ao fim: configuração da ferramenta gratuita, ajuste dos prompts estruturados e técnicas para obter nitidez extrema de pele e iluminação realista de estúdio.</p>
           </div>
           <div class="incluso-visual fade-up d1">
-            <img src="images/gabriel-ia/dark_portrait_deliverable.jpeg" alt="Método na Prática - Aulas Gravadas 4K" />
+            <picture><source srcset="images/gabriel-ia/webp/dark_portrait_deliverable.webp" type="image/webp" /><img src="images/gabriel-ia/dark_portrait_deliverable.jpeg" alt="Método na Prática - Aulas Gravadas 4K" width="800" height="1000" loading="lazy" decoding="async"  /></picture>
           </div>
         </div>
 
         <!-- Item 2: Assistente de IA -->
         <div class="incluso-item">
           <div class="incluso-visual fade-up">
-            <img src="images/gabriel-ia/futuristic.jpeg" alt="Assistente de IA - Criação de Prompts" />
+            <picture><source srcset="images/gabriel-ia/webp/futuristic.webp" type="image/webp" /><img src="images/gabriel-ia/futuristic.jpeg" alt="Assistente de IA - Criação de Prompts" width="800" height="1000" loading="lazy" decoding="async"  /></picture>
           </div>
           <div class="incluso-info fade-up d1">
             <h3><span>02 / Bônus Grátis</span>Assistente de IA Gerador de Prompts</h3>
@@ -1447,7 +1471,7 @@
             </ul>
           </div>
           <div class="incluso-visual fade-up d1">
-            <img src="images/gabriel-ia/high_fashion.jpeg" alt="Biblioteca com 200 Prompts - Variedade de Estilos" />
+            <picture><source srcset="images/gabriel-ia/webp/high_fashion.webp" type="image/webp" /><img src="images/gabriel-ia/high_fashion.jpeg" alt="Biblioteca com 200 Prompts - Variedade de Estilos" width="800" height="1000" loading="lazy" decoding="async"  /></picture>
           </div>
         </div>
       </div>
@@ -1455,7 +1479,7 @@
       <!-- Inline Prompt Demonstration -->
       <div class="demo-box fade-up" style="margin-top: 60px; background: var(--surface); border: 1px solid rgba(71, 228, 190, 0.15); padding: 40px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center;">
         <div style="position: relative; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--border);">
-          <img src="images/gabriel-ia/high_fashion.jpeg" alt="Exemplo de imagem gerada" style="width: 100%; height: 100%; object-fit: cover;" />
+          <picture><source srcset="images/gabriel-ia/webp/high_fashion.webp" type="image/webp" /><img src="images/gabriel-ia/high_fashion.jpeg" alt="Exemplo de imagem gerada" width="800" height="1000" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" /></picture>
           <span class="showcase-badge badge-premium" style="left: 15px; top: 15px;">Estilo Demonstrativo</span>
         </div>
         <div>
