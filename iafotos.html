@@ -1832,6 +1832,21 @@
         }, 2000);
       });
     }
+
+    // Back redirect downsell trigger
+    (function() {
+      const stateObj = { backRedirect: true };
+      try {
+        history.pushState(stateObj, document.title, window.location.href);
+        history.pushState(stateObj, document.title, window.location.href);
+      } catch (e) {
+        console.error('History pushState error:', e);
+      }
+
+      window.addEventListener('popstate', function(event) {
+        window.location.replace('ultima-chance');
+      });
+    })();
   </script>
 </body>
 </html>
