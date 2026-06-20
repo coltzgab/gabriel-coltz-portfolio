@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <title>OFERTA EXCLUSIVA — Promptbook IA</title>
+  <meta name="description" content="Aproveite esta oferta exclusiva: acesso vitalício ao Promptbook.IA por apenas R$ 27." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050505;
+      --surface: #0c0c0c;
+      --surface2: #121212;
+      --border: #1c1c1c;
+      --accent: #47e4be; /* Portfolio Mint Teal */
+      --accent-dim: rgba(71, 228, 190, 0.10);
+      --accent-glow: rgba(71, 228, 190, 0.22);
+      --accent-danger: #ff4a4a;
+      --accent-danger-dim: rgba(255, 74, 74, 0.10);
+      --text: #F5F5F5;
+      --text-muted: #9E9E9E;
+      --text-dim: #666666;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    /* Minimal Header */
+    header {
+      padding: 25px 0;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    /* Main Section */
+    .sales-section {
+      padding: 50px 0 120px;
+    }
+
+    .headline-group {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+
+    .warn-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(71, 228, 190, 0.2);
+      color: var(--accent);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .main-title {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .main-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Split Grid */
+    .sales-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Column Left: Benefits & Offer */
+    .offer-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent);
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    /* Checklist Benefits */
+    .benefits-list {
+      list-style: none;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .benefits-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .benefits-list li svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .benefits-list li strong {
+      color: #fff;
+    }
+
+    /* Pricing Area */
+    .price-box {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .price-old {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+
+    .price-new {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      display: flex;
+      align-items: flex-baseline;
+      gap: 8px;
+    }
+
+    .price-new span {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .price-tagline {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* CTA Button */
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--accent);
+      color: #050505;
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      border-radius: 4px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px var(--accent-glow);
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+
+    .btn-checkout:hover {
+      background: #5effda;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(71, 228, 190, 0.35);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    .btn-checkout svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Column Right: Before/After Cases */
+    .proof-box {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .proof-title {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 4px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .proof-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    /* Before-After Card Stack */
+    .showcase-pair {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .showcase-photo {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .showcase-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-tag {
+      position: absolute;
+      top: 10px; left: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+    }
+
+    .tag-original {
+      background: #000;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .tag-ia {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .showcase-label {
+      grid-column: span 2;
+      font-size: 0.85rem;
+      color: var(--text);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .showcase-label span {
+      color: var(--accent);
+    }
+
+    /* Floating Footer Bar */
+    .floating-bar {
+      position: fixed;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(150px);
+      width: calc(100% - 48px);
+      max-width: 800px;
+      background: rgba(12, 12, 12, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .floating-bar.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .bar-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bar-info-text h4 {
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    .bar-info-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .bar-timer-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-shrink: 0;
+    }
+
+    .bar-timer {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 4px;
+      min-width: 80px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .bar-timer.flash {
+      color: var(--accent-danger);
+      border-color: var(--accent-danger);
+      background: rgba(255, 74, 74, 0.05);
+      animation: alert-flash 0.5s infinite alternate;
+    }
+
+    .floating-bar.flash-glow {
+      border-color: var(--accent-danger);
+      box-shadow: 0 0 25px rgba(255, 74, 74, 0.3), 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    @keyframes alert-flash {
+      0% { opacity: 0.4; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .bar-cta {
+      display: inline-block;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .bar-cta:hover {
+      background: #5effda;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent) !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .sales-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .main-title {
+        font-size: 2rem;
+      }
+      .floating-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 16px;
+        bottom: 12px;
+        width: calc(100% - 24px);
+      }
+      .bar-info {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .bar-timer-wrapper {
+        width: 100%;
+        justify-content: center;
+      }
+      .bar-timer {
+        width: 100%;
+        max-width: 200px;
+      }
+      .bar-cta {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimal Header -->
+  <header>
+    <div class="logo">Promptbook<span>.IA</span></div>
+  </header>
+
+  <!-- Sales Offer Section -->
+  <section class="sales-section">
+    <div class="container">
+      
+      <div class="headline-group">
+        <span class="warn-badge">Acesso Vitalício — Oferta Única</span>
+        <h1 class="main-title">Checklist + Pack Completo por R$ 27</h1>
+        <p class="main-subtitle">Acesso imediato ao método estruturado para criar fotos profissionais e realistas com Inteligência Artificial.</p>
+      </div>
+
+      <div class="sales-grid">
+        
+        <!-- Offer Card Left -->
+        <div class="offer-card">
+          <h2 class="card-title">O que está incluso:</h2>
+          
+          <ul class="benefits-list">
+            <li>
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span><strong>Guia Passo a Passo:</strong> O método direto do zero ao resultado profissional.</span>
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span><strong>Biblioteca de Prompts:</strong> 200+ prompts prontos de copiar e colar.</span>
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span><strong>Consistência Facial:</strong> Estratégias para manter a mesma face em fotos diferentes.</span>
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span><strong>Atualizações Vitalícias:</strong> Sem taxas adicionais ou assinaturas.</span>
+            </li>
+          </ul>
+
+          <div class="price-box">
+            <div class="price-old">De R$ 97,00 por apenas</div>
+            <div class="price-new"><span>R$</span> 27,00</div>
+            <div class="price-tagline">Pagamento único — Pix ou Cartão</div>
+          </div>
+
+          <a href="https://pay.cakto.com.br/wu7rtmh_934673" class="btn-checkout">
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path></svg>
+            Garantir Meu Acesso por R$ 27
+          </a>
+        </div>
+
+        <!-- Case Proof Right -->
+        <div class="proof-box">
+          <div>
+            <h3 class="proof-title">Resultados do Método</h3>
+            <p class="proof-desc">Exemplo real comparando a foto original e a imagem premium gerada com o pack:</p>
+          </div>
+
+          <!-- Case 1 -->
+          <div class="showcase-pair">
+            <div class="showcase-photo">
+              <img src="images/gabriel-ia/before_portrait.jpeg" alt="Foto original" />
+              <span class="photo-tag tag-original">Original</span>
+            </div>
+            <div class="showcase-photo">
+              <img src="images/gabriel-ia/after_portrait.jpeg" alt="Foto gerada com IA" />
+              <span class="photo-tag tag-ia">IA Premium</span>
+            </div>
+            <div class="showcase-label">Caso 1: Retrato Profissional Masculino</div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="showcase-pair">
+            <div class="showcase-photo">
+              <img src="images/gabriel-ia/before_woman.png" alt="Foto original" />
+              <span class="photo-tag tag-original">Original</span>
+            </div>
+            <div class="showcase-photo">
+              <img src="images/gabriel-ia/after_woman.jpeg" alt="Foto gerada com IA" />
+              <span class="photo-tag tag-ia">IA Premium</span>
+            </div>
+            <div class="showcase-label">Caso 2: Retrato Profissional Feminino</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Floating Footer Bar -->
+  <div class="floating-bar" id="downsell-bar">
+    <div class="bar-info">
+      <div class="bar-info-text">
+        <h4>Desconto Temporário</h4>
+        <p>Aproveite o valor único de R$ 27 antes que encerre.</p>
+      </div>
+    </div>
+    <div class="bar-timer-wrapper">
+      <div class="bar-timer" id="countdown-timer">00:10</div>
+      <a href="https://pay.cakto.com.br/wu7rtmh_934673" class="bar-cta">Adquirir por R$ 27</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">Promptbook.IA &copy; 2026. Todos os direitos reservados.</p>
+      <p style="margin-bottom: 16px; font-size: 0.75rem; color: var(--text-dim);">CNPJ: 44.747.634/0001-05</p>
+      <div class="footer-links">
+        <a href="politica-privacidade.html" style="color: var(--text-muted); text-decoration: none; margin: 0 8px; font-size: 0.75rem; transition: color 0.2s;">Política de Privacidade</a> | 
+        <a href="termos-uso.html" style="color: var(--text-muted); text-decoration: none; margin: 0 8px; font-size: 0.75rem; transition: color 0.2s;">Termos de Uso</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Floating Bar Slide-in Delay
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('downsell-bar').classList.add('active');
+        startTimer();
+      }, 1000);
+    });
+
+    // Countdown Timer Logic (10 seconds)
+    function startTimer() {
+      const timerElement = document.getElementById('countdown-timer');
+      const barElement = document.getElementById('downsell-bar');
+      let timeLeft = 10;
+
+      const interval = setInterval(() => {
+        timeLeft--;
+
+        if (timeLeft >= 0) {
+          const secondsStr = timeLeft < 10 ? '0' + timeLeft : timeLeft;
+          timerElement.textContent = '00:' + secondsStr;
+        }
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          
+          timerElement.textContent = 'ENCERRANDO!';
+          timerElement.classList.add('flash');
+          barElement.classList.add('flash-glow');
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
