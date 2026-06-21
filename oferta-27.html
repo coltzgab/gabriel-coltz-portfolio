@@ -1886,7 +1886,7 @@
 
     
     // Track click on checkout buttons
-    document.querySelectorAll('.btn-main').forEach(button => {
+    document.querySelectorAll('a[href^="https://pay.cakto.com.br/"]').forEach(button => {
       button.addEventListener('click', () => {
         if (typeof fbq === 'function') {
           fbq('track', 'InitiateCheckout', {

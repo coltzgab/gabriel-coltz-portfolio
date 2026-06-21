@@ -18,6 +18,7 @@ import { Coproduction } from './pages/Coproduction';
 import { BlogList } from './pages/BlogList';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { Bio } from './pages/Bio';
+import { Relaxante } from './pages/Relaxante';
 
 // Admin components
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
@@ -39,7 +40,7 @@ import { ProposalPage } from './pages/ProposalPage';
 // Public layout wrapper
 const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
-  const isServicePage = ['/web-design', '/social-media', '/branding', '/coproduction'].includes(location.pathname);
+  const isServicePage = ['/web-design', '/social-media', '/branding', '/coproduction', '/relaxante'].includes(location.pathname);
 
   return (
     <div className="font-sans antialiased text-organic-white selection:bg-organic-cyan selection:text-organic-black min-h-screen flex flex-col bg-organic-black relative overflow-x-hidden">
@@ -120,6 +121,7 @@ const App: React.FC = () => {
           <Route path="/branding" element={<PublicLayout><Branding /></PublicLayout>} />
           <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
           <Route path="/coproduction" element={<PublicLayout><Coproduction /></PublicLayout>} />
+          <Route path="/relaxante" element={<PublicLayout><Relaxante /></PublicLayout>} />
 
           {/* Blog Pages */}
           <Route path="/blog" element={<PublicLayout><BlogList /></PublicLayout>} />
