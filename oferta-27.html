@@ -896,6 +896,16 @@
       color: var(--text-dim);
     }
 
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
     /* Focus States for Accessibility */
     :focus-visible {
       outline: 2px solid var(--accent);
@@ -1671,9 +1681,22 @@
 
   <!-- Footer -->
   <footer>
-    <div class="container footer-inner">
+    <div class="container footer-inner" style="display: flex; flex-direction: column; gap: 20px; align-items: center; text-align: center; padding: 24px 0;">
       <div class="footer-brand">Promptbook<span>.IA</span></div>
-      <div class="footer-copy">&copy; 2026 Gabriel Coltz. Todos os direitos reservados.</div>
+      
+      <div class="footer-copy" style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.6;">
+        CNPJ: 44.747.634/0001-05
+      </div>
+      
+      <div class="footer-links" style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 0.75rem; color: var(--text-dim);">
+        <a href="politica-privacidade.html">Política de Privacidade</a>
+        <span>|</span>
+        <a href="termos-uso.html">Termos de Uso</a>
+      </div>
+      
+      <div class="footer-copy" style="font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">
+        &copy; 2026 Gabriel Coltz. Todos os direitos reservados.
+      </div>
     </div>
   </footer>
 
