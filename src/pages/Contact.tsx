@@ -23,15 +23,15 @@ export const Contact: React.FC = () => {
     const handleWhatsAppRedirect = (e: React.FormEvent) => {
         e.preventDefault();
         const text = `Olá! Meu nome é ${formData.name}. Gostaria de falar sobre ${formData.service}.%0A%0A*Mensagem:* ${formData.message}%0A%0A*E-mail:* ${formData.email}`;
-        window.open(`https://wa.me/5551993909150?text=${text}`, '_blank');
+        window.open(`https://wa.me/5551992592021?text=${text}`, '_blank');
     };
 
     const contactInfo = [
         {
             icon: <Phone className="text-organic-cyan" />,
             title: "Telefone / WhatsApp",
-            value: "(51) 99390-9150",
-            link: "https://wa.me/5551993909150"
+            value: "(51) 99259-2021",
+            link: "https://wa.me/5551992592021"
         },
         {
             icon: <Mail className="text-organic-cyan" />,

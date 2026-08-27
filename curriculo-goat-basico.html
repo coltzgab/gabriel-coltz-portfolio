@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Moura Vasco — Currículo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #009155;
+      --ink: #1a1a1a;
+      --gray: #555555;
+      --light: #e8e8e8;
+    }
+
+    body {
+      background: #f2f2f2;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      font-size: 10.5pt;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: #fff;
+      padding: 16mm 18mm;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 3px solid var(--green);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 21pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .headline {
+      font-size: 11.5pt;
+      font-weight: 600;
+      color: var(--green);
+      margin-top: 2px;
+    }
+    .contact-line {
+      margin-top: 8px;
+      font-size: 9pt;
+      color: var(--gray);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+    }
+    .contact-line strong { color: var(--ink); font-weight: 600; }
+    .contact-line a { color: var(--ink); text-decoration: none; font-weight: 600; }
+
+    /* SECTIONS */
+    section { margin-bottom: 14px; }
+    h2 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--green);
+      border-bottom: 1px solid var(--light);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+    p { color: var(--ink); }
+    .muted { color: var(--gray); }
+
+    /* EXPERIENCE */
+    .job { margin-bottom: 10px; }
+    .job:last-child { margin-bottom: 0; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .job-title { font-weight: 700; font-size: 10.5pt; }
+    .job-title span { font-weight: 500; color: var(--gray); }
+    .job-period { font-size: 9pt; color: var(--gray); white-space: nowrap; }
+    ul { list-style: none; margin-top: 3px; }
+    li {
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 2px;
+      font-size: 9.8pt;
+      color: #333;
+    }
+    li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* SKILLS */
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill {
+      font-size: 8.8pt;
+      font-weight: 500;
+      color: #333;
+      background: #f5f5f5;
+      border: 1px solid var(--light);
+      border-radius: 4px;
+      padding: 3px 10px;
+    }
+
+    /* TWO COLS (formação + info) */
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* FOOTER NOTE */
+    .footer-note {
+      margin-top: 4px;
+      background: #f0f9f4;
+      border-left: 3px solid var(--green);
+      padding: 8px 12px;
+      font-size: 9.3pt;
+      color: #333;
+    }
+    .footer-note strong { color: var(--ink); }
+
+    /* PRINT */
+    @media print {
+      body { background: #fff; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: auto;
+        min-height: auto;
+        padding: 10mm 14mm;
+      }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <h1>Gabriel Moura Vasco</h1>
+      <div class="headline">Marketing · Branding · Social Media · IA Aplicada</div>
+      <div class="contact-line">
+        <span><strong>Lajeado/RS</strong></span>
+        <span>WhatsApp: <strong>(51) 99259-2021</strong></span>
+        <span>E-mail: <strong>coltzgabriel7@gmail.com</strong></span>
+        <span>Instagram: <strong>@gabriel.coltz</strong></span>
+        <span>Portfólio: <a href="https://gabriel-coltz.vercel.app">gabriel-coltz.vercel.app</a></span>
+      </div>
+    </header>
+
+    <!-- OBJETIVO -->
+    <section>
+      <h2>Objetivo</h2>
+      <p>
+        Atuar na liderança de <strong>marketing, branding e conteúdo</strong>, unindo visão
+        estratégica e execução para fortalecer marcas e apoiar o crescimento do negócio.
+      </p>
+    </section>
+
+    <!-- RESUMO -->
+    <section>
+      <h2>Resumo</h2>
+      <p class="muted">
+        Desde 2021 no marketing digital, com especialidade em <strong style="color:#1a1a1a">construção de marcas e
+        crescimento orgânico em redes sociais</strong>. Fundador da Organic (agência de branding, +50 projetos
+        entregues) e criador da FinUp (startup com IA). Atuo do posicionamento à execução: identidade visual,
+        direção criativa, conteúdo, copywriting, campanhas e presença digital.
+      </p>
+    </section>
+
+    <!-- EXPERIÊNCIA -->
+    <section>
+      <h2>Experiência</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Organic — Agência de Branding <span>· Fundador e Estrategista</span></div>
+          <div class="job-period">2022 – atual</div>
+        </div>
+        <ul>
+          <li>+50 projetos de marca entregues: posicionamento, identidade visual, brandbooks e estratégia digital.</li>
+          <li>Estratégias de conteúdo e crescimento orgânico para empresas de diversos segmentos.</li>
+          <li>Gestão completa de projetos: social media, design, copywriting, tráfego pago e automação com IA.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">FinUp — Startup com IA <span>· Criador / Estratégia, Branding e Marketing</span></div>
+          <div class="job-period">2024 – atual</div>
+        </div>
+        <ul>
+          <li>Construção da marca do zero: posicionamento, identidade visual, linguagem e presença digital.</li>
+          <li>Assistente pessoal com IA via WhatsApp (registro de gastos, agenda, automação de rotinas).</li>
+          <li>Criação de landing pages, conteúdos, campanhas e materiais de aquisição.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Projetos de Marca e Conteúdo <span>· Estrategista / Designer / Copywriter</span></div>
+          <div class="job-period">2021 – atual</div>
+        </div>
+        <ul>
+          <li>2 por 1 Audiovisual — criação da marca do zero: posicionamento, identidade visual e linguagem.</li>
+          <li>MP4 Contábil — rebranding completo, transformando uma marca regional em marca escalável.</li>
+          <li>Juliano Camello — posicionamento de marca pessoal para especialista em holding.</li>
+          <li>JJ Lima Contabilidade — identidade visual + estratégia de conteúdo (personas, pilares, canais).</li>
+          <li>Olivers Vistorias — rebranding completo com identidade visual e posicionamento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section>
+      <h2>Habilidades</h2>
+      <div class="skills-row">
+        <span class="skill">Branding & Posicionamento</span>
+        <span class="skill">Identidade Visual</span>
+        <span class="skill">Direção Criativa</span>
+        <span class="skill">Social Media & Conteúdo</span>
+        <span class="skill">Crescimento Orgânico</span>
+        <span class="skill">Copywriting</span>
+        <span class="skill">Meta Ads / Tráfego</span>
+        <span class="skill">IA Aplicada ao Marketing</span>
+        <span class="skill">Landing Pages</span>
+      </div>
+    </section>
+
+    <!-- FERRAMENTAS + FORMAÇÃO -->
+    <div class="two-cols">
+      <section>
+        <h2>Ferramentas</h2>
+        <div class="skills-row">
+          <span class="skill">Photoshop</span>
+          <span class="skill">Illustrator</span>
+          <span class="skill">Figma</span>
+          <span class="skill">Canva</span>
+          <span class="skill">ChatGPT / Claude</span>
+          <span class="skill">Vercel / Supabase</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Formação</h2>
+        <ul>
+          <li>Ensino Superior em Marketing — cursando</li>
+          <li>Social Media — Rejane Toigo</li>
+          <li>O Super Poder</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- NOTA FINAL -->
+    <div class="footer-note">
+      Disponível para presencial, híbrido ou remoto · Interesse em marketing, branding, conteúdo e crescimento digital.
+    </div>
+
+  </div>
+
+</body>
+</html>

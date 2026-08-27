@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Fontes pesadas de imagens IA (nao versionar)
+Gabriel IA.zip
+Gabriel IA/

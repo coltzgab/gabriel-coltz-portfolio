@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
               <a href="mailto:contato@organic-mkt.com.br" className="p-3 border border-organic-white/20 rounded-full hover:border-organic-white hover:text-organic-white transition-colors">
                 <Mail size={20} />
               </a>
-              <a href="https://wa.me/5511999999999" target="_blank" rel="noreferrer" className="p-3 border border-organic-white/20 rounded-full hover:border-green-400 hover:text-green-400 transition-colors">
+              <a href="https://wa.me/5551992592021" target="_blank" rel="noreferrer" className="p-3 border border-organic-white/20 rounded-full hover:border-green-400 hover:text-green-400 transition-colors">
                 <MessageCircle size={20} />
               </a>
             </div>

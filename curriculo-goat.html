@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabriel Coltz — Estratégia, Branding e IA</title>
+  <title>Gabriel Coltz — Head de Marketing · Goat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -15,9 +15,9 @@
       --surface: #111111;
       --surface2: #181818;
       --border: #222222;
-      --accent: #F59E0B;
-      --accent-dim: rgba(245, 158, 11, 0.10);
-      --accent-glow: rgba(245, 158, 11, 0.20);
+      --accent: #00BA6C;
+      --accent-dim: rgba(0, 186, 108, 0.10);
+      --accent-glow: rgba(0, 186, 108, 0.20);
       --text: #F0F0F0;
       --text-muted: #888888;
       --text-dim: #444444;
@@ -84,7 +84,7 @@
       position: absolute;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,186,108,0.06) 0%, transparent 70%);
       top: 50%; left: -100px;
       transform: translateY(-50%);
       pointer-events: none;
@@ -125,6 +125,12 @@
       letter-spacing: -0.03em;
       margin-bottom: 6px;
     }
+    .hero-fullname {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
     .hero-role {
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(1rem, 1.8vw, 1.25rem);
@@ -162,7 +168,7 @@
       transition: all 0.2s;
       letter-spacing: 0.01em;
     }
-    .btn-primary:hover { background: #FBBF24; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .btn-primary:hover { background: #00D67C; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -253,7 +259,7 @@
       transform-origin: left;
       transition: transform 0.4s;
     }
-    .valor-card:hover { border-color: rgba(245,158,11,0.25); transform: translateY(-3px); }
+    .valor-card:hover { border-color: rgba(0,186,108,0.25); transform: translateY(-3px); }
     .valor-card:hover::after { transform: scaleX(1); }
     .valor-card-icon {
       width: 40px; height: 40px;
@@ -350,7 +356,7 @@
       padding: 36px 32px;
       transition: all 0.3s;
     }
-    .constr-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-3px); }
+    .constr-card:hover { border-color: rgba(0,186,108,0.3); transform: translateY(-3px); }
     .constr-year {
       font-size: 0.7rem;
       font-weight: 700;
@@ -381,7 +387,7 @@
       text-transform: uppercase;
       color: var(--accent);
       background: var(--accent-dim);
-      border: 1px solid rgba(245,158,11,0.2);
+      border: 1px solid rgba(0,186,108,0.2);
       padding: 4px 10px;
       border-radius: 4px;
     }
@@ -400,7 +406,7 @@
       overflow: hidden;
       transition: all 0.35s;
     }
-    .proj-card:hover { border-color: rgba(245,158,11,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .proj-card:hover { border-color: rgba(0,186,108,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
     .proj-img {
       width: 100%;
       aspect-ratio: 16/9;
@@ -460,7 +466,7 @@
       width: 28px; height: 28px;
       border-radius: 50%;
       background: var(--accent-dim);
-      border: 1px solid rgba(245,158,11,0.3);
+      border: 1px solid rgba(0,186,108,0.3);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       font-family: 'Space Grotesk', sans-serif;
@@ -488,7 +494,7 @@
       position: absolute;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,186,108,0.05) 0%, transparent 70%);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -518,6 +524,14 @@
       line-height: 1.8;
     }
     .contato-buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .contato-meta {
+      margin-top: 40px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+    .contato-meta a { color: var(--text-muted); text-decoration: none; }
+    .contato-meta a:hover { color: var(--accent); }
 
     /* FOOTER */
     footer {
@@ -590,22 +604,22 @@
     <div class="hero-glow-left"></div>
 
     <div class="hero-text-col">
-      <div class="hero-status">Aberto a oportunidades</div>
+      <div class="hero-status">Candidatura · Head de Marketing — Goat</div>
       <h1 class="hero-name">Gabriel Coltz</h1>
-      <p class="hero-role">Estratégia · Branding · Inteligência Artificial</p>
+      <p class="hero-fullname">Gabriel Moura Vasco · @gabriel.coltz · Lajeado/RS</p>
+      <p class="hero-role">Branding · Redes Sociais · Estratégia · IA</p>
       <div class="hero-divider"></div>
       <p class="hero-bio">
-        Desde 2021 construindo marcas e negócios do zero, com <strong>resultados reais antes
-        de existirem ferramentas para facilitar o trabalho</strong>. Fundei duas empresas,
-        liderei mais de 50 projetos e desenvolvi um produto com IA do zero para resolver
-        um problema que o mercado ainda não havia endereçado.
+        Desde 2021 construindo marcas do zero — <strong>posicionamento, identidade visual,
+        direção criativa e crescimento orgânico</strong>. Fundei duas empresas, liderei mais
+        de 50 projetos de branding e desenvolvi um produto com IA do zero.
         <br><br>
-        Hoje busco levar essa combinação de visao estrategica, execucao em branding
-        e pensamento com IA para dentro de uma empresa que quer crescer de verdade.
+        A Goat é uma marca de terereé com identidade forte e muito por construir.
+        <strong>É exatamente o tipo de marca que eu amo construir.</strong>
       </p>
       <div class="hero-cta-row">
         <a href="#contato" class="btn-primary">Entrar em contato</a>
-        <a href="#projetos" class="btn-secondary">Ver projetos</a>
+        <a href="https://gabriel-coltz.vercel.app/" target="_blank" class="btn-secondary">Ver portfólio</a>
       </div>
     </div>
 
@@ -618,10 +632,11 @@
   <!-- O QUE EU TRAGO -->
   <section id="valor">
     <p class="section-label fade-up">Proposta de valor</p>
-    <h2 class="section-title fade-up d1">O que eu trago<br>para dentro de <em>uma empresa</em></h2>
+    <h2 class="section-title fade-up d1">O que eu trago<br>para dentro da <em>Goat</em></h2>
     <p class="section-lead fade-up d2">
-      Nao sou especialista em uma coisa so. Sou especialista na intersecao entre tres areas
-      que raramente coexistem na mesma pessoa. Essa e a diferenca.
+      Um Head de Marketing precisa pensar a marca, executar a comunicação e liderar
+      o crescimento. Eu faço as três coisas há cinco anos — porque construí as minhas
+      próprias marcas fazendo exatamente isso.
     </p>
 
     <div class="valor-grid">
@@ -629,22 +644,23 @@
         <div class="valor-card-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
-        <h3>Visao estrategica aplicada</h3>
+        <h3>Branding de ponta a ponta</h3>
         <p>
-          Cinco anos tomando decisoes de posicionamento com impacto real em faturamento e percepcao de marca.
-          Nao apenas analiso o cenario. Defino a direcao e executo.
+          Da estratégia à execução: posicionamento, diferenciação, identidade visual,
+          direção criativa e consistência em todos os pontos de contato. Branding
+          conectado aos objetivos do negócio — não estética pela estética.
         </p>
       </div>
 
       <div class="valor-card fade-up d2">
         <div class="valor-card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>
         </div>
-        <h3>Branding com profundidade</h3>
+        <h3>Redes sociais que crescem</h3>
         <p>
-          Identidade visual e muito mais do que estetica. E percepcao de valor construida
-          ao longo do tempo. Entendo o que faz uma marca crescer porque construi marcas
-          que cresceram.
+          Desde 2021 com especialidade em crescimento orgânico: estratégia de conteúdo,
+          campanhas, design, copywriting e posicionamento. Conteúdo que constrói
+          autoridade, aumenta alcance e gera resultado consistente.
         </p>
       </div>
 
@@ -652,11 +668,11 @@
         <div class="valor-card-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <h3>IA como construtor, nao usuario</h3>
+        <h3>IA como vantagem competitiva</h3>
         <p>
-          Desenvolvi um agente de IA funcional com integracao ao WhatsApp e Google Agenda.
-          Entendo o que e possivel construir com IA e como isso se traduz em
-          resultado de negocio.
+          Desenvolvi um agente de IA funcional integrado ao WhatsApp e Google Agenda.
+          Sei usar IA para multiplicar a capacidade de produção de um time de
+          marketing — velocidade e volume sem perder qualidade de marca.
         </p>
       </div>
     </div>
@@ -664,77 +680,78 @@
 
   <!-- HABILIDADES -->
   <section id="habilidades">
-    <p class="section-label fade-up">Competencias</p>
+    <p class="section-label fade-up">Competências</p>
     <h2 class="section-title fade-up d1">Habilidades que<br><em>geram resultado</em></h2>
 
     <div class="hab-grid">
       <div>
         <div class="hab-group fade-up d1">
-          <div class="hab-category">Estrategia e Negocio</div>
+          <div class="hab-category">Branding e Estratégia</div>
           <div class="hab-tags">
             <span class="hab-tag">Posicionamento de marca</span>
-            <span class="hab-tag">Pesquisa de mercado</span>
-            <span class="hab-tag">Estrategia de conteudo</span>
-            <span class="hab-tag">Crescimento organico</span>
+            <span class="hab-tag">Identidade visual</span>
+            <span class="hab-tag">Direção criativa</span>
+            <span class="hab-tag">Brand strategy</span>
+            <span class="hab-tag">Brandbook</span>
             <span class="hab-tag">Rebranding</span>
-            <span class="hab-tag">Analise competitiva</span>
+            <span class="hab-tag">Naming</span>
+            <span class="hab-tag">Análise competitiva</span>
           </div>
         </div>
 
         <div class="hab-group fade-up d2">
-          <div class="hab-category">Branding e Design</div>
+          <div class="hab-category">Redes Sociais e Conteúdo</div>
           <div class="hab-tags">
-            <span class="hab-tag">Identidade visual</span>
-            <span class="hab-tag">Brand strategy</span>
-            <span class="hab-tag">Arquitetura de marca</span>
-            <span class="hab-tag">Brandbook</span>
-            <span class="hab-tag">Naming</span>
-            <span class="hab-tag">Adobe Illustrator</span>
-            <span class="hab-tag">Figma</span>
+            <span class="hab-tag">Crescimento orgânico</span>
+            <span class="hab-tag">Estratégia de conteúdo</span>
+            <span class="hab-tag">Campanhas</span>
+            <span class="hab-tag">Copywriting</span>
+            <span class="hab-tag">Instagram</span>
+            <span class="hab-tag">Linhas editoriais</span>
+            <span class="hab-tag">Calendário de conteúdo</span>
           </div>
         </div>
 
         <div class="hab-group fade-up d3">
-          <div class="hab-category">Tecnologia e IA</div>
+          <div class="hab-category">Design e Ferramentas</div>
           <div class="hab-tags">
-            <span class="hab-tag">Desenvolvimento de agentes IA</span>
-            <span class="hab-tag">Automacao de processos</span>
-            <span class="hab-tag">Integracao com APIs</span>
-            <span class="hab-tag">Prompt engineering</span>
-            <span class="hab-tag">ChatGPT</span>
-            <span class="hab-tag">Claude</span>
-            <span class="hab-tag">Make / Zapier</span>
+            <span class="hab-tag">Adobe Illustrator</span>
+            <span class="hab-tag">Figma</span>
+            <span class="hab-tag">Design para social</span>
+            <span class="hab-tag">Materiais de marca</span>
           </div>
         </div>
 
         <div class="hab-group fade-up d4">
-          <div class="hab-category">Marketing Digital</div>
+          <div class="hab-category">Tecnologia, IA e Performance</div>
           <div class="hab-tags">
-            <span class="hab-tag">Gestao de trafego</span>
+            <span class="hab-tag">Desenvolvimento de agentes IA</span>
+            <span class="hab-tag">Automação de processos</span>
+            <span class="hab-tag">Prompt engineering</span>
             <span class="hab-tag">Meta Ads</span>
-            <span class="hab-tag">Copywriting</span>
+            <span class="hab-tag">Gestão de tráfego</span>
             <span class="hab-tag">Funis de vendas</span>
-            <span class="hab-tag">Instagram</span>
           </div>
         </div>
       </div>
 
       <div class="fade-up d2">
         <div class="hab-right-block">
-          <h3>O que me diferencia</h3>
+          <h3>Por que isso importa para a Goat</h3>
           <p>
-            A maioria das pessoas escolhe entre ser estrategista, designer ou profissional de tecnologia.
-            Eu nunca fiz essa escolha, e isso nao foi por falta de foco.
+            A Goat já tem o que a maioria das marcas leva anos para conseguir:
+            <strong>uma identidade forte e reconhecível</strong>. O desafio agora é outro —
+            transformar essa identidade em crescimento consistente, canal por canal,
+            campanha por campanha.
           </p>
           <p>
-            Foi porque percebi que <strong>os problemas reais de uma empresa nao respeitam
-            fronteiras entre departamentos</strong>. Uma marca fraca e um problema de estrategia
-            tanto quanto de design. Uma ferramenta de IA mal implementada e um problema
-            de negocio tanto quanto de tecnologia.
+            É exatamente nessa fase que eu trabalho melhor. Pego marcas com potencial
+            e construo o sistema de marketing que as faz crescer: <strong>estratégia clara,
+            conteúdo com consistência, campanhas com identidade e processos que escalam</strong>.
           </p>
           <p>
-            Trabalhar no ponto de intersecao dessas tres areas e o que me permite entregar
-            solucoes que <strong>especialistas isolados nao conseguem ver</strong>.
+            E como fundador de duas empresas, sei o que é olhar para o marketing
+            com responsabilidade de dono — cada real investido precisa voltar.
           </p>
         </div>
       </div>
@@ -743,10 +760,10 @@
 
   <!-- CONSTRUCOES -->
   <section id="construcoes">
-    <p class="section-label fade-up">Experiencia</p>
-    <h2 class="section-title fade-up d1">Empresas que<br><em>eu construi</em></h2>
+    <p class="section-label fade-up">Experiência</p>
+    <h2 class="section-title fade-up d1">Marcas que<br><em>eu construí</em></h2>
     <p class="section-lead fade-up d2">
-      Nao aprendi em sala de aula. Aprendi construindo, errando e ajustando ate funcionar.
+      Não aprendi em sala de aula. Aprendi construindo, errando e ajustando até funcionar.
     </p>
 
     <div class="constr-grid">
@@ -754,16 +771,16 @@
         <div class="constr-year">2022 — presente</div>
         <div class="constr-name">Organic</div>
         <p class="constr-desc">
-          Agencia focada em branding, posicionamento e crescimento organico.
+          Agência focada em branding, posicionamento e crescimento orgânico.
           Mais de <strong>50 projetos entregues</strong> para empresas de diferentes setores.
-          Identidades visuais, estrategias de conteudo e construcao de marca do zero.
+          Identidades visuais, estratégias de conteúdo e construção de marca do zero.
           <br><br>
           Lideramos rebrandings que transformaram negócios com posicionamento
           limitado em marcas escaláveis e preparadas para crescer.
         </p>
         <div class="constr-tags">
           <span class="constr-tag">Branding</span>
-          <span class="constr-tag">Estrategia</span>
+          <span class="constr-tag">Estratégia</span>
           <span class="constr-tag">50+ projetos</span>
         </div>
       </div>
@@ -772,17 +789,17 @@
         <div class="constr-year">2024 — presente</div>
         <div class="constr-name">FinUp</div>
         <p class="constr-desc">
-          Fintech nascida de um problema pessoal: eu nao conseguia gerir financas
-          com planilhas tradicionais. Solucao encontrada: <strong>construir um agente de IA
-          dentro do WhatsApp</strong> com integracao ao Google Agenda.
+          Fintech que construí do zero: <strong>estruturação estratégica, posicionamento,
+          identidade visual, direção criativa, linguagem da marca e presença digital</strong>.
+          Uma marca sólida e moderna para transmitir inovação e confiança no mercado financeiro.
           <br><br>
-          O produto evoluiu para um assistente pessoal completo, capaz de registrar gastos,
-          organizar agenda, capturar ideias e automatizar rotinas do dia a dia.
+          O produto: um agente de IA dentro do WhatsApp com integração ao Google Agenda —
+          assistente pessoal que registra gastos, organiza agenda e automatiza rotinas.
         </p>
         <div class="constr-tags">
+          <span class="constr-tag">Branding completo</span>
           <span class="constr-tag">IA</span>
           <span class="constr-tag">Produto</span>
-          <span class="constr-tag">Fintech</span>
         </div>
       </div>
     </div>
@@ -790,9 +807,12 @@
 
   <!-- PROJETOS -->
   <section id="projetos">
-    <p class="section-label fade-up">Portfolio</p>
+    <p class="section-label fade-up">Portfólio</p>
     <h2 class="section-title fade-up d1">Projetos<br><em>executados</em></h2>
-    <p class="section-lead fade-up d2">Cada entrega com intencao, estrategia e identidade construida para durar.</p>
+    <p class="section-lead fade-up d2">
+      Cada entrega com intenção, estratégia e identidade construída para durar.
+      Portfólio completo em <a href="https://gabriel-coltz.vercel.app/" target="_blank" style="color: var(--accent); text-decoration: none;">gabriel-coltz.vercel.app</a>
+    </p>
 
     <div class="proj-grid">
       <a href="olivers.html" class="proj-card fade-up d1" style="text-decoration:none; color:inherit; display:block;">
@@ -800,8 +820,8 @@
         <div class="proj-info">
           <div class="proj-tag">Rebranding · Identidade Visual</div>
           <div class="proj-name">Olivers Vistorias</div>
-          <p class="proj-desc">Reposicionamento completo da marca para refletir tecnologia e autoridade no setor de vistorias. Identidade visual, brandbook e todas as aplicacoes.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <p class="proj-desc">Reposicionamento completo da marca para refletir tecnologia e autoridade no setor de vistorias. Identidade visual, brandbook e todas as aplicações.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:var(--accent); letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
 
@@ -809,8 +829,8 @@
         <img src="images/mp4.png" alt="MP4 Contabil" class="proj-img" />
         <div class="proj-info">
           <div class="proj-tag">Rebranding</div>
-          <div class="proj-name">MP4 Contabil</div>
-          <p class="proj-desc">Transformacao de uma marca regional com crescimento limitado em uma marca escalavel, mantendo a essencia e historia da empresa.</p>
+          <div class="proj-name">MP4 Contábil</div>
+          <p class="proj-desc">Transformação de uma marca regional com crescimento limitado em uma marca escalável, mantendo a essência e história da empresa.</p>
         </div>
       </div>
 
@@ -819,7 +839,7 @@
         <div class="proj-info">
           <div class="proj-tag">Identidade Visual</div>
           <div class="proj-name">Gislaine Coltz</div>
-          <p class="proj-desc">Branding pessoal sofisticado com aplicacoes de alto padrao. Conceito premium desenvolvido do briefing ate a entrega final.</p>
+          <p class="proj-desc">Branding pessoal sofisticado com aplicações de alto padrão. Conceito premium desenvolvido do briefing até a entrega final.</p>
         </div>
       </div>
 
@@ -828,37 +848,27 @@
         <div class="proj-info">
           <div class="proj-tag">Produto e Marca</div>
           <div class="proj-name">FinUp</div>
-          <p class="proj-desc">Identidade completa para uma fintech com IA. Design pensado para escalar em um mercado onde velocidade e clareza de marca sao vantagem competitiva.</p>
+          <p class="proj-desc">Identidade completa para uma fintech com IA. Design pensado para escalar em um mercado onde velocidade e clareza de marca são vantagem competitiva.</p>
         </div>
       </div>
 
       <a href="jjlima.html" class="proj-card fade-up d5" style="text-decoration:none; color:inherit; display:block;">
         <img src="images/jjlima.png" alt="JJ Lima Contabilidade" class="proj-img" />
         <div class="proj-info">
-          <div class="proj-tag">Identidade Visual e Estrategia de Conteudo</div>
+          <div class="proj-tag">Identidade Visual e Estratégia de Conteúdo</div>
           <div class="proj-name">JJ Lima Contabilidade</div>
-          <p class="proj-desc">Projeto completo: identidade visual com manual de marca, paleta e tipografia. Estrategia de conteudo com 3 personas mapeadas, 4 pilares editoriais, analise SWOT e plano digital para Instagram, LinkedIn, YouTube e Blog.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <p class="proj-desc">Projeto completo: identidade visual com manual de marca, paleta e tipografia. Estratégia de conteúdo com 3 personas mapeadas, 4 pilares editoriais, análise SWOT e plano digital para Instagram, LinkedIn, YouTube e Blog.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:var(--accent); letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
 
-      <a href="olivers-treinamento.html" class="proj-card fade-up d2" style="text-decoration:none; color:inherit; display:block;">
-        <img src="images/olivers-treinamento.png" alt="Treinamento de Croquis Olivers" class="proj-img" />
-        <div class="proj-info">
-          <div class="proj-tag">Processo · Treinamento · Gestao Operacional</div>
-          <div class="proj-name">Treinamento de Croquis — Olivers</div>
-          <p class="proj-desc">Processos desorganizados onde cada um ensinava de um jeito. Criei o processo padronizado e o treinamento gravado definitivo — mesmo conteudo para todos, economia real de horas e mao de obra.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
-        </div>
-      </a>
-
-      <a href="juliano-camello.html" class="proj-card fade-up d3" style="text-decoration:none; color:inherit; display:block;">
+      <a href="juliano-camello.html" class="proj-card fade-up d6" style="text-decoration:none; color:inherit; display:block;">
         <img src="images/juliano-camello.png" alt="Juliano Camello" class="proj-img" />
         <div class="proj-info">
-          <div class="proj-tag">Marca Pessoal · Estrategia de Conteudo</div>
+          <div class="proj-tag">Marca Pessoal · Estratégia de Conteúdo</div>
           <div class="proj-name">Juliano Camello — Especialista em Holding</div>
-          <p class="proj-desc">Posicionamento de marca pessoal do zero: contador a referencia em holding para contadores empresarios. 3 personas, 6 linhas editoriais e estrategia para 4 canais digitais.</p>
-          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:#F59E0B; letter-spacing:0.04em;">Ver projeto completo →</div>
+          <p class="proj-desc">Posicionamento de marca pessoal do zero: contador a referência em holding para contadores empresários. 3 personas, 6 linhas editoriais e estratégia para 4 canais digitais.</p>
+          <div style="margin-top:12px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:var(--accent); letter-spacing:0.04em;">Ver projeto completo →</div>
         </div>
       </a>
     </div>
@@ -866,25 +876,24 @@
 
   <!-- POR QUE EU -->
   <section id="porque">
-    <p class="section-label fade-up">Para a empresa</p>
-    <h2 class="section-title fade-up d1">O que uma empresa<br>ganha ao me <em>contratar</em></h2>
+    <p class="section-label fade-up">Para a Goat</p>
+    <h2 class="section-title fade-up d1">O que a Goat ganha<br>ao me <em>contratar</em></h2>
 
     <div class="porque-inner">
       <div class="porque-text fade-up d1">
         <p>
-          A maioria das empresas tem um problema especifico: contratam especialistas
-          que sao excelentes dentro da sua caixa, mas nao conseguem enxergar o que
-          esta fora dela.
+          O anúncio diz: <strong>"identidade forte, crescimento acelerado e muito
+          ainda por construir"</strong>. Essa última parte é a que me interessa.
         </p>
         <p>
-          Quando marca, estrategia e tecnologia sao tratadas como silos separados,
-          o resultado e fragmentado. A campanha nao conversa com a identidade.
-          O produto nao reflete o posicionamento. A IA e implementada sem
-          <strong>logica de negocio por tras</strong>.
+          Marca com identidade forte não precisa de alguém para reinventá-la.
+          Precisa de alguém que <strong>respeite o que já existe e construa o sistema
+          de crescimento em cima</strong> — conteúdo, campanhas, canais, comunidade.
         </p>
         <p>
-          Eu resolvo esses tres problemas juntos porque os entendo juntos.
-          Nao e multitarefa. E visao integrada.
+          Eu amo marcas. É literalmente o que escolhi fazer da vida quando fundei
+          uma agência de branding. E a chance de fazer isso de dentro, em uma marca
+          com a personalidade da Goat, é o tipo de desafio que me move.
         </p>
       </div>
 
@@ -892,25 +901,25 @@
         <div class="porque-item">
           <div class="porque-bullet">01</div>
           <div class="porque-item-text">
-            <strong>Estrategia que conecta com execucao.</strong> Nao entrego relatorios que ficam na gaveta. Entrego direcao com capacidade de executar o que foi definido.
+            <strong>Estratégia que conecta com execução.</strong> Não entrego relatórios que ficam na gaveta. Entrego direção com capacidade de executar o que foi definido.
           </div>
         </div>
         <div class="porque-item">
           <div class="porque-bullet">02</div>
           <div class="porque-item-text">
-            <strong>Branding com resultado mensuravel.</strong> Posicionamento, identidade visual e percepcao de valor sao ativoS. Construo esses ativos com criterio.
+            <strong>Consistência de marca em todos os canais.</strong> Identidade forte só gera valor quando aparece igual em todo ponto de contato. Eu construo essa consistência.
           </div>
         </div>
         <div class="porque-item">
           <div class="porque-bullet">03</div>
           <div class="porque-item-text">
-            <strong>IA aplicada, nao teorizada.</strong> Ja construi solucoes funcionando com IA. Sei o que e possivel, o que nao e, e como estruturar um projeto para que funcione.
+            <strong>Crescimento orgânico como especialidade.</strong> Desde 2021 fazendo marcas crescerem nas redes com conteúdo, autoridade e alcance — sem depender só de mídia paga.
           </div>
         </div>
         <div class="porque-item">
           <div class="porque-bullet">04</div>
           <div class="porque-item-text">
-            <strong>Mentalidade de fundador dentro de um time.</strong> Cinco anos construindo do zero ensinam responsabilidade, adaptacao e orientacao a resultado que cursos nao ensinam.
+            <strong>Mentalidade de fundador dentro do time.</strong> Cinco anos construindo do zero ensinam responsabilidade, adaptação e orientação a resultado que cursos não ensinam.
           </div>
         </div>
       </div>
@@ -920,23 +929,28 @@
   <!-- CONTATO -->
   <section id="contato">
     <div class="contato-glow"></div>
-    <p class="contato-label fade-up">Proximo passo</p>
+    <p class="contato-label fade-up">Próximo passo</p>
     <h2 class="contato-title fade-up d1">
-      Vamos conversar<br>sobre o que posso<br><em>construir com voce</em>
+      Vamos construir<br>a próxima fase<br>da <em>Goat juntos</em>
     </h2>
     <p class="contato-sub fade-up d2">
-      Estou disponivel para uma conversa sem compromisso. Se o que voce leu faz sentido
-      para o momento da sua empresa, entre em contato.
+      Disponível para trabalho presencial em Lajeado/RS.
+      Se fizer sentido, chama no Whats.
     </p>
     <div class="contato-buttons fade-up d3">
-      <a href="https://wa.me/5551992592021" class="btn-primary" target="_blank">WhatsApp</a>
-      <a href="mailto:gabriel@organic.com.br" class="btn-secondary">Enviar e-mail</a>
+      <a href="https://wa.me/5551992592021" class="btn-primary" target="_blank">Chamar no WhatsApp</a>
+      <a href="https://gabriel-coltz.vercel.app/" class="btn-secondary" target="_blank">Ver portfólio</a>
     </div>
+    <p class="contato-meta fade-up d4">
+      <a href="https://instagram.com/gabriel.coltz" target="_blank">@gabriel.coltz</a>
+      &nbsp;·&nbsp; <a href="mailto:gabriel@organic.com.br">gabriel@organic.com.br</a>
+      &nbsp;·&nbsp; Lajeado/RS
+    </p>
   </section>
 
   <footer>
     <div class="footer-brand">Gabriel Coltz<span>.</span></div>
-    <div class="footer-right">Estrategia, Branding e IA — 2025</div>
+    <div class="footer-right">Candidatura · Head de Marketing Goat — 2026</div>
   </footer>
 
   <script>

@@ -75,7 +75,7 @@ export const Coproduction: React.FC = () => {
                                 Na Organic, cuidamos de toda a estratégia e bastidores para você focar no que faz de melhor: ensinar.
                             </p>
                             <a
-                                href="https://wa.me/5551993909150?text=Olá! Tenho interesse na coprodução da Organic para o meu projeto."
+                                href="https://wa.me/5551992592021?text=Olá! Tenho interesse na coprodução da Organic para o meu projeto."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex px-8 py-4 bg-organic-cyan text-organic-black font-semibold rounded-full items-center space-x-2 hover:scale-105 transition-transform w-full sm:w-auto justify-center"
@@ -221,7 +221,7 @@ export const Coproduction: React.FC = () => {
                                 Se você tem o conhecimento e a audiência, nós temos o motor para fazer você voar. Vamos conversar sobre como levar seu projeto ao próximo nível.
                             </p>
                             <a
-                                href="https://wa.me/5551993909150?text=Olá! Quero falar sobre coprodução."
+                                href="https://wa.me/5551992592021?text=Olá! Quero falar sobre coprodução."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex px-12 py-5 bg-white text-organic-black font-bold rounded-full items-center space-x-3 hover:scale-110 transition-transform font-display text-2xl uppercase tracking-tighter"

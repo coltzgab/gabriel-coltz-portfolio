@@ -10,7 +10,7 @@ export const Bio: React.FC = () => {
             tag: "ATENDIMENTO",
             title: "Falar no WhatsApp",
             description: "Clique aqui para iniciar um atendimento direto e personalizado com nossa equipe agora mesmo.",
-            url: "https://wa.me/5551981240660",
+            url: "https://wa.me/5551992592021",
             buttonText: "CHAMAR AGORA",
             color: "from-green-500/20 to-emerald-500/10",
             borderColor: "border-green-500/30",

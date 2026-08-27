@@ -23,7 +23,7 @@ export const SocialMedia: React.FC = () => {
     const handleWhatsAppRedirect = (e: React.FormEvent) => {
         e.preventDefault();
         const message = `Olá! Gostaria de um orçamento para Social Media.%0A%0A*Nome:* ${formData.name}%0A*Empresa:* ${formData.company}%0A*Instagram/Site:* ${formData.instagram}%0A*Objetivo:* ${formData.objective}`;
-        window.open(`https://wa.me/5551993909150?text=${message}`, '_blank');
+        window.open(`https://wa.me/5551992592021?text=${message}`, '_blank');
     };
 
     const steps = [
